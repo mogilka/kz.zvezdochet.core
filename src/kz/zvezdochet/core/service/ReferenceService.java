@@ -20,14 +20,14 @@ import kz.zvezdochet.core.tool.Connector;
 public abstract class ReferenceService extends BaseService implements IReferenceService {
 
 	@Override
-	public Base getEntityByCode(String code) throws DataAccessException {
+	public Base find(String code) throws DataAccessException {
         Reference type = new Reference();
         PreparedStatement ps = null;
         ResultSet rs = null;
-		String query;
 		try {
-			query = "select * from " + tableName + " where code like '" + code + "'";
+			String query = "select * from " + tableName + " where code like ?";
 			ps = Connector.getInstance().getConnection().prepareStatement(query);
+			ps.setString(1, code);
 			rs = ps.executeQuery();
 			if (rs.next()) 
 				type = init(rs);
@@ -46,13 +46,14 @@ public abstract class ReferenceService extends BaseService implements IReference
 
 	@Override
 	public Base find(Long id) throws DataAccessException {
+		if (id == null) return null;
         Reference type = new Reference();
         PreparedStatement ps = null;
         ResultSet rs = null;
-		String query;
 		try {
-			query = "select * from " + tableName + " where id = " + id;
+			String query = "select * from " + tableName + " where id = ?";
 			ps = Connector.getInstance().getConnection().prepareStatement(query);
+			ps.setLong(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) 
 				type = init(rs);
@@ -74,9 +75,8 @@ public abstract class ReferenceService extends BaseService implements IReference
         List<Base> list = new ArrayList<Base>();
         PreparedStatement ps = null;
         ResultSet rs = null;
-		String query;
 		try {
-			query = "select * from " + tableName + " order by name";
+			String query = "select * from " + tableName + " order by name";
 			ps = Connector.getInstance().getConnection().prepareStatement(query);
 			rs = ps.executeQuery();
 			while (rs.next()) {

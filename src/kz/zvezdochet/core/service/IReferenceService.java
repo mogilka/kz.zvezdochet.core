@@ -12,5 +12,5 @@ public interface IReferenceService extends IBaseService {
 	 * @param code код
 	 * @return объект-сущность
 	 */
-	public Base getEntityByCode(final String code) throws DataAccessException;
+	public Base find(final String code) throws DataAccessException;
 }
