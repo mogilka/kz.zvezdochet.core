@@ -17,16 +17,20 @@ Bundle-ActivationPolicy: lazy
 Import-Package: javax.inject;version="1.0.0",
  org.eclipse.swt.graphics,
  org.eclipse.swt.widgets,
- org.eclipse.ui
+ org.eclipse.ui,
+ org.eclipse.ui.forms.widgets
 Export-Package: kz.zvezdochet.core.bean,
  kz.zvezdochet.core.handler,
  kz.zvezdochet.core.service,
  kz.zvezdochet.core.tool,
+ kz.zvezdochet.core.ui.comparator,
  kz.zvezdochet.core.ui.decoration,
+ kz.zvezdochet.core.ui.extension,
  kz.zvezdochet.core.ui.listener,
  kz.zvezdochet.core.ui.provider,
  kz.zvezdochet.core.ui.util,
  kz.zvezdochet.core.ui.view,
  kz.zvezdochet.core.util
-Bundle-ClassPath: lib/mysql-connector-java-5.1.5-bin.jar,
- .
+Bundle-ClassPath: .,
+ lib/sqlite.jar,
+ lib/mysql.jar
