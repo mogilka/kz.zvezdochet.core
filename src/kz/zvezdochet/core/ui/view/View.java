@@ -3,53 +3,12 @@ package kz.zvezdochet.core.ui.view;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * Прототип представления системы
+ * Прототип представления
  * @author Nataly Didenko
  */
 public abstract class View {
 	
-	/**
-	 * Признак, определяющий, были ли изменены данные в представлении
-	 */
-	protected boolean isStateChanged = false;
-	
-	/**
-	 * Признак, определяющий, изменены ли пользователем данные представления
-	 */
-	protected boolean codeEdit = false;
-	
-	/**
-	 * Инициализация элементов управления
-	 */
-	protected abstract void initializeControls();
-	
-	public boolean isStateChanged() {
-		return isStateChanged;
-	}
-	
-	public void setCodeEdit(boolean codeEdit) {
-		this.codeEdit = codeEdit;
-	}
-	
-	public boolean isCodeEdit() {
-		return codeEdit;
-	}
-	
-	/**
-	 * Изменение заголовка в соответствии с состоянием представления.
-	 * Если данные были изменены, добавляем в текст заголовка звездочку
-	 */
-	public void setIsStateChanged(boolean isChange) {
-		if (isCodeEdit() || (isChange == this.isStateChanged))
-			return;
-		this.isStateChanged = isChange;
-//		if (this.isStateChanged)
-//			setPartName("*" + viewTitle);
-//		else
-//			setPartName(viewTitle);
-	}
-	
-	public void setViewTitle(String title) {
+	public void setTitle(String title) {
 //		setPartName(title);
 	}
 	
@@ -57,7 +16,7 @@ public abstract class View {
 	 * Создание элементов управления
 	 * @param parent композит-родитель
 	 **/
-	public void createComposite(Composite parent) {}
+	public void create(Composite parent) {}
 	
 	/**
 	 * Закрытие представления
@@ -70,14 +29,11 @@ public abstract class View {
 	/**
 	 * Очистка значений элементов управления
 	 */
-	public void clearView() {}
+	public void clear() {}
 
 	/**
-	 * Проверка заполненности элементов управления
-	 * @return
-	 * @throws Exception
+	 * Выравнивание визуальных компонентов
+	 * @param composite контейнер виджетов
 	 */
-	public boolean checkViewValues() throws Exception {
-		return false;
-	}
+	protected void init(Composite composite) {}
 }

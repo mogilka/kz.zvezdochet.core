@@ -5,7 +5,7 @@ import java.math.BigInteger;
 
 /**
  * Класс, предоставляющий методы для работы с числами
- * @author Nataly
+ * @author Nataly Didenko
  */
 public class NumberUtil {
 

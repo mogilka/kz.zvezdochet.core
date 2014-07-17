@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Control;
 
 /**
  * Класс, обеспечивающий декорирование полей ввода предупреждающим сообщением
- * @author nataly
+ * @author Nataly Didenko
  *
  */
 public class WarningDecoration extends ControlDecoration {

@@ -1,16 +1,16 @@
 package kz.zvezdochet.core.service;
 
-import kz.zvezdochet.core.bean.BaseEntity;
+import kz.zvezdochet.core.bean.Base;
 
 /**
  * Общий интерфейс сервиса по управлению сущностями предметной области в БД
- * @author nataly
+ * @author Nataly Didenko
  */
-public interface IReferenceService extends IEntityService {
+public interface IReferenceService extends IBaseService {
 	/**
 	 * Метод, возвращающий объект по коду
 	 * @param code код
 	 * @return объект-сущность
 	 */
-	public BaseEntity getEntityByCode(final String code) throws DataAccessException;
+	public Base getEntityByCode(final String code) throws DataAccessException;
 }

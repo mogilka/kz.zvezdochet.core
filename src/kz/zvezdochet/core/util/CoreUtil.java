@@ -2,7 +2,7 @@ package kz.zvezdochet.core.util;
 
 import java.util.List;
 
-import kz.zvezdochet.core.bean.BaseEntity;
+import kz.zvezdochet.core.bean.Base;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Display;
 
 /**
  * Класс, предоставляющий общеупотребительные методы и константы
- * @author Nataly
+ * @author Nataly Didenko
  */
 public class CoreUtil {
 	/**
@@ -47,7 +47,7 @@ public class CoreUtil {
 	 * @param servlet
 	 * @return
 	 */
-	public Object[] getArrayFromList(List<BaseEntity> list) {
+	public Object[] getArrayFromList(List<Base> list) {
 		if (list == null) return null;
 		Object[] array = null;
 //		try {

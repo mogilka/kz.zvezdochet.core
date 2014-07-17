@@ -3,7 +3,7 @@ package kz.zvezdochet.core.ui.listener;
 /**
  * Интерфейс отслеживания добавления, удаления и
  * изменения элементов списка  
- * @author Nataly
+ * @author Nataly Didenko
  */
 public interface IElementListListener {
 	/**

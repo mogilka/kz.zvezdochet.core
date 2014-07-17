@@ -8,7 +8,7 @@ import java.lang.reflect.Type;
 
 /**
  * Класс, предоставляющий методы для работы с метаданными Java-классов
- * @author Nataly
+ * @author Nataly Didenko
  */
 public class ReflectionUtil {
 

@@ -4,27 +4,27 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import kz.zvezdochet.core.bean.BaseEntity;
+import kz.zvezdochet.core.bean.Base;
 import kz.zvezdochet.core.tool.Connector;
 
 
 /**
  * Реализация интерфейса сервиса управления сущностями
- * @see IEntityService Интерфейс сервиса управления объектами на уровне БД  
+ * @see IBaseService Интерфейс сервиса управления объектами на уровне БД  
  */
-public abstract class EntityService implements IEntityService {
+public abstract class BaseService implements IBaseService {
 	/**
 	 * Название таблицы БД, представляющей сущность 
 	 */
 	protected String tableName = "";
 	
 	@Override
-	public int removeEntity(Long id) {
+	public int delete(Long id) {
 		if (id == null) return -1;
 		int result = -1;
         PreparedStatement ps = null;
 		try {
-			updateDictionary();
+			update();
 			String query = "delete from " + tableName + " where id = ?";
 			ps = Connector.getInstance().getConnection().prepareStatement(query);
 			ps.setLong(1, id);
@@ -68,17 +68,22 @@ public abstract class EntityService implements IEntityService {
 	/**
 	 * Кэшированный список часто используемых объектов сущности
 	 */
-	protected List<BaseEntity> list = null;
+	protected List<Base> list = null;
 
 	@Override
-	public List<BaseEntity> getList() throws DataAccessException {
+	public List<Base> getList() throws DataAccessException {
 		if (null == list || 0 == list.size())
-			list = getOrderedEntities();
+			list = getList();
 		return list;
 	}
 
 	@Override
-	public void updateDictionary() {
+	public void update() {
 		list = null;
+	}
+	
+	@Override
+	public String getTableName() {
+		return tableName;
 	}
 }

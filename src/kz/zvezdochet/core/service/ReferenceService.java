@@ -6,22 +6,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import kz.zvezdochet.core.bean.BaseEntity;
+import kz.zvezdochet.core.bean.Base;
 import kz.zvezdochet.core.bean.Reference;
 import kz.zvezdochet.core.tool.Connector;
 
-
 /**
  * Реализация сервиса справочников
- * @author nataly
+ * @author Nataly Didenko
  *
- * @see EntityService Реализация интерфейса сервиса управления объектами на уровне БД  
+ * @see BaseService Реализация интерфейса сервиса управления объектами на уровне БД  
  * @see IReferenceService Интерфейс управления справочниками на уровне БД  
  */
-public abstract class ReferenceService extends EntityService implements IReferenceService {
+public abstract class ReferenceService extends BaseService implements IReferenceService {
 
 	@Override
-	public BaseEntity getEntityByCode(String code) throws DataAccessException {
+	public Base getEntityByCode(String code) throws DataAccessException {
         Reference type = new Reference();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -31,7 +30,7 @@ public abstract class ReferenceService extends EntityService implements IReferen
 			ps = Connector.getInstance().getConnection().prepareStatement(query);
 			rs = ps.executeQuery();
 			if (rs.next()) 
-				type = initEntity(rs);
+				type = init(rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -46,7 +45,7 @@ public abstract class ReferenceService extends EntityService implements IReferen
 	}
 
 	@Override
-	public BaseEntity getEntityById(Long id) throws DataAccessException {
+	public Base find(Long id) throws DataAccessException {
         Reference type = new Reference();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -56,7 +55,7 @@ public abstract class ReferenceService extends EntityService implements IReferen
 			ps = Connector.getInstance().getConnection().prepareStatement(query);
 			rs = ps.executeQuery();
 			if (rs.next()) 
-				type = initEntity(rs);
+				type = init(rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -71,8 +70,8 @@ public abstract class ReferenceService extends EntityService implements IReferen
 	}
 
 	@Override
-	public List<BaseEntity> getOrderedEntities() throws DataAccessException {
-        List<BaseEntity> list = new ArrayList<BaseEntity>();
+	public List<Base> getList() throws DataAccessException {
+        List<Base> list = new ArrayList<Base>();
         PreparedStatement ps = null;
         ResultSet rs = null;
 		String query;
@@ -81,7 +80,7 @@ public abstract class ReferenceService extends EntityService implements IReferen
 			ps = Connector.getInstance().getConnection().prepareStatement(query);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				Reference type = initEntity(rs);
+				Reference type = init(rs);
 				list.add(type);
 			}
 		} catch (Exception e) {
@@ -98,7 +97,7 @@ public abstract class ReferenceService extends EntityService implements IReferen
 	}
 
 	@Override
-	public BaseEntity saveEntity(BaseEntity element) throws DataAccessException {
+	public Base save(Base element) throws DataAccessException {
 		Reference reference = (Reference)element;
 		int result = -1;
         PreparedStatement ps = null;
@@ -137,14 +136,14 @@ public abstract class ReferenceService extends EntityService implements IReferen
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			updateDictionary();
+			update();
 		}
 		return reference;
 	}
 
 	@Override
-	public Reference initEntity(ResultSet rs) throws DataAccessException, SQLException {
-		Reference type = (Reference)createEntity();
+	public Reference init(ResultSet rs) throws DataAccessException, SQLException {
+		Reference type = (Reference)create();
 		type.setId(Long.parseLong(rs.getString("ID")));
 		type.setCode(rs.getString("Code"));
 		type.setName(rs.getString("Name"));

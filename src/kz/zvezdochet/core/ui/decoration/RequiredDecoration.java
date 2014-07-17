@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Control;
 /**
  * Класс, обеспечивающий декорирование полей ввода,
  * которые обязательны для заполнения
- * @author nataly
+ * @author Nataly Didenko
  *
  */
 public class RequiredDecoration extends ControlDecoration {

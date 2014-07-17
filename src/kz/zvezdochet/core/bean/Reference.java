@@ -1,18 +1,17 @@
 package kz.zvezdochet.core.bean;
 
-/**
- * Абстрактная сущность, определяющая свойства
- * однотипных текстовых справочников,
- * структура которых имеет вид "идентификатор:код:значение"
- * @author Nataly
- * 
- * @see BaseEntity Базовая сущность
- */
-public class Reference extends BaseEntity {
-	private static final long serialVersionUID = 1613816375946166946L;
+import kz.zvezdochet.core.service.BaseService;
 
-	public Reference() {}
-		
+/**
+ * Прототип объекта текстового справочника,
+ * структура которого имеет вид "идентификатор:код:значение"
+ * @author Nataly Didenko
+ * 
+ * @see Base прототип объекта предметной области
+ */
+public class Reference extends Base {
+	private static final long serialVersionUID = 211870081291580287L;
+
 	/**
 	 * Код
 	 */
@@ -54,5 +53,9 @@ public class Reference extends BaseEntity {
 	@Override
 	public String toString() {
 		return name;
+	}
+	@Override
+	public BaseService getService() {
+		return null;
 	}
 }

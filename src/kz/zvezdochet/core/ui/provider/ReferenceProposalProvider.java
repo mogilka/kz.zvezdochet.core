@@ -10,7 +10,7 @@ import org.eclipse.jface.fieldassist.IContentProposalProvider;
 
 /**
  * Класс, обеспечивающий автозаполнение текстовых полей
- * @author nataly
+ * @author Nataly Didenko
  *
  */
 public class ReferenceProposalProvider implements IContentProposalProvider {

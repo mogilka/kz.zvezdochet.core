@@ -1,7 +1,7 @@
 package kz.zvezdochet.core.handler;
 
-import kz.zvezdochet.core.bean.BaseEntity;
-import kz.zvezdochet.core.service.IEntityService;
+import kz.zvezdochet.core.bean.Base;
+import kz.zvezdochet.core.service.IBaseService;
 import kz.zvezdochet.core.ui.listener.IEditorElementListener;
 import kz.zvezdochet.core.ui.util.DialogUtil;
 import kz.zvezdochet.core.ui.view.ElementView;
@@ -24,10 +24,10 @@ public class SaveHandler extends Handler {
 	@Execute
 	public void execute() {
 		updateStatus(Messages.getString("ApplyElementAction.SavingElement"), false); //$NON-NLS-1$
-		BaseEntity element = null;
+		Base element = null;
 		try {
 			if (!((ElementView)view).checkViewValues()) return;
-			element = ((ElementView)view).getElement();
+			element = ((ElementView)view).getElement(Handler.MODE_SAVE);
 			element = saveElement(element);
 			((ElementView)view).setElement(element, false);
 			updateStatus(Messages.getString("ApplyElementAction.ElementSaved"), false); //$NON-NLS-1$
@@ -46,11 +46,11 @@ public class SaveHandler extends Handler {
 	 * @param element объект, подлежащий сохранению
 	 * @return сохраненный объект 
 	 */
-	public BaseEntity saveElement(BaseEntity element) throws Exception {
-		IEntityService service = null;
+	public Base saveElement(Base element) throws Exception {
+		IBaseService service = null;
 		try {
-			service = element.getEntityService();
-			element = service.saveEntity(element);
+			service = element.getService();
+			element = service.save(element);
 		} catch (Exception e) {
 			updateStatus(Messages.getString("ApplyElementAction.ErrorSavingElement"), true); //$NON-NLS-1$
 			DialogUtil.alertError(getActionErrorMessage());

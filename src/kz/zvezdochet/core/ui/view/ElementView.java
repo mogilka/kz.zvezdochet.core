@@ -3,7 +3,7 @@ package kz.zvezdochet.core.ui.view;
 import java.util.HashMap;
 import java.util.Map;
 
-import kz.zvezdochet.core.bean.BaseEntity;
+import kz.zvezdochet.core.bean.Base;
 import kz.zvezdochet.core.ui.listener.IEditorElementListener;
 import kz.zvezdochet.core.ui.listener.IElementListListener;
 
@@ -30,8 +30,8 @@ public abstract class ElementView extends View {
 	/**
 	 * Элемент представления (объект-домен)
 	 */
-	protected BaseEntity element;
-	
+	protected Base element;
+
 	/**
 	 * Обработчик событий сохранения объекта
 	 */
@@ -39,9 +39,10 @@ public abstract class ElementView extends View {
 	
 	/**
 	 * Проверка введенных значений
+	 * @param mode режим проверки элемента
 	 * @return <true> - поля заполнены корректно
 	 */
-	public boolean checkViewValues() throws Exception {	
+	public boolean checkViewValues(int mode) throws Exception {	
 		return false;
 	}
 	
@@ -115,7 +116,7 @@ public abstract class ElementView extends View {
 	 * синхронизацию представления с моделью
 	 * @param element объект-домен
 	 */
-	public void setElement(BaseEntity element) {
+	public void setElement(Base element) {
 		updateStatus(Messages.getString("ElementView.InitializingElement"), false); //$NON-NLS-1$
 		setElement(element, true);
 	}
@@ -125,13 +126,13 @@ public abstract class ElementView extends View {
 	 * @param element объект-домен
 	 * @param refresh <true> - синхронизировать представление с моделью
 	 */
-	public void setElement(BaseEntity element, boolean refresh) {		
+	public void setElement(Base element, boolean refresh) {		
 		if (null == element) return;
 		if (refresh) {
 			this.element = element;		 
 			modelToView();
 		} else if (this.element != null && element.getId() != null)
-			((BaseEntity)this.element).setId(element.getId());
+			((Base)this.element).setId(element.getId());
 		setIsStateChanged(false);		
 		deactivateUnaccessable();
 	}
@@ -139,9 +140,10 @@ public abstract class ElementView extends View {
 	/**
 	 * Метод, возвращающий элемент представления.
 	 * Предварительно происходит синхронизация модели с представлением
+	 * @param mode режим запроса элемента
 	 */
-	public BaseEntity getElement() throws Exception {
-		viewToModel();
+	public Base getElement(int mode) throws Exception {
+		viewToModel(mode);
 		return element;
 	}
 	
@@ -151,7 +153,7 @@ public abstract class ElementView extends View {
 	 * чтобы он возвращал новый экземпляр конкретного класса
 	 * @return созданный объект-домен
 	 * */
-	public Object createElement() {
+	public Object addElement() {
 		return element;
 	}
 	
@@ -161,12 +163,11 @@ public abstract class ElementView extends View {
 	 * @param parent Базовый композит представления
 	 */
 	@Override
-	public void createComposite(Composite parent) {
-		super.createComposite(parent);
+	public void create(Composite parent) {
+		super.create(parent);
 //		this.viewTitle = this.getTitle();
 		decorateView();
-		prepareView(parent);
-		initializeControls();
+		init(parent);
 		deactivateUnaccessable();
 		setListeners();
 	}
@@ -183,8 +184,9 @@ public abstract class ElementView extends View {
 	
 	/**
 	 * Синхронизация модели с представлением
+	 * @param mode режим синхронизации элемента
 	 */
-	protected abstract void viewToModel()throws Exception;
+	protected abstract void viewToModel(int mode) throws Exception;
 	
 	/**
 	 * Управление доступом к функциям модификации данных
@@ -252,15 +254,6 @@ public abstract class ElementView extends View {
 	 * @param lockType признак установки/снятия блокировки
 	 */
 	protected void lockControls(boolean lockType) {}
-
-	/**
-	 * Метод, обновляющий содержимое элементов управления
-	 * (как правило списочных)
-	 */
-	public void refreshData() {
-		updateStatus(Messages.getString("ElementView.RefreshingControls"), false); //$NON-NLS-1$
-		initializeControls();
-	}
 
 	/**
 	 * Отображение прогресса выполняемой операции
@@ -331,12 +324,6 @@ public abstract class ElementView extends View {
 	}
 
 	/**
-	 * Выравнивание визуальных компонентов
-	 * @param composite контейнер виджетов
-	 */
-	protected void prepareView(Composite composite) {}
-
-	/**
 	 * Обработчик изменения состояния представления
 	 */
 //	protected IExtensionStateListener stateListener = null;
@@ -360,4 +347,49 @@ public abstract class ElementView extends View {
 	 * в соответствии с требованиями предметной области
 	 */
 	protected void decorateView() {}
+
+	/**
+	 * Признак, определяющий, были ли изменены данные в представлении
+	 */
+	protected boolean isStateChanged = false;
+	
+	/**
+	 * Признак, определяющий, изменены ли пользователем данные представления
+	 */
+	protected boolean codeEdit = false;
+	
+	public boolean isStateChanged() {
+		return isStateChanged;
+	}
+	
+	public void setCodeEdit(boolean codeEdit) {
+		this.codeEdit = codeEdit;
+	}
+	
+	public boolean isCodeEdit() {
+		return codeEdit;
+	}
+	
+	/**
+	 * Изменение заголовка в соответствии с состоянием представления.
+	 * Если данные были изменены, добавляем в текст заголовка звездочку
+	 */
+	public void setIsStateChanged(boolean isChange) {
+		if (isCodeEdit() || (isChange == this.isStateChanged))
+			return;
+		this.isStateChanged = isChange;
+//		if (this.isStateChanged)
+//			setPartName("*" + viewTitle);
+//		else
+//			setPartName(viewTitle);
+	}
+
+	/**
+	 * Проверка заполненности элементов управления
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean checkViewValues() throws Exception {
+		return false;
+	}
 }

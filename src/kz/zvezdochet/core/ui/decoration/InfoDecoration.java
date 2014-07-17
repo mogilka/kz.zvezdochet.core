@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Control;
 
 /**
  * Класс, обеспечивающий декорирование полей ввода информационным сообщением
- * @author nataly
+ * @author Nataly Didenko
  *
  */
 public class InfoDecoration extends ControlDecoration {

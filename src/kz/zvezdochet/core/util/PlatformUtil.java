@@ -17,7 +17,7 @@ import org.osgi.framework.Bundle;
 
 /**
  * Класс, обеспечивающий методы для работы с объектами рабочей среды
- * @author Nataly
+ * @author Nataly Didenko
  *
  */
 public class PlatformUtil {

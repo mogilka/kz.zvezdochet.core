@@ -6,7 +6,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 
 /**
  * Класс, предоставляющий вызов пользовательских сообщений
- * @author Nataly
+ * @author Nataly Didenko
  *
  */
 public class DialogUtil {

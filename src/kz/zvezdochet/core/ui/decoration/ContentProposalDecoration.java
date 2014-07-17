@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Control;
 /**
  * Класс, обеспечивающий декорирование полей ввода,
  * для которых включено автозаполнение из справочника
- * @author nataly
+ * @author Nataly Didenko
  *
  */
 public class ContentProposalDecoration extends ControlDecoration {

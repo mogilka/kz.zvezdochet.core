@@ -7,7 +7,7 @@ import org.eclipse.ui.IActionBars;
 
 /**
  * Класс, предоставляющий методы для работы со строкой состояния
- * @author Nataly
+ * @author Nataly Didenko
  *
  */
 public class StatusUtil {
