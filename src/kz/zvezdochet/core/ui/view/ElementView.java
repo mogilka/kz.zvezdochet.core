@@ -168,6 +168,7 @@ public abstract class ElementView extends View {
 //		this.viewTitle = this.getTitle();
 		decorateView();
 		init(parent);
+		initializeControls();
 		deactivateUnaccessable();
 		setListeners();
 	}
