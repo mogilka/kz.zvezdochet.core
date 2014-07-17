@@ -7,6 +7,10 @@ import kz.zvezdochet.core.ui.view.View;
  * @author Nataly Didenko
  */
 public abstract class Handler {
+	/**
+	 * Режим обработки элемента
+	 */
+	public static int MODE_SAVE = 0;
 
 	/**
 	 * Ссылка на представление, где расположено действие
