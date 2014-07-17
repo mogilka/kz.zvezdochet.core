@@ -5,33 +5,21 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
 /**
- * Класс, обеспечивающий соединение с базой данных
- * @author nataly
+ * Класс, обеспечивающий соединение с БД SQLite
+ * @author Nataly Didenko
  *
  */
 public class Connector {
 	private static Connector instance;
 	private static Connection connection;
-	/**
-	 * Признак того, что устанавливается соединение с удаленным сервером
-	 */
-	public static boolean remote = false;
 	
 	private Connector() {}
 	
 	public static Connector getInstance() {
 		if (instance == null) {
 			instance = new Connector();
-			if (remote)
-				setConnection();
-			else
-				setLocalConnection();
+			setLocalConnection();
 		}
 		return instance;
 	}
@@ -43,7 +31,10 @@ public class Connector {
 	public Connection getConnection() {
 		return connection;
 	}
-	
+
+	/**
+	 * Закрытие соединения с БД
+	 */
 	public synchronized void closeConnection() {
 		try {
 			if (connection != null) 
@@ -61,6 +52,22 @@ public class Connector {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Инициализация соединения с БД
+	 * @todo вынести в конфиг + назначить местонахождение БД
+	 */
+	private static void setLocalConnection2() {
+		try {
+			Class.forName("org.sqlite.JDBC");
+			connection = DriverManager.getConnection("jdbc:sqlite:stargazer.db");
+		} catch (ClassNotFoundException e) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}	
 
 	/**
 	 * Инициализация соединения с БД
@@ -88,25 +95,4 @@ public class Connector {
 			e.printStackTrace();
 		}
 	}	
-
-	/**
-	 * Инициализация соединения с БД через контекст веб-сервера
-	 */
-	private static void setConnection() {
-		String datasource = "jdbc/stargazer";
-		try {
-			Context c = (Context)new InitialContext().lookup("java:comp/env");
-			DataSource ds = (DataSource)c.lookup(datasource);
-			connection = ds.getConnection();
-			connection.setAutoCommit(false);
-			System.out.println("Источних данных найден: java:comp/env/" + datasource);
-			System.out.println("Соединение установлено");
-		} catch (SQLException se) {
-			se.printStackTrace();
-			System.err.println("Соединение не установлено\t" + se.getMessage());
-		} catch (NamingException ne) {
-			//ne.printStackTrace();
-			System.err.println("Источних данных не найден\t" + ne.getMessage());
-		}
-	}
 }
