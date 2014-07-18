@@ -3,7 +3,7 @@ package kz.zvezdochet.core.ui.extension;
 import java.util.List;
 
 import kz.zvezdochet.core.ui.view.ElementComposite;
-import kz.zvezdochet.core.ui.view.ElementView;
+import kz.zvezdochet.core.ui.view.ModelView;
 import kz.zvezdochet.core.ui.view.View;
 
 import org.eclipse.jface.action.Action;
@@ -60,12 +60,12 @@ public abstract interface IElementExtensionProvider extends IExtensionProvider {
 	/**
 	 * Передача ссылки на основное представление в расширитель
 	 */
-	public void setView(ElementView view);
+	public void setView(ModelView view);
 	/**
 	 * Метод, возвращающий расширяемое представление
 	 * @return представление
 	 */
-	public ElementView getView();
+	public ModelView getView();
 	/** 
 	 * Метод, возвращающий контейнер виджетов расширителя
 	 * @return композит

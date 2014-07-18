@@ -1,8 +1,5 @@
 package kz.zvezdochet.core.ui.view;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import kz.zvezdochet.core.bean.Base;
 import kz.zvezdochet.core.ui.listener.IEditorElementListener;
 import kz.zvezdochet.core.ui.listener.IElementListListener;
@@ -26,11 +23,11 @@ import org.eclipse.ui.PlatformUI;
  * 
  * @author Nataly Didenko
  */
-public abstract class ElementView extends View {
+public abstract class ModelView extends View {
 	/**
 	 * Элемент представления (объект-домен)
 	 */
-	protected Base element;
+	protected Base model;
 
 	/**
 	 * Обработчик событий сохранения объекта
@@ -42,7 +39,7 @@ public abstract class ElementView extends View {
 	 * @param mode режим проверки элемента
 	 * @return <true> - поля заполнены корректно
 	 */
-	public boolean checkViewValues(int mode) throws Exception {	
+	public boolean check(int mode) throws Exception {	
 		return false;
 	}
 	
@@ -114,25 +111,25 @@ public abstract class ElementView extends View {
 	/**
 	 * Инициализация элемента представления, включающая
 	 * синхронизацию представления с моделью
-	 * @param element объект-домен
+	 * @param model объект-модель
 	 */
-	public void setElement(Base element) {
+	public void setModel(Base model) {
 		updateStatus(Messages.getString("ElementView.InitializingElement"), false); //$NON-NLS-1$
-		setElement(element, true);
+		setModel(model, true);
 	}
 	
 	/**
 	 * Инициализация элемента представления
-	 * @param element объект-домен
+	 * @param model объект-домен
 	 * @param refresh <true> - синхронизировать представление с моделью
 	 */
-	public void setElement(Base element, boolean refresh) {		
-		if (null == element) return;
+	public void setModel(Base model, boolean refresh) {		
+		if (null == model) return;
 		if (refresh) {
-			this.element = element;		 
-			modelToView();
-		} else if (this.element != null && element.getId() != null)
-			((Base)this.element).setId(element.getId());
+			this.model = model;		 
+			syncView();
+		} else if (this.model != null && model.getId() != null)
+			((Base)this.model).setId(model.getId());
 		setIsStateChanged(false);		
 		deactivateUnaccessable();
 	}
@@ -142,9 +139,9 @@ public abstract class ElementView extends View {
 	 * Предварительно происходит синхронизация модели с представлением
 	 * @param mode режим запроса элемента
 	 */
-	public Base getElement(int mode) throws Exception {
-		viewToModel(mode);
-		return element;
+	public Base getModel(int mode) throws Exception {
+		syncModel(mode);
+		return model;
 	}
 	
 	/**
@@ -153,8 +150,8 @@ public abstract class ElementView extends View {
 	 * чтобы он возвращал новый экземпляр конкретного класса
 	 * @return созданный объект-домен
 	 * */
-	public Object addElement() {
-		return element;
+	public Object addModel() {
+		return model;
 	}
 	
 	/**
@@ -166,34 +163,28 @@ public abstract class ElementView extends View {
 	public void create(Composite parent) {
 		super.create(parent);
 //		this.viewTitle = this.getTitle();
-		decorateView();
+		decorate();
 		init(parent);
-		initializeControls();
+		initControls();
 		deactivateUnaccessable();
-		setListeners();
 	}
-	
-	/**
-	 * Инициализация обработчиков событий элементов управления
-	 */
-	protected void setListeners() {}
 	
 	/**
 	 * Синхронизация представления с моделью
 	 */
-	protected abstract void modelToView();
+	protected abstract void syncView();
 	
 	/**
 	 * Синхронизация модели с представлением
 	 * @param mode режим синхронизации элемента
 	 */
-	protected abstract void viewToModel(int mode) throws Exception;
+	protected abstract void syncModel(int mode) throws Exception;
 	
 	/**
 	 * Управление доступом к функциям модификации данных
 	 */
 	protected void deactivateUnaccessable() {
-		boolean changed = (element != null) 
+		boolean changed = (model != null) 
 			&& isStateChanged() 
 			&& isEditable();
 //		if (applyAction != null)
@@ -203,7 +194,7 @@ public abstract class ElementView extends View {
 	/**
 	 * Инициализация элементов управления
 	 */
-	protected void initializeControls() {}
+	protected void initControls() {}
 	
 	/**
 	 * Признак того, что элементы представления
@@ -241,16 +232,6 @@ public abstract class ElementView extends View {
 	}
 
 	/**
-	 * Метод, возвращающий текущий элемент представления
-	 * без синхронизации модели с представлением
-	 * @return объект-домен
-	 * @throws BusinessRuleException
-	 */
-	public Object getEntity() {
-		return element;
-	}
-
-	/**
 	 * Блокировка редактируемых полей
 	 * @param lockType признак установки/снятия блокировки
 	 */
@@ -276,29 +257,6 @@ public abstract class ElementView extends View {
 		}.start();				
     }
     
-    /**
-     * Структура, хранящая вспомогательные данные представления
-     */
-    private Map<String, Object> data = new HashMap<String, Object>();
-    
-    /**
-     * Метод, извлекающий параметр представления по ключу
-     * @param key имя параметра
-     * @return значение параметра
-     */
-    public Object getData(String key) {
-    	return data.get(key);
-    }
-    
-    /**
-     * Метод, задающий параметр представления
-     * @param key имя параметра
-     * @param value значение параметра
-     */
-    public void setData(String key, Object value) {
-    	data.put(key, value);
-    }
-
 	/**
 	 * Вывод сообщения в строке состояния
 	 * @param msg сообщение
@@ -347,7 +305,7 @@ public abstract class ElementView extends View {
 	 * Декорирование визуальных компонентов
 	 * в соответствии с требованиями предметной области
 	 */
-	protected void decorateView() {}
+	protected void decorate() {}
 
 	/**
 	 * Признак, определяющий, были ли изменены данные в представлении
@@ -383,14 +341,5 @@ public abstract class ElementView extends View {
 //			setPartName("*" + viewTitle);
 //		else
 //			setPartName(viewTitle);
-	}
-
-	/**
-	 * Проверка заполненности элементов управления
-	 * @return
-	 * @throws Exception
-	 */
-	public boolean checkViewValues() throws Exception {
-		return false;
 	}
 }

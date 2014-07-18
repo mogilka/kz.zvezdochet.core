@@ -25,9 +25,9 @@ import org.eclipse.ui.forms.widgets.Section;
  * Используется для простых справочных данных, имеющих наименование и код
  * @author Nataly
  * 
- * @see ElementView Прототип редактора объекта
+ * @see ModelView Прототип редактора объекта
  */
-public abstract class ReferenceView extends ElementView {
+public abstract class ReferenceView extends ModelView {
 	protected Text txtName;
 	protected Text txtCode;
 	protected Text txtDescription;
@@ -130,23 +130,23 @@ public abstract class ReferenceView extends ElementView {
 		} else return true;
 	}
 	
-	protected void modelToView() {		
+	protected void syncView() {		
 		clear();
-		if (element == null) return;
+		if (model == null) return;
 		setCodeEdit(true);
-		txtName.setText(StringUtil.safeString(((Reference)element).getName()));
-		txtCode.setText(StringUtil.safeString(((Reference)element).getCode()));
-		txtDescription.setText(StringUtil.safeString(((Reference)element).getDescription()));
+		txtName.setText(StringUtil.safeString(((Reference)model).getName()));
+		txtCode.setText(StringUtil.safeString(((Reference)model).getCode()));
+		txtDescription.setText(StringUtil.safeString(((Reference)model).getDescription()));
 		setCodeEdit(false);
 	}
 
 	protected void viewToModel() throws Exception {
 		if (!checkViewValues()) return;
-		if (element == null) 
-			element = (Base)addElement();
-		((Reference)element).setName(txtName.getText());
-		((Reference)element).setCode(txtCode.getText());	
-		((Reference)element).setDescription(txtDescription.getText());	
+		if (model == null) 
+			model = (Base)addModel();
+		((Reference)model).setName(txtName.getText());
+		((Reference)model).setCode(txtCode.getText());	
+		((Reference)model).setDescription(txtDescription.getText());	
 	}
 
 	public void clear() {

@@ -28,28 +28,28 @@ import org.eclipse.swt.widgets.Text;
  * Прототип представления стандартного списочного справочника значений
  * @author Nataly
  * 
- * @see ElementListView Прототип списочных представлений
+ * @see ModelListView Прототип списочных представлений
  */
-public class ReferenceListView extends ElementListView {
+public class ReferenceListView extends ModelListView {
 	private Text txtName;
 	
 	@Override
 	public void create(Composite parent) {
-		filterGroup = new Group(container, SWT.NONE);
+		grFilter = new Group(container, SWT.NONE);
 		final FormData fd = new FormData();
 		fd.bottom = new FormAttachment(0, 55);
 		fd.right = new FormAttachment(100, -5);
 		fd.top = new FormAttachment(0, 5);
 		fd.left = new FormAttachment(0, 5);
-		filterGroup.setLayoutData(fd);
+		grFilter.setLayoutData(fd);
 		final GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 4;
-		filterGroup.setLayout(gridLayout);
-		filterGroup.setText(Messages.getString("ReferenceListView.Filter")); //$NON-NLS-1$
+		grFilter.setLayout(gridLayout);
+		grFilter.setText(Messages.getString("ReferenceListView.Filter")); //$NON-NLS-1$
 
-		final Label label = new Label(filterGroup, SWT.NONE);
+		final Label label = new Label(grFilter, SWT.NONE);
 		label.setText(Messages.getString("ReferenceListView.Name")); //$NON-NLS-1$
-		txtName = new Text(filterGroup, SWT.BORDER);
+		txtName = new Text(grFilter, SWT.BORDER);
 		final GridData gd_txtName = new GridData(SWT.FILL, SWT.CENTER, true, false);
 		txtName.setLayoutData(gd_txtName);
 		txtName.addModifyListener(new StateChangedListener());
@@ -60,9 +60,9 @@ public class ReferenceListView extends ElementListView {
 		table.setLinesVisible(false);
 		final FormData fd_table = new FormData();
 		fd_table.bottom = new FormAttachment(100, -5);
-		fd_table.right = new FormAttachment(filterGroup, 0, SWT.RIGHT);
-		fd_table.top = new FormAttachment(filterGroup, 5, SWT.BOTTOM);
-		fd_table.left = new FormAttachment(filterGroup, 0, SWT.LEFT);
+		fd_table.right = new FormAttachment(grFilter, 0, SWT.RIGHT);
+		fd_table.top = new FormAttachment(grFilter, 5, SWT.BOTTOM);
+		fd_table.left = new FormAttachment(grFilter, 0, SWT.LEFT);
 		table.setLayoutData(fd_table);
 	}
 	
@@ -107,8 +107,8 @@ public class ReferenceListView extends ElementListView {
 	}
 
 	protected void createTableFilter() {
-		filter = new ReferenceListFilter();	
-		tableViewer.addFilter(filter);
+		viewerFilter = new ReferenceListFilter();	
+		tableViewer.addFilter(viewerFilter);
 	}
 	
 	protected void addColumns() {
@@ -143,8 +143,8 @@ public class ReferenceListView extends ElementListView {
 	protected void initTable() {
 		try {
 			showBusy(true);
-			if (elementList != null) 
-				tableViewer.setInput(elementList);
+			if (modelList != null) 
+				tableViewer.setInput(modelList);
 		} finally {
 			showBusy(false);
 		}

@@ -1,6 +1,6 @@
 package kz.zvezdochet.core.ui.extension;
 
-import kz.zvezdochet.core.ui.view.ElementView;
+import kz.zvezdochet.core.ui.view.ModelView;
 
 
 /**
@@ -13,13 +13,13 @@ public class ExtensionStateListener implements IExtensionStateListener {
 	/**
 	 * Ссылка на представление расширяемого объекта
 	 */
-	private ElementView view = null;
+	private ModelView view = null;
 
 	/**
 	 * Параметризованный конструктор
 	 * @param view представление документа
 	 */
-	public ExtensionStateListener(ElementView view) {
+	public ExtensionStateListener(ModelView view) {
 		this.view = view;		
 	}
 

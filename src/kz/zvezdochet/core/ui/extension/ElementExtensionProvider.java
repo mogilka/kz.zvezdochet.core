@@ -5,7 +5,7 @@ import java.util.List;
 
 import kz.zvezdochet.core.bean.Base;
 import kz.zvezdochet.core.ui.view.ElementComposite;
-import kz.zvezdochet.core.ui.view.ElementView;
+import kz.zvezdochet.core.ui.view.ModelView;
 import kz.zvezdochet.core.ui.view.View;
 import kz.zvezdochet.core.util.PlatformUtil;
 
@@ -26,7 +26,7 @@ public abstract class ElementExtensionProvider extends ExtensionProvider impleme
 	/**
 	 * Представление, используемое в расширение 
 	 */
-	protected ElementView view;
+	protected ModelView view;
 	/**
 	 * Композит расширения 
 	 */
@@ -62,12 +62,12 @@ public abstract class ElementExtensionProvider extends ExtensionProvider impleme
 	}
 		
 	@Override
-	public void setView(ElementView view) {
+	public void setView(ModelView view) {
 		this.view = view;
 	}
 
 	@Override
-	public ElementView getView() {
+	public ModelView getView() {
 		return view;
 	}
 	
@@ -75,7 +75,7 @@ public abstract class ElementExtensionProvider extends ExtensionProvider impleme
 	public void checkModelForSave() {
 		if (view != null)
 			try {
-				view.checkViewValues();
+				view.check(0);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -89,17 +89,17 @@ public abstract class ElementExtensionProvider extends ExtensionProvider impleme
 	@Override
 	public void showAdditionalViews() {
 		if (getExtensionViewId() != null) {
-			ElementView view = null;
+			ModelView view = null;
 			IWorkbenchPage page = PlatformUtil.getActivePage();
 			try {
-				view = (ElementView)page.findView(extensionViewId);
+				view = (ModelView)page.findView(extensionViewId);
 				if (view == null)
-					view = (ElementView)page.showView(extensionViewId, null, IWorkbenchPage.VIEW_CREATE);
+					view = (ModelView)page.showView(extensionViewId, null, IWorkbenchPage.VIEW_CREATE);
 			} catch (PartInitException e) {
 				e.printStackTrace();
 			}	
 //			view.setStateListener(stateListener);
-			view.setElement((Base)extension);
+			view.setModel((Base)extension);
 			addShowingView(view);	
 		}
 	}

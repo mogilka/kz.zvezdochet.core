@@ -29,8 +29,8 @@ public abstract class ReferenceService extends BaseService implements IReference
 			ps = Connector.getInstance().getConnection().prepareStatement(query);
 			ps.setString(1, code);
 			rs = ps.executeQuery();
-			if (rs.next()) 
-				type = init(rs);
+			if (rs.next())
+				type = init(rs, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -47,7 +47,7 @@ public abstract class ReferenceService extends BaseService implements IReference
 	@Override
 	public Base find(Long id) throws DataAccessException {
 		if (id == null) return null;
-        Reference type = new Reference();
+        Reference type = (Reference)create();
         PreparedStatement ps = null;
         ResultSet rs = null;
 		try {
@@ -56,7 +56,7 @@ public abstract class ReferenceService extends BaseService implements IReference
 			ps.setLong(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) 
-				type = init(rs);
+				type = init(rs, type);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -80,7 +80,8 @@ public abstract class ReferenceService extends BaseService implements IReference
 			ps = Connector.getInstance().getConnection().prepareStatement(query);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				Reference type = init(rs);
+				Reference type = (Reference)create();
+				type = init(rs, type);
 				list.add(type);
 			}
 		} catch (Exception e) {
@@ -142,8 +143,12 @@ public abstract class ReferenceService extends BaseService implements IReference
 	}
 
 	@Override
-	public Reference init(ResultSet rs) throws DataAccessException, SQLException {
-		Reference type = (Reference)create();
+	public Reference init(ResultSet rs, Base base) throws DataAccessException, SQLException {
+		Reference type = null;
+		if (base != null && base instanceof Reference)
+			type = (Reference)base;
+		else
+			type = new Reference();
 		type.setId(Long.parseLong(rs.getString("ID")));
 		type.setCode(rs.getString("Code"));
 		type.setName(rs.getString("Name"));

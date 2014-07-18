@@ -4,8 +4,8 @@ import kz.zvezdochet.core.bean.Base;
 import kz.zvezdochet.core.ui.listener.IEditorElementListener;
 import kz.zvezdochet.core.ui.util.DialogUtil;
 import kz.zvezdochet.core.ui.util.GUIutil;
-import kz.zvezdochet.core.ui.view.ElementListView;
-import kz.zvezdochet.core.ui.view.ElementView;
+import kz.zvezdochet.core.ui.view.ModelListView;
+import kz.zvezdochet.core.ui.view.ModelView;
 import kz.zvezdochet.core.ui.view.View;
 
 import org.eclipse.ui.IViewPart;
@@ -34,12 +34,12 @@ public abstract class ElementListExtPoint {
 	 */
 	public void addElement(View view, IEditorElementListener listener) {
 		try {
-			Base element = (Base)((ElementListView)view).addElement();
+			Base element = (Base)((ModelListView)view).addModel();
 			if (element != null) {
 //					elementView = view.getSite().getPage().showView(getElementViewId());
-					((ElementView)elementView).setListener(listener);
-					((ElementView)elementView).setElement(element);
-					((ElementView)elementView).setEditable(((ElementView)view).isEditable());
+					((ModelView)elementView).setListener(listener);
+					((ModelView)elementView).setModel(element);
+					((ModelView)elementView).setEditable(((ModelView)view).isEditable());
 //					((ElementView)elementView).setFocus();
 			}
 			updateStatus(view, Messages.getString("ElementListExtPoint.AddingElement"), false); //$NON-NLS-1$
@@ -57,11 +57,11 @@ public abstract class ElementListExtPoint {
 	 */
 	public void editElement(View view, IEditorElementListener listener) {
 		try {
-			Base element = (Base)((ElementListView)view).getElement();
+			Base element = (Base)((ModelListView)view).getModel();
 			if (element != null) {
 //				elementView = view.getSite().getPage().showView(getElementViewId());
-				((ElementView)elementView).setListener(listener);
-				((ElementView)elementView).setElement(element);
+				((ModelView)elementView).setListener(listener);
+				((ModelView)elementView).setModel(element);
 			}
 			updateStatus(view, Messages.getString("ElementListExtPoint.EditingElement"), false); //$NON-NLS-1$
 		} catch (Exception e) {
@@ -78,7 +78,7 @@ public abstract class ElementListExtPoint {
 	 * @param listener слушатель, отслеживающий сохранение объекта
 	 */
 	public void deleteElement(View view, IEditorElementListener listener) {
-		Base entity = (Base)((ElementListView)view).getElement();
+		Base entity = (Base)((ModelListView)view).getModel();
 		if (DialogUtil.alertConfirm(GUIutil.DO_YOU_REALLY_WANNA_DELETE_ENTRY)) {
 //			if (entity.getChildren() != null && entity.getChildren().size() > 0) {
 //				DialogUtil.alertWarning(GUIutil.DELETING_OBJECT_HAS_CHILDREN);
@@ -92,7 +92,7 @@ public abstract class ElementListExtPoint {
 				((View)elementView).clear();
 		} else {
 			updateStatus(view, Messages.getString("ElementListExtPoint.CancelDeletingElement"), false); //$NON-NLS-1$
-			listener.onCancelSave(((ElementListView)view).getElement());
+			listener.onCancelSave(((ModelListView)view).getModel());
 		}
 	}
 	

@@ -42,7 +42,7 @@ public interface IBaseService {
 	 * @throws DataAccessException
 	 * @throws SQLException
 	 */
-	public Base init(ResultSet rs) throws DataAccessException, SQLException;
+	public Base init(ResultSet rs, Base base) throws DataAccessException, SQLException;
 	/**
 	 * Добавление объекта. Должно быть переопределено в наследниках
 	 * @return объект

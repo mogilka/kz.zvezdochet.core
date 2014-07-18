@@ -4,7 +4,7 @@ import kz.zvezdochet.core.bean.Base;
 import kz.zvezdochet.core.service.IBaseService;
 import kz.zvezdochet.core.ui.listener.IEditorElementListener;
 import kz.zvezdochet.core.ui.util.DialogUtil;
-import kz.zvezdochet.core.ui.view.ElementView;
+import kz.zvezdochet.core.ui.view.ModelView;
 import kz.zvezdochet.core.ui.view.View;
 
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -26,12 +26,12 @@ public class SaveHandler extends Handler {
 		updateStatus(Messages.getString("ApplyElementAction.SavingElement"), false); //$NON-NLS-1$
 		Base element = null;
 		try {
-			if (!((ElementView)view).checkViewValues()) return;
-			element = ((ElementView)view).getElement(Handler.MODE_SAVE);
+			if (!((ModelView)view).check(0)) return;
+			element = ((ModelView)view).getModel(Handler.MODE_SAVE);
 			element = saveElement(element);
-			((ElementView)view).setElement(element, false);
+			((ModelView)view).setModel(element, false);
 			updateStatus(Messages.getString("ApplyElementAction.ElementSaved"), false); //$NON-NLS-1$
-			IEditorElementListener listener = ((ElementView)view).getListener();
+			IEditorElementListener listener = ((ModelView)view).getListener();
 			if (listener != null)
 				listener.onSave(element);
 		} catch (Exception e) {

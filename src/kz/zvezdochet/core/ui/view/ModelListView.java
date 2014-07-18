@@ -6,6 +6,7 @@ import kz.zvezdochet.core.bean.Base;
 import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
 import kz.zvezdochet.core.ui.listener.IElementListListener;
 import kz.zvezdochet.core.ui.listener.ISelectElementListener;
+import kz.zvezdochet.core.ui.listener.StateChangedListener;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
@@ -27,7 +28,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.ui.PlatformUI;
 
 /**
  * Прототип списочного представления данных
@@ -35,7 +35,7 @@ import org.eclipse.ui.PlatformUI;
  * 
  * @author Nataly Didenko
  */
-public abstract class ElementListView extends View {
+public abstract class ModelListView extends View {
 	protected String extPointId = "";
 	
 	/**
@@ -52,8 +52,8 @@ public abstract class ElementListView extends View {
 	/**
 	 * Композит фильтра
 	 */
-	public Group filterGroup;
-	protected ViewerFilter filter;
+	public Group grFilter;
+	protected ViewerFilter viewerFilter;
 	
 	/**
 	 * Массив расширителей точки расширения списка
@@ -62,25 +62,29 @@ public abstract class ElementListView extends View {
 	
 	protected ISelectElementListener selectListener;
 
-	protected List<Base> elementList;
+	protected List<Base> modelList;
 
 	@Override
 	public void create(Composite parent) {
 		container = new Composite(parent, SWT.NONE);
 		container.setLayout(new FormLayout());
-//		this.parent = parent;
-		addColumns();
-		addFilter();
+		initFilter();
 
-		tableViewer.setContentProvider(new ArrayContentProvider());		
+		tableViewer = new TableViewer(container, SWT.BORDER | SWT.FULL_SELECTION);
+		table = tableViewer.getTable();
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		addColumns();
+		init(parent);
+
+		tableViewer.setContentProvider(new ArrayContentProvider());
 		tableViewer.setLabelProvider(getLabelProvider());
 		
-//		if (tableViewer != null) {
-//			stateChangedListener = new StateChangedListener();
-//			tableViewer.addSelectionChangedListener(stateChangedListener);
-//			tableViewer.addDoubleClickListener(stateChangedListener);
-//		}
-		
+		if (tableViewer != null) {
+			StateChangedListener listener = new StateChangedListener();
+			tableViewer.addSelectionChangedListener(listener);
+			tableViewer.addDoubleClickListener(listener);
+		}
 		initTable();
 	}
 	
@@ -88,7 +92,7 @@ public abstract class ElementListView extends View {
 	 * Метод, возвращающий выделенный элемент таблицы
 	 * @return Object выделенный элемент таблицы
 	 */
-	public Object getElement() {
+	public Object getModel() {
 		IStructuredSelection selected = 
 			(IStructuredSelection)tableViewer.getSelection();
 		if (selected.isEmpty())
@@ -131,9 +135,8 @@ public abstract class ElementListView extends View {
 	/**
 	 * Стандартный класс отображения содержимого таблицы
 	 */
-	private class ElementListLabelProvider extends LabelProvider
+	protected class ModelLabelProvider extends LabelProvider
 									implements ITableLabelProvider {
-
 		public Image getColumnImage(Object element, int columnIndex) {
 			return null;
 		}
@@ -143,11 +146,11 @@ public abstract class ElementListView extends View {
 	}	
 	
 	/**
-	 * Метод, возвращающий стандартный провайдер отображения содержимого таблицы
+	 * Поиск обработчика отображения содержимого таблицы
 	 * @return ElementListLabelProvider
 	 */
 	protected IBaseLabelProvider getLabelProvider() {
-		return new ElementListLabelProvider();
+		return new ModelLabelProvider();
 	}
 	
 	/**
@@ -156,7 +159,9 @@ public abstract class ElementListView extends View {
 	protected void initTable() {
 		try {
 			showBusy(true);
-			tableViewer.setInput(elementList);		
+			tableViewer.setInput(modelList);
+			for (int i = 0; i < table.getColumnCount(); i++)
+				table.getColumn(i).pack();
 		} finally {
 			showBusy(false);
 		}
@@ -166,7 +171,7 @@ public abstract class ElementListView extends View {
 	 * Проверка модифицируемости списка элементов
 	 */
 	public boolean isEditable() {
-		if (null == getElement())
+		if (null == getModel())
 			return false;
 		else
 			return tableViewer != null;
@@ -185,33 +190,33 @@ public abstract class ElementListView extends View {
 	
 	/**
 	 * Добавление елемента в таблицу
-	 * @param element новый елемент
+	 * @param model новый елемент
 	 */
-	public void addElement(Object element) {
-		if (elementList.size() > 0) 
-			if (elementList.contains(element)) {
-				editElement(element);
+	public void addModel(Object model) {
+		if (modelList.size() > 0) 
+			if (modelList.contains(model)) {
+				editModel(model);
 				return;
 			}
-		elementList.add(0, (Base)element);
-		tableViewer.add(element);
-		tableViewer.setSelection(new StructuredSelection(element));
+		modelList.add(0, (Base)model);
+		tableViewer.add(model);
+		tableViewer.setSelection(new StructuredSelection(model));
 	}
 	
 	/**
 	 * Удаление елемента из таблицы
-	 * @param element удаляемый елемент
+	 * @param model удаляемый елемент
 	 */
-	public void deleteElement(Object element) {
-		elementList.remove(element);
-		setElements(elementList);
+	public void deleteModel(Object model) {
+		modelList.remove(model);
+		setModelList(modelList);
 	}
 
 	/**
 	 * Редактирование елемента таблицы
 	 * @param element редактируемый елемент
 	 */
-	public void editElement(Object element) {
+	public void editModel(Object element) {
 		if (element != null)
 			tableViewer.refresh(element);
 	}
@@ -236,14 +241,14 @@ public abstract class ElementListView extends View {
 
 	/**
 	 * Инициализация списка элементов
-	 * @param elementsList список элементов
+	 * @param list список элементов
 	 */
-	public void setElements(List<Base> elementsList) {
+	public void setModelList(List<Base> list) {
 		try {
 			showBusy(true);
-			elementList = elementsList;
-			if (elementList != null) 
-				tableViewer.setInput(elementList);	
+			modelList = list;
+			if (modelList != null) 
+				tableViewer.setInput(modelList);	
 		} finally {
 			showBusy(false);
 		}
@@ -283,36 +288,34 @@ public abstract class ElementListView extends View {
 		return tableViewer;
 	}
 
-	public void addFilter() {
+	public void initFilter() {
 //		createTableFilter();
 	}
 
 	/**
 	 * Изменяет значение заданного элемента в списке
-	 * @param element
+	 * @param model объект-модель
 	 */
-	public void updateElement(Base element) {
-		if (elementList != null) {
-			int index = 0;
-			for (Base entity : elementList) {
-				if (entity.equals(element)) {
-					if (entity != element) {
-						updateElement(entity, element);
+	public void updateModel(Base model) {
+		if (modelList != null) {
+			for (Base entity : modelList) {
+				if (entity.equals(model)) {
+					if (entity != model) {
+						updateModel(entity, model);
 					}
 					return;
 				}
-				index++;
 			}
 		}
 	}
 
 	/**
 	 * Применяет изменения для элемента
-	 * @param entity элемент списка
-	 * @param element элемент с измененными данными
+	 * @param model элемент списка
+	 * @param modified элемент с измененными данными
 	 */
-	public void updateElement(Base entity, Base element) {
-		tableViewer.editElement(entity, 0);
+	public void updateModel(Base model, Base modified) {
+		tableViewer.editElement(model, 0);
 	}
 
 	/**
@@ -329,21 +332,21 @@ public abstract class ElementListView extends View {
 	}
 	
 	public void showBusy(final boolean busy) {
-		new Thread() {
-			public void run() {
-				PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-					public void run() {
-//						if (busy)
-//							updateStatus(Messages.getString("ElementListView.ListInitializing"), false); //$NON-NLS-1$
-//						else
-//							updateStatus(Messages.getString("ElementListView.DataLoaded"), false); //$NON-NLS-1$
-					}
-				});
-			}
-		}.start();				
+//		new Thread() {
+//			public void run() {
+//				PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+//					public void run() {
+////						if (busy)
+////							updateStatus(Messages.getString("ElementListView.ListInitializing"), false); //$NON-NLS-1$
+////						else
+////							updateStatus(Messages.getString("ElementListView.DataLoaded"), false); //$NON-NLS-1$
+//					}
+//				});
+//			}
+//		}.start();				
     }
 
-	public Object addElement() {
+	public Object addModel() {
 		return null;
 	}
 }
