@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import kz.zvezdochet.core.bean.Base;
+import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.tool.Connector;
 
 
@@ -68,10 +68,10 @@ public abstract class BaseService implements IBaseService {
 	/**
 	 * Кэшированный список часто используемых объектов сущности
 	 */
-	protected List<Base> list = null;
+	protected List<Model> list = null;
 
 	@Override
-	public List<Base> getList() throws DataAccessException {
+	public List<Model> getList() throws DataAccessException {
 		if (null == list || 0 == list.size())
 			list = getList();
 		return list;

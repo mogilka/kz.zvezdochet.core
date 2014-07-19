@@ -1,6 +1,6 @@
 package kz.zvezdochet.core.handler;
 
-import kz.zvezdochet.core.bean.Base;
+import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.service.IBaseService;
 import kz.zvezdochet.core.ui.listener.IEditorElementListener;
 import kz.zvezdochet.core.ui.util.DialogUtil;
@@ -24,7 +24,7 @@ public class SaveHandler extends Handler {
 	@Execute
 	public void execute() {
 		updateStatus(Messages.getString("ApplyElementAction.SavingElement"), false); //$NON-NLS-1$
-		Base element = null;
+		Model element = null;
 		try {
 			if (!((ModelView)view).check(0)) return;
 			element = ((ModelView)view).getModel(Handler.MODE_SAVE);
@@ -46,7 +46,7 @@ public class SaveHandler extends Handler {
 	 * @param element объект, подлежащий сохранению
 	 * @return сохраненный объект 
 	 */
-	public Base saveElement(Base element) throws Exception {
+	public Model saveElement(Model element) throws Exception {
 		IBaseService service = null;
 		try {
 			service = element.getService();

@@ -7,9 +7,9 @@ import kz.zvezdochet.core.service.BaseService;
  * структура которого имеет вид "идентификатор:код:значение"
  * @author Nataly Didenko
  * 
- * @see Base прототип объекта предметной области
+ * @see Model прототип объекта предметной области
  */
-public class Reference extends Base {
+public class Reference extends Model {
 	private static final long serialVersionUID = 211870081291580287L;
 
 	/**

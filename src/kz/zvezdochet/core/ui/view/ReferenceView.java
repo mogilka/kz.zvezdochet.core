@@ -1,6 +1,6 @@
 package kz.zvezdochet.core.ui.view;
 
-import kz.zvezdochet.core.bean.Base;
+import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.bean.Reference;
 import kz.zvezdochet.core.ui.util.DialogUtil;
 import kz.zvezdochet.core.ui.util.GUIutil;
@@ -143,7 +143,7 @@ public abstract class ReferenceView extends ModelView {
 	protected void viewToModel() throws Exception {
 		if (!checkViewValues()) return;
 		if (model == null) 
-			model = (Base)addModel();
+			model = (Model)addModel();
 		((Reference)model).setName(txtName.getText());
 		((Reference)model).setCode(txtCode.getText());	
 		((Reference)model).setDescription(txtDescription.getText());	

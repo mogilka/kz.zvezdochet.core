@@ -2,7 +2,7 @@ package kz.zvezdochet.core.util;
 
 import java.util.List;
 
-import kz.zvezdochet.core.bean.Base;
+import kz.zvezdochet.core.bean.Model;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
@@ -47,7 +47,7 @@ public class CoreUtil {
 	 * @param servlet
 	 * @return
 	 */
-	public Object[] getArrayFromList(List<Base> list) {
+	public Object[] getArrayFromList(List<Model> list) {
 		if (list == null) return null;
 		Object[] array = null;
 //		try {

@@ -8,7 +8,7 @@ import kz.zvezdochet.core.service.BaseService;
  * Прототип объекта предметной области
  * @author Nataly Didenko
  */
-public abstract class Base implements Serializable {
+public abstract class Model implements Serializable {
 	private static final long serialVersionUID = 1419179855113656076L;
 
 	/**

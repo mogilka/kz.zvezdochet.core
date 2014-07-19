@@ -2,7 +2,7 @@ package kz.zvezdochet.core.ui.view;
 
 import java.util.List;
 
-import kz.zvezdochet.core.bean.Base;
+import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
 import kz.zvezdochet.core.ui.listener.IElementListListener;
 import kz.zvezdochet.core.ui.listener.ISelectElementListener;
@@ -62,7 +62,7 @@ public abstract class ModelListView extends View {
 	
 	protected ISelectElementListener selectListener;
 
-	protected List<Base> modelList;
+	protected List<Model> modelList;
 
 	@Override
 	public void create(Composite parent) {
@@ -198,7 +198,7 @@ public abstract class ModelListView extends View {
 				editModel(model);
 				return;
 			}
-		modelList.add(0, (Base)model);
+		modelList.add(0, (Model)model);
 		tableViewer.add(model);
 		tableViewer.setSelection(new StructuredSelection(model));
 	}
@@ -243,7 +243,7 @@ public abstract class ModelListView extends View {
 	 * Инициализация списка элементов
 	 * @param list список элементов
 	 */
-	public void setModelList(List<Base> list) {
+	public void setModelList(List<Model> list) {
 		try {
 			showBusy(true);
 			modelList = list;
@@ -296,9 +296,9 @@ public abstract class ModelListView extends View {
 	 * Изменяет значение заданного элемента в списке
 	 * @param model объект-модель
 	 */
-	public void updateModel(Base model) {
+	public void updateModel(Model model) {
 		if (modelList != null) {
-			for (Base entity : modelList) {
+			for (Model entity : modelList) {
 				if (entity.equals(model)) {
 					if (entity != model) {
 						updateModel(entity, model);
@@ -314,7 +314,7 @@ public abstract class ModelListView extends View {
 	 * @param model элемент списка
 	 * @param modified элемент с измененными данными
 	 */
-	public void updateModel(Base model, Base modified) {
+	public void updateModel(Model model, Model modified) {
 		tableViewer.editElement(model, 0);
 	}
 

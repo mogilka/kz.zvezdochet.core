@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import kz.zvezdochet.core.bean.Base;
+import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.bean.Reference;
 import kz.zvezdochet.core.tool.Connector;
 
@@ -20,7 +20,7 @@ import kz.zvezdochet.core.tool.Connector;
 public abstract class ReferenceService extends BaseService implements IReferenceService {
 
 	@Override
-	public Base find(String code) throws DataAccessException {
+	public Model find(String code) throws DataAccessException {
         Reference type = new Reference();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -45,7 +45,7 @@ public abstract class ReferenceService extends BaseService implements IReference
 	}
 
 	@Override
-	public Base find(Long id) throws DataAccessException {
+	public Model find(Long id) throws DataAccessException {
 		if (id == null) return null;
         Reference type = (Reference)create();
         PreparedStatement ps = null;
@@ -71,8 +71,8 @@ public abstract class ReferenceService extends BaseService implements IReference
 	}
 
 	@Override
-	public List<Base> getList() throws DataAccessException {
-        List<Base> list = new ArrayList<Base>();
+	public List<Model> getList() throws DataAccessException {
+        List<Model> list = new ArrayList<Model>();
         PreparedStatement ps = null;
         ResultSet rs = null;
 		try {
@@ -98,7 +98,7 @@ public abstract class ReferenceService extends BaseService implements IReference
 	}
 
 	@Override
-	public Base save(Base element) throws DataAccessException {
+	public Model save(Model element) throws DataAccessException {
 		Reference reference = (Reference)element;
 		int result = -1;
         PreparedStatement ps = null;
@@ -143,7 +143,7 @@ public abstract class ReferenceService extends BaseService implements IReference
 	}
 
 	@Override
-	public Reference init(ResultSet rs, Base base) throws DataAccessException, SQLException {
+	public Reference init(ResultSet rs, Model base) throws DataAccessException, SQLException {
 		Reference type = null;
 		if (base != null && base instanceof Reference)
 			type = (Reference)base;

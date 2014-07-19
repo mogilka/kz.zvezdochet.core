@@ -2,7 +2,7 @@ package kz.zvezdochet.core.ui.view;
 
 import java.util.List;
 
-import kz.zvezdochet.core.bean.Base;
+import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.service.DataAccessException;
 import kz.zvezdochet.core.ui.extension.IExtensionStateListener;
 
@@ -28,7 +28,7 @@ import org.eclipse.swt.widgets.Listener;
  * представление расширяемого объекта
  * @author Nataly
  */
-public abstract class ElementComposite {
+public abstract class ModelComposite {
 	protected Group group;
 	protected StateChangedListener stateChangedListener;
 	
@@ -40,12 +40,12 @@ public abstract class ElementComposite {
 	/**
 	 * Элемент расширения
 	 */
-	protected Object elementInfo = null;
+	protected Object model = null;
 
 	/**
 	 * Список расширения для служебных целей
 	 */
-	protected List<Base> elementList = null;
+	protected List<Model> elementList = null;
 	
 	/**
 	 * Слушатель расширения
@@ -138,18 +138,18 @@ public abstract class ElementComposite {
 	/**
 	 * Инициализация элемента представления
 	 */
-	public void setElement(Object elementInfo) {		
-		setElement(elementInfo, true);
+	public void setModel(Object model) {		
+		setModel(model, true);
 	}
 	
-	public void setElement(Object elementInfo, boolean refresh) {		
-		if (elementInfo == null) return;
+	public void setModel(Object model, boolean refresh) {		
+		if (model == null) return;
 		if (refresh) {
-			this.elementInfo = elementInfo;
-			modelToView();
-		} else if (this.elementInfo != null ){
-			((Base)this.elementInfo).setId(
-				((Base)elementInfo).getId()	
+			this.model = model;
+			syncView();
+		} else if (this.model != null ){
+			((Model)this.model).setId(
+				((Model)model).getId()	
 			);
 		}
 		setIsStateChanged(false);
@@ -158,20 +158,20 @@ public abstract class ElementComposite {
 	/**
 	 * Метод, возвращающий элемент представления
 	 */
-	public Object getElement() {
-		viewToModel();
-		return elementInfo;
+	public Object getModel() {
+		syncModel();
+		return model;
 	}
 	
 	/**
 	 * Синхронизация модели с представлением
 	 */
-	protected abstract void modelToView();
+	protected abstract void syncView();
 	
 	/**
 	 * Синхронизация представления с моделью
 	 */
-	public abstract void viewToModel();
+	public abstract void syncModel();
 	
 	/**
 	 * Метод, определяющий, изменилось ли состояние композита
@@ -215,7 +215,7 @@ public abstract class ElementComposite {
 	 * Обновление визуального представления композита
 	 */
 	public void refresh() {
-		modelToView();
+		syncView();
 	}
 
 	/**
@@ -252,9 +252,9 @@ public abstract class ElementComposite {
 
 	/**
 	 * Сохранение элемента композита
-	 * @param extendedElement объект, расширяемый элементом композита
+	 * @param extended объект, расширяемый элементом композита
 	 */
-	public void saveElement(Object extendedElement) throws DataAccessException {}
+	public void saveModel(Object extended) throws DataAccessException {}
 	
 	/**
 	 * Инициализация обрабочика изменения состояния композита

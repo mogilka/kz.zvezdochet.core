@@ -1,6 +1,6 @@
 package kz.zvezdochet.core.ui.extension;
 
-import kz.zvezdochet.core.bean.Base;
+import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.ui.listener.IEditorElementListener;
 import kz.zvezdochet.core.ui.util.DialogUtil;
 import kz.zvezdochet.core.ui.util.GUIutil;
@@ -34,7 +34,7 @@ public abstract class ElementListExtPoint {
 	 */
 	public void addElement(View view, IEditorElementListener listener) {
 		try {
-			Base element = (Base)((ModelListView)view).addModel();
+			Model element = (Model)((ModelListView)view).addModel();
 			if (element != null) {
 //					elementView = view.getSite().getPage().showView(getElementViewId());
 					((ModelView)elementView).setListener(listener);
@@ -57,7 +57,7 @@ public abstract class ElementListExtPoint {
 	 */
 	public void editElement(View view, IEditorElementListener listener) {
 		try {
-			Base element = (Base)((ModelListView)view).getModel();
+			Model element = (Model)((ModelListView)view).getModel();
 			if (element != null) {
 //				elementView = view.getSite().getPage().showView(getElementViewId());
 				((ModelView)elementView).setListener(listener);
@@ -78,7 +78,7 @@ public abstract class ElementListExtPoint {
 	 * @param listener слушатель, отслеживающий сохранение объекта
 	 */
 	public void deleteElement(View view, IEditorElementListener listener) {
-		Base entity = (Base)((ModelListView)view).getModel();
+		Model entity = (Model)((ModelListView)view).getModel();
 		if (DialogUtil.alertConfirm(GUIutil.DO_YOU_REALLY_WANNA_DELETE_ENTRY)) {
 //			if (entity.getChildren() != null && entity.getChildren().size() > 0) {
 //				DialogUtil.alertWarning(GUIutil.DELETING_OBJECT_HAS_CHILDREN);

@@ -1,6 +1,6 @@
 package kz.zvezdochet.core.ui.extension;
 
-import kz.zvezdochet.core.bean.Base;
+import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.service.DataAccessException;
 import kz.zvezdochet.core.service.IBaseService;
 
@@ -46,12 +46,12 @@ public abstract class ExtensionProvider implements IExtensionProvider {
 
 	@Override
 	public void deleteExtension() {
-		if (extension == null || ((Base)extension).getId() == null)
+		if (extension == null || ((Model)extension).getId() == null)
 			initExtension();
 		IBaseService service = (IBaseService)getExtensionService();
 		if (service != null)
 			try {
-				service.delete(((Base)extension).getId());
+				service.delete(((Model)extension).getId());
 			} catch (DataAccessException e) {
 				e.printStackTrace();
 			}

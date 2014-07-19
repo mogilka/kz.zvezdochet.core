@@ -2,7 +2,7 @@ package kz.zvezdochet.core.ui.extension;
 
 import java.util.List;
 
-import kz.zvezdochet.core.ui.view.ElementComposite;
+import kz.zvezdochet.core.ui.view.ModelComposite;
 import kz.zvezdochet.core.ui.view.ModelView;
 import kz.zvezdochet.core.ui.view.View;
 
@@ -89,5 +89,5 @@ public abstract interface IElementExtensionProvider extends IExtensionProvider {
 	 * Метод, возвращающий композит расширения
 	 * @return композит расширения
 	 */
-	public ElementComposite getExtensionComposite();
+	public ModelComposite getExtensionComposite();
 }

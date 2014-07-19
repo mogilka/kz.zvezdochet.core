@@ -1,6 +1,6 @@
 package kz.zvezdochet.core.service;
 
-import kz.zvezdochet.core.bean.Base;
+import kz.zvezdochet.core.bean.Model;
 
 /**
  * Общий интерфейс сервиса по управлению сущностями предметной области в БД
@@ -12,5 +12,5 @@ public interface IReferenceService extends IBaseService {
 	 * @param code код
 	 * @return объект-сущность
 	 */
-	public Base find(final String code) throws DataAccessException;
+	public Model find(final String code) throws DataAccessException;
 }

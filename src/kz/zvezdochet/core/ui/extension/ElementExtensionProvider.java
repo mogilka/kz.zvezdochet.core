@@ -3,8 +3,8 @@ package kz.zvezdochet.core.ui.extension;
 import java.util.ArrayList;
 import java.util.List;
 
-import kz.zvezdochet.core.bean.Base;
-import kz.zvezdochet.core.ui.view.ElementComposite;
+import kz.zvezdochet.core.bean.Model;
+import kz.zvezdochet.core.ui.view.ModelComposite;
 import kz.zvezdochet.core.ui.view.ModelView;
 import kz.zvezdochet.core.ui.view.View;
 import kz.zvezdochet.core.util.PlatformUtil;
@@ -30,7 +30,7 @@ public abstract class ElementExtensionProvider extends ExtensionProvider impleme
 	/**
 	 * Композит расширения 
 	 */
-	protected ElementComposite extensionComposite = null;
+	protected ModelComposite extensionComposite = null;
 	/**
 	 * Композит расширяемого представления,
 	 * который выполняет роль контейнера виджетов расширения
@@ -99,7 +99,7 @@ public abstract class ElementExtensionProvider extends ExtensionProvider impleme
 				e.printStackTrace();
 			}	
 //			view.setStateListener(stateListener);
-			view.setModel((Base)extension);
+			view.setModel((Model)extension);
 			addShowingView(view);	
 		}
 	}
@@ -146,12 +146,12 @@ public abstract class ElementExtensionProvider extends ExtensionProvider impleme
 	 * Данный метод должен быть обязательно переопределен в наследниках
 	 * @return композит расширения
 	 */
-	protected ElementComposite createExtensionComposite() {
+	protected ModelComposite createExtensionComposite() {
 		return null;
 	}
 
 	@Override
-	public ElementComposite getExtensionComposite() {
+	public ModelComposite getExtensionComposite() {
 		return extensionComposite;
 	}
 }

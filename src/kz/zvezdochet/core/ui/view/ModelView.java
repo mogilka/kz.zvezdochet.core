@@ -1,6 +1,6 @@
 package kz.zvezdochet.core.ui.view;
 
-import kz.zvezdochet.core.bean.Base;
+import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.ui.listener.IEditorElementListener;
 import kz.zvezdochet.core.ui.listener.IElementListListener;
 
@@ -27,7 +27,7 @@ public abstract class ModelView extends View {
 	/**
 	 * Элемент представления (объект-домен)
 	 */
-	protected Base model;
+	protected Model model;
 
 	/**
 	 * Обработчик событий сохранения объекта
@@ -113,7 +113,7 @@ public abstract class ModelView extends View {
 	 * синхронизацию представления с моделью
 	 * @param model объект-модель
 	 */
-	public void setModel(Base model) {
+	public void setModel(Model model) {
 		updateStatus(Messages.getString("ElementView.InitializingElement"), false); //$NON-NLS-1$
 		setModel(model, true);
 	}
@@ -123,13 +123,13 @@ public abstract class ModelView extends View {
 	 * @param model объект-домен
 	 * @param refresh <true> - синхронизировать представление с моделью
 	 */
-	public void setModel(Base model, boolean refresh) {		
+	public void setModel(Model model, boolean refresh) {		
 		if (null == model) return;
 		if (refresh) {
 			this.model = model;		 
 			syncView();
 		} else if (this.model != null && model.getId() != null)
-			((Base)this.model).setId(model.getId());
+			((Model)this.model).setId(model.getId());
 		setIsStateChanged(false);		
 		deactivateUnaccessable();
 	}
@@ -139,7 +139,7 @@ public abstract class ModelView extends View {
 	 * Предварительно происходит синхронизация модели с представлением
 	 * @param mode режим запроса элемента
 	 */
-	public Base getModel(int mode) throws Exception {
+	public Model getModel(int mode) throws Exception {
 		syncModel(mode);
 		return model;
 	}
