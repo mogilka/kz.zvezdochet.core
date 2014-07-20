@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Shell;
 public class GUIutil {
 	/**
 	 * Пользовательские сообщения
+	 * TODO сделать всё через мэсиджи в core
 	 */
 	public static final String SOME_FIELDS_NOT_FILLED = Messages.getString("GUIutil.SomeFieldsNotFilled"); //$NON-NLS-1$
 	public static final String NO_PARENT_NODE_SELECTED = Messages.getString("GUIutil.NoParentNodeSelected"); //$NON-NLS-1$

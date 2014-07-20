@@ -1,6 +1,5 @@
 package kz.zvezdochet.core.handler;
 
-import kz.zvezdochet.core.ui.view.View;
 
 /**
  * Прототип визуального действия
@@ -11,33 +10,6 @@ public abstract class Handler {
 	 * Режим обработки элемента
 	 */
 	public static int MODE_SAVE = 0;
-
-	/**
-	 * Ссылка на представление, где расположено действие
-	 */
-	protected View view;
-	
-	/**
-	 * Параметризованный конструктор
-	 * @param view представление 
-	 */
-	public Handler(View view) {
-		if (view == null)
-			throw new IllegalArgumentException("Параметр не должен быть пустым"); //TODO extract to const
-		this.view = view;
-	}
-	
-	/**
-	 * Параметризованный конструктор
-	 * @param view представление 
-	 * @param text надпись действия
-	 * @param style стиль действия
-	 * */
-	public Handler(View view, String text, int style) {
-		if (view == null)
-			throw new IllegalArgumentException("Параметр не должен быть пустым");
-		this.view = view;
-	}
 
 	/**
 	 * Вывод сообщения в строке состояния

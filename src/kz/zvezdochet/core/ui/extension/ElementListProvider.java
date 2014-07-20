@@ -1,7 +1,7 @@
 package kz.zvezdochet.core.ui.extension;
 
 import kz.zvezdochet.core.bean.Model;
-import kz.zvezdochet.core.ui.listener.IEditorElementListener;
+import kz.zvezdochet.core.ui.listener.ISaveListener;
 import kz.zvezdochet.core.ui.view.ModelListView;
 import kz.zvezdochet.core.ui.view.ModelView;
 import kz.zvezdochet.core.ui.view.View;
@@ -22,7 +22,7 @@ public abstract class ElementListProvider extends ElementListExtPoint {
 	 */
 	protected void setObjectView(Object element) {}
 	
-	public void addElement(View view, IEditorElementListener listener) {
+	public void addElement(View view, ISaveListener listener) {
 		try {
 			Model element = (Model)((ModelListView)view).addModel();
 			if (element != null) {
@@ -38,7 +38,7 @@ public abstract class ElementListProvider extends ElementListExtPoint {
 		}
 	}
 	
-	public void editElement(View view, IEditorElementListener listener) {
+	public void editElement(View view, ISaveListener listener) {
 		try {
 			Model element = (Model)((ModelListView)view).getModel();
 			if (element != null) {

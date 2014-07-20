@@ -1,61 +1,55 @@
 package kz.zvezdochet.core.handler;
 
 import kz.zvezdochet.core.bean.Model;
-import kz.zvezdochet.core.service.IBaseService;
-import kz.zvezdochet.core.ui.listener.IEditorElementListener;
+import kz.zvezdochet.core.service.IModelService;
+import kz.zvezdochet.core.ui.listener.ISaveListener;
 import kz.zvezdochet.core.ui.util.DialogUtil;
 import kz.zvezdochet.core.ui.view.ModelView;
-import kz.zvezdochet.core.ui.view.View;
 
+import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 
 /**
- * Действие для сохранения объекта в БД
+ * Обработчик сохранения модели
  * @author Nataly Didenko
+ *
  */
 public class SaveHandler extends Handler {
-
-	public SaveHandler(View view) {
-		super(view);
-//		setText(Messages.getString("ApplyElementAction.Save")); //$NON-NLS-1$
-//		setImageDescriptor(Activator.getImageDescriptor("icons/applyElement.gif")); //$NON-NLS-1$
-	}
-
+	
 	@Execute
-	public void execute() {
+	public void execute(@Active MPart activePart) {
 		updateStatus(Messages.getString("ApplyElementAction.SavingElement"), false); //$NON-NLS-1$
-		Model element = null;
 		try {
-			if (!((ModelView)view).check(0)) return;
-			element = ((ModelView)view).getModel(Handler.MODE_SAVE);
-			element = saveElement(element);
-			((ModelView)view).setModel(element, false);
+			int mode = Handler.MODE_SAVE;
+			ModelView part = (ModelView)activePart.getObject();
+			if (!part.check(mode)) return;
+			Model model = part.getModel(mode, true);
+			model = saveModel(model);
 			updateStatus(Messages.getString("ApplyElementAction.ElementSaved"), false); //$NON-NLS-1$
-			IEditorElementListener listener = ((ModelView)view).getListener();
-			if (listener != null)
-				listener.onSave(element);
+			//TODO после сохранения делать недоступным сохранение пока данные снова не изменятся
+			((ISaveListener)part).onSave(model);
 		} catch (Exception e) {
 			DialogUtil.alertError(e.getMessage());
 			updateStatus(Messages.getString("ApplyElementAction.ErrorSavingElement"), true); //$NON-NLS-1$
 			e.printStackTrace();
 		}
 	}
-
+		
 	/**
 	 * Сохранение объекта в БД
-	 * @param element объект, подлежащий сохранению
+	 * @param model объект, подлежащий сохранению
 	 * @return сохраненный объект 
 	 */
-	public Model saveElement(Model element) throws Exception {
-		IBaseService service = null;
+	private Model saveModel(Model model) throws Exception {
 		try {
-			service = element.getService();
-			element = service.save(element);
+			IModelService service = model.getService();
+			model = service.save(model);
 		} catch (Exception e) {
 			updateStatus(Messages.getString("ApplyElementAction.ErrorSavingElement"), true); //$NON-NLS-1$
-			DialogUtil.alertError(getActionErrorMessage());
+			DialogUtil.alertError("error");
 			e.printStackTrace();
 		}
-		return element;
+		return model;
 	}
 }

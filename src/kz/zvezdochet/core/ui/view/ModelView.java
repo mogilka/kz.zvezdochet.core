@@ -1,9 +1,12 @@
 package kz.zvezdochet.core.ui.view;
 
-import kz.zvezdochet.core.bean.Model;
-import kz.zvezdochet.core.ui.listener.IEditorElementListener;
-import kz.zvezdochet.core.ui.listener.IElementListListener;
+import javax.inject.Inject;
 
+import kz.zvezdochet.core.bean.Model;
+import kz.zvezdochet.core.ui.listener.IElementListListener;
+import kz.zvezdochet.core.ui.listener.ISaveListener;
+
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.events.KeyEvent;
@@ -23,17 +26,12 @@ import org.eclipse.ui.PlatformUI;
  * 
  * @author Nataly Didenko
  */
-public abstract class ModelView extends View {
+public abstract class ModelView extends View implements ISaveListener {
 	/**
 	 * Элемент представления (объект-домен)
 	 */
 	protected Model model;
 
-	/**
-	 * Обработчик событий сохранения объекта
-	 */
-	protected IEditorElementListener listener;
-	
 	/**
 	 * Проверка введенных значений
 	 * @param mode режим проверки элемента
@@ -73,74 +71,40 @@ public abstract class ModelView extends View {
 	}
 
 	/**
-	 * Оповещение о том, что данные представления сохранены.
-	 * Блокируем кнопку сохранения и фиксируем 
-	 * состояние представления как неизмененное
-	 */
-	public void notifySave() {
-		setIsStateChanged(false);
-		deactivateUnaccessable();
-	}
-	
-	/**
 	 * Оповещение о том, что данные представления изменены
 	 * Активируем кнопку сохранения и фиксируем 
 	 * состояние представления как измененное,
 	 * если оно изменено пользователем, а не программно
 	 */
 	public void notifyChange() {
-		setIsStateChanged(true);
-		if (!isCodeEdit())
-			deactivateUnaccessable();
+		part.setDirty(true);
+//		if (!isCodeEdit())
+//			deactivateUnaccessable();
 	}
 
 	/**
-	 * Инициализация обработчика событий редактора
+	 * Инициализация модели представления
+	 * @param model модель
+	 * @param sync признак, требуется ли предварительная синхронизация модели с представлением
 	 */
-	public void setListener(IEditorElementListener listener) {
-		this.listener = listener;
-	}
-	
-	/**
-	 * Метод, возвращающий обработчик событий редактора
-	 */
-	public IEditorElementListener getListener() {
-		return listener;
-	}
-	
-	/**
-	 * Инициализация элемента представления, включающая
-	 * синхронизацию представления с моделью
-	 * @param model объект-модель
-	 */
-	public void setModel(Model model) {
-		updateStatus(Messages.getString("ElementView.InitializingElement"), false); //$NON-NLS-1$
-		setModel(model, true);
-	}
-	
-	/**
-	 * Инициализация элемента представления
-	 * @param model объект-домен
-	 * @param refresh <true> - синхронизировать представление с моделью
-	 */
-	public void setModel(Model model, boolean refresh) {		
+	public void setModel(Model model, boolean sync) {		
 		if (null == model) return;
-		if (refresh) {
-			this.model = model;		 
+		if (sync) {
+			this.model = model;
 			syncView();
 		} else if (this.model != null && model.getId() != null)
 			((Model)this.model).setId(model.getId());
-		setIsStateChanged(false);		
 		deactivateUnaccessable();
 	}
 	
 	/**
-	 * Метод, возвращающий элемент представления.
-	 * Предварительно происходит синхронизация модели с представлением
-	 * @param mode режим запроса элемента
+	 * Возвращает модель представления
+	 * @param mode режим запроса модели
+	 * @param sync признак, требуется ли предварительная синхронизация модели с представлением
 	 */
-	public Model getModel(int mode) throws Exception {
-		syncModel(mode);
+	public Model getModel(int mode, boolean sync) throws Exception {
+		if (sync)
+			syncModel(mode);
 		return model;
 	}
 	
@@ -185,7 +149,7 @@ public abstract class ModelView extends View {
 	 */
 	protected void deactivateUnaccessable() {
 		boolean changed = (model != null) 
-			&& isStateChanged() 
+			&& part.isDirty() 
 			&& isEditable();
 //		if (applyAction != null)
 //			applyAction.setEnabled(changed);
@@ -307,39 +271,16 @@ public abstract class ModelView extends View {
 	 */
 	protected void decorate() {}
 
-	/**
-	 * Признак, определяющий, были ли изменены данные в представлении
-	 */
-	protected boolean isStateChanged = false;
-	
-	/**
-	 * Признак, определяющий, изменены ли пользователем данные представления
-	 */
-	protected boolean codeEdit = false;
-	
-	public boolean isStateChanged() {
-		return isStateChanged;
+	@Inject
+	protected MPart part;
+	  
+	@Override
+	public void onSave(Model model) {
+		part.setDirty(false);
+		setModel(model, false);
+//		deactivateUnaccessable();
 	}
-	
-	public void setCodeEdit(boolean codeEdit) {
-		this.codeEdit = codeEdit;
-	}
-	
-	public boolean isCodeEdit() {
-		return codeEdit;
-	}
-	
-	/**
-	 * Изменение заголовка в соответствии с состоянием представления.
-	 * Если данные были изменены, добавляем в текст заголовка звездочку
-	 */
-	public void setIsStateChanged(boolean isChange) {
-		if (isCodeEdit() || (isChange == this.isStateChanged))
-			return;
-		this.isStateChanged = isChange;
-//		if (this.isStateChanged)
-//			setPartName("*" + viewTitle);
-//		else
-//			setPartName(viewTitle);
+	@Override
+	public void onCancel(Model model) {
 	}
 }

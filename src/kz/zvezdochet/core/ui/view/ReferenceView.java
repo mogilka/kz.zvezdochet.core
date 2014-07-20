@@ -133,11 +133,9 @@ public abstract class ReferenceView extends ModelView {
 	protected void syncView() {		
 		clear();
 		if (model == null) return;
-		setCodeEdit(true);
 		txtName.setText(StringUtil.safeString(((Reference)model).getName()));
 		txtCode.setText(StringUtil.safeString(((Reference)model).getCode()));
 		txtDescription.setText(StringUtil.safeString(((Reference)model).getDescription()));
-		setCodeEdit(false);
 	}
 
 	protected void viewToModel() throws Exception {
@@ -150,11 +148,9 @@ public abstract class ReferenceView extends ModelView {
 	}
 
 	public void clear() {
-		setCodeEdit(true);
 		txtName.setText(""); //$NON-NLS-1$
 		txtCode.setText(""); //$NON-NLS-1$
 		txtDescription.setText(""); //$NON-NLS-1$
-		setCodeEdit(false);
 	}
 
 	public Section getSectionDescription() {

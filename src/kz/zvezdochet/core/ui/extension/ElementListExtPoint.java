@@ -1,7 +1,7 @@
 package kz.zvezdochet.core.ui.extension;
 
 import kz.zvezdochet.core.bean.Model;
-import kz.zvezdochet.core.ui.listener.IEditorElementListener;
+import kz.zvezdochet.core.ui.listener.ISaveListener;
 import kz.zvezdochet.core.ui.util.DialogUtil;
 import kz.zvezdochet.core.ui.util.GUIutil;
 import kz.zvezdochet.core.ui.view.ModelListView;
@@ -32,7 +32,7 @@ public abstract class ElementListExtPoint {
 	 * @param view представление списка
 	 * @param listener слушатель, отслеживающий сохранение объекта
 	 */
-	public void addElement(View view, IEditorElementListener listener) {
+	public void addElement(View view, ISaveListener listener) {
 		try {
 			Model element = (Model)((ModelListView)view).addModel();
 			if (element != null) {
@@ -55,7 +55,7 @@ public abstract class ElementListExtPoint {
 	 * @param view представление списка
 	 * @param listener слушатель, отслеживающий сохранение объекта
 	 */
-	public void editElement(View view, IEditorElementListener listener) {
+	public void editElement(View view, ISaveListener listener) {
 		try {
 			Model element = (Model)((ModelListView)view).getModel();
 			if (element != null) {
@@ -77,7 +77,7 @@ public abstract class ElementListExtPoint {
 	 * @param view представление списка
 	 * @param listener слушатель, отслеживающий сохранение объекта
 	 */
-	public void deleteElement(View view, IEditorElementListener listener) {
+	public void deleteElement(View view, ISaveListener listener) {
 		Model entity = (Model)((ModelListView)view).getModel();
 		if (DialogUtil.alertConfirm(GUIutil.DO_YOU_REALLY_WANNA_DELETE_ENTRY)) {
 //			if (entity.getChildren() != null && entity.getChildren().size() > 0) {
@@ -92,7 +92,7 @@ public abstract class ElementListExtPoint {
 				((View)elementView).clear();
 		} else {
 			updateStatus(view, Messages.getString("ElementListExtPoint.CancelDeletingElement"), false); //$NON-NLS-1$
-			listener.onCancelSave(((ModelListView)view).getModel());
+			listener.onCancel(((ModelListView)view).getModel());
 		}
 	}
 	

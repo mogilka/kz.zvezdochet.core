@@ -2,7 +2,7 @@ package kz.zvezdochet.core.ui.extension;
 
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.service.DataAccessException;
-import kz.zvezdochet.core.service.IBaseService;
+import kz.zvezdochet.core.service.IModelService;
 
 /**
  * Прототип расширителя объекта
@@ -48,7 +48,7 @@ public abstract class ExtensionProvider implements IExtensionProvider {
 	public void deleteExtension() {
 		if (extension == null || ((Model)extension).getId() == null)
 			initExtension();
-		IBaseService service = (IBaseService)getExtensionService();
+		IModelService service = (IModelService)getExtensionService();
 		if (service != null)
 			try {
 				service.delete(((Model)extension).getId());
