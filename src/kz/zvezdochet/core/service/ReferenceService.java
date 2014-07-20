@@ -80,8 +80,7 @@ public abstract class ReferenceService extends ModelService implements IReferenc
 			ps = Connector.getInstance().getConnection().prepareStatement(query);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				Reference type = (Reference)create();
-				type = init(rs, type);
+				Model type = init(rs, null);
 				list.add(type);
 			}
 		} catch (Exception e) {
@@ -143,10 +142,10 @@ public abstract class ReferenceService extends ModelService implements IReferenc
 	}
 
 	@Override
-	public Reference init(ResultSet rs, Model base) throws DataAccessException, SQLException {
+	public Reference init(ResultSet rs, Model model) throws DataAccessException, SQLException {
 		Reference type = null;
-		if (base != null && base instanceof Reference)
-			type = (Reference)base;
+		if (model != null && model instanceof Reference)
+			type = (Reference)model;
 		else
 			type = new Reference();
 		type.setId(Long.parseLong(rs.getString("ID")));

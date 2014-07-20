@@ -2,6 +2,11 @@ package kz.zvezdochet.core.util;
 
 import java.text.DecimalFormat;
 
+/**
+ * Набор методов для вычислений
+ * @author Nataly Didenko
+ *
+ */
 public class CalcUtil {
 	
 	public static double decToDeg(double dec) {
@@ -84,7 +89,7 @@ public class CalcUtil {
     }
 
 	/**
-	 * Определение разности между точками на окружности
+	 * Определение количества градусов между точками на окружности
 	 * @param one координата первой точки
 	 * @param two координата второй точки
 	 * @return расстояние между точками в градусах
@@ -93,10 +98,12 @@ public class CalcUtil {
 		double res = 0.0;
 		if (Double.compare(one, two) > 0) {
 			res = one - two;
-			if (res >= 189) res = 360 - one + two;
+			if (res >= 189)
+				res = 360 - one + two;
 		} else {
 			res = two - one;
-			if (res >= 189) res = 360 - two + one;
+			if (res >= 189)
+				res = 360 - two + one;
 		}
 		return res;
 	}

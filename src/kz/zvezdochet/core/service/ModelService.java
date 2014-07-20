@@ -71,13 +71,6 @@ public abstract class ModelService implements IModelService {
 	protected List<Model> list = null;
 
 	@Override
-	public List<Model> getList() throws DataAccessException {
-		if (null == list || 0 == list.size())
-			list = getList();
-		return list;
-	}
-
-	@Override
 	public void update() {
 		list = null;
 	}
@@ -85,5 +78,10 @@ public abstract class ModelService implements IModelService {
 	@Override
 	public String getTableName() {
 		return tableName;
+	}
+
+	@Override
+	public List<Model> getList() throws DataAccessException {
+		return list;
 	}
 }

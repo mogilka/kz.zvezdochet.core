@@ -46,8 +46,8 @@ public class DateUtil {
 	 * @sample 2010-05-14 14:14:14 */
 	public static DateFormat dbdtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //$NON-NLS-1$
 	/** Формат даты и времени EEE, d MMM yyyy HH:mm:ss Z 
-	 * @sample четверг, 7 Август 1975 22:43:35 +0600 */
-	public static DateFormat fulldtf = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm:ss Z");
+	 * @sample воскресенье, 21 Июль 1985 21:18:51 +0600 */
+	public static DateFormat fulldtf = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm:ss");
 
 	/**
 	 * Возвращает дату первого дня месяца
