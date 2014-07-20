@@ -6,7 +6,7 @@ import kz.zvezdochet.core.bean.Model;
  * Общий интерфейс сервиса по управлению сущностями предметной области в БД
  * @author Nataly Didenko
  */
-public interface IReferenceService extends IBaseService {
+public interface IReferenceService extends IModelService {
 	/**
 	 * Метод, возвращающий объект по коду
 	 * @param code код

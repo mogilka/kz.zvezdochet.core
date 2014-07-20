@@ -14,10 +14,10 @@ import kz.zvezdochet.core.tool.Connector;
  * Реализация сервиса справочников
  * @author Nataly Didenko
  *
- * @see BaseService Реализация интерфейса сервиса управления объектами на уровне БД  
+ * @see ModelService Реализация интерфейса сервиса управления объектами на уровне БД  
  * @see IReferenceService Интерфейс управления справочниками на уровне БД  
  */
-public abstract class ReferenceService extends BaseService implements IReferenceService {
+public abstract class ReferenceService extends ModelService implements IReferenceService {
 
 	@Override
 	public Model find(String code) throws DataAccessException {

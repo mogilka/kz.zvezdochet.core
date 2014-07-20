@@ -10,9 +10,9 @@ import kz.zvezdochet.core.tool.Connector;
 
 /**
  * Реализация интерфейса сервиса управления сущностями
- * @see IBaseService Интерфейс сервиса управления объектами на уровне БД  
+ * @see IModelService Интерфейс сервиса управления объектами на уровне БД  
  */
-public abstract class BaseService implements IBaseService {
+public abstract class ModelService implements IModelService {
 	/**
 	 * Название таблицы БД, представляющей сущность 
 	 */

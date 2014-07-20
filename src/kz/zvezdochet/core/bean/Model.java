@@ -2,7 +2,7 @@ package kz.zvezdochet.core.bean;
 
 import java.io.Serializable;
 
-import kz.zvezdochet.core.service.BaseService;
+import kz.zvezdochet.core.service.ModelService;
 
 /**
  * Прототип объекта предметной области
@@ -28,5 +28,5 @@ public abstract class Model implements Serializable {
      * Возвращает сервис, поставляющий объект из БД
      * @return сервис объекта для взаимодействия с БД
      */
-    public abstract BaseService getService();
+    public abstract ModelService getService();
 }

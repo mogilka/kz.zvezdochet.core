@@ -1,6 +1,6 @@
 package kz.zvezdochet.core.bean;
 
-import kz.zvezdochet.core.service.BaseService;
+import kz.zvezdochet.core.service.ModelService;
 
 /**
  * Прототип объекта текстового справочника,
@@ -55,7 +55,7 @@ public class Reference extends Model {
 		return name;
 	}
 	@Override
-	public BaseService getService() {
+	public ModelService getService() {
 		return null;
 	}
 }
