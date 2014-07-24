@@ -143,8 +143,8 @@ public class ReferenceListView extends ModelListView {
 	protected void initTable() {
 		try {
 			showBusy(true);
-			if (modelList != null) 
-				tableViewer.setInput(modelList);
+			if (data != null) 
+				tableViewer.setInput(data);
 		} finally {
 			showBusy(false);
 		}
