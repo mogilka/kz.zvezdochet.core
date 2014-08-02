@@ -45,32 +45,6 @@ public abstract class ReferenceService extends ModelService implements IReferenc
 	}
 
 	@Override
-	public Model find(Long id) throws DataAccessException {
-		if (id == null) return null;
-        Reference type = (Reference)create();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-		try {
-			String query = "select * from " + tableName + " where id = ?";
-			ps = Connector.getInstance().getConnection().prepareStatement(query);
-			ps.setLong(1, id);
-			rs = ps.executeQuery();
-			if (rs.next()) 
-				type = init(rs, type);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try { 
-				if (rs != null) rs.close();
-				if (ps != null) ps.close();
-			} catch (SQLException e) { 
-				e.printStackTrace(); 
-			}
-		}
-		return type;
-	}
-
-	@Override
 	public List<Model> getList() throws DataAccessException {
         List<Model> list = new ArrayList<Model>();
         PreparedStatement ps = null;

@@ -1,6 +1,7 @@
 package kz.zvezdochet.core.service;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -83,5 +84,31 @@ public abstract class ModelService implements IModelService {
 	@Override
 	public List<Model> getList() throws DataAccessException {
 		return list;
+	}
+
+	@Override
+	public Model find(Long id) throws DataAccessException {
+		if (id == null) return null;
+		Model model = create();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+		try {
+			String query = "select * from " + tableName + " where id = ?";
+			ps = Connector.getInstance().getConnection().prepareStatement(query);
+			ps.setLong(1, id);
+			rs = ps.executeQuery();
+			if (rs.next()) 
+				model = init(rs, model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { 
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+			} catch (SQLException e) { 
+				e.printStackTrace(); 
+			}
+		}
+		return model;
 	}
 }
