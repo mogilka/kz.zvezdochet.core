@@ -26,8 +26,8 @@ public abstract class ModelService implements IModelService {
         PreparedStatement ps = null;
 		try {
 			update();
-			String query = "delete from " + tableName + " where id = ?";
-			ps = Connector.getInstance().getConnection().prepareStatement(query);
+			String sql = "delete from " + tableName + " where id = ?";
+			ps = Connector.getInstance().getConnection().prepareStatement(sql);
 			ps.setLong(1, id);
 			result = ps.executeUpdate();
 		} catch (Exception e) {
@@ -93,8 +93,8 @@ public abstract class ModelService implements IModelService {
         PreparedStatement ps = null;
         ResultSet rs = null;
 		try {
-			String query = "select * from " + tableName + " where id = ?";
-			ps = Connector.getInstance().getConnection().prepareStatement(query);
+			String sql = "select * from " + tableName + " where id = ?";
+			ps = Connector.getInstance().getConnection().prepareStatement(sql);
 			ps.setLong(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) 

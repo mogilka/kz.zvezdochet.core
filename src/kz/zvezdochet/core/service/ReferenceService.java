@@ -25,8 +25,8 @@ public abstract class ReferenceService extends ModelService implements IReferenc
         PreparedStatement ps = null;
         ResultSet rs = null;
 		try {
-			String query = "select * from " + tableName + " where code like ?";
-			ps = Connector.getInstance().getConnection().prepareStatement(query);
+			String sql = "select * from " + tableName + " where code like ?";
+			ps = Connector.getInstance().getConnection().prepareStatement(sql);
 			ps.setString(1, code);
 			rs = ps.executeQuery();
 			if (rs.next())
@@ -50,11 +50,11 @@ public abstract class ReferenceService extends ModelService implements IReferenc
         PreparedStatement ps = null;
         ResultSet rs = null;
 		try {
-			String query = "select * from " + tableName + " order by name";
-			ps = Connector.getInstance().getConnection().prepareStatement(query);
+			String sql = "select * from " + tableName + " order by name";
+			ps = Connector.getInstance().getConnection().prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				Model type = init(rs, null);
+				Model type = init(rs, create());
 				list.add(type);
 			}
 		} catch (Exception e) {
@@ -76,16 +76,16 @@ public abstract class ReferenceService extends ModelService implements IReferenc
 		int result = -1;
         PreparedStatement ps = null;
 		try {
-			String query;
+			String sql;
 			if (element.getId() == null) 
-				query = "insert into " + tableName + "(code, name, description) values(?,?,?)";
+				sql = "insert into " + tableName + "(code, name, description) values(?,?,?)";
 			else
-				query = "update " + tableName + " set " +
+				sql = "update " + tableName + " set " +
 					"code = ?, " +
 					"name = ?, " +
 					"description = ? " +
 					"where id = " + reference.getId();
-			ps = Connector.getInstance().getConnection().prepareStatement(query);
+			ps = Connector.getInstance().getConnection().prepareStatement(sql);
 			ps.setString(1, reference.getCode());
 			ps.setString(2, reference.getName());
 			ps.setString(3, reference.getDescription());
@@ -122,7 +122,7 @@ public abstract class ReferenceService extends ModelService implements IReferenc
 			type = (Reference)model;
 		else
 			type = new Reference();
-		type.setId(Long.parseLong(rs.getString("ID")));
+		type.setId(rs.getLong("ID"));
 		type.setCode(rs.getString("Code"));
 		type.setName(rs.getString("Name"));
 		type.setDescription(rs.getString("Description"));
