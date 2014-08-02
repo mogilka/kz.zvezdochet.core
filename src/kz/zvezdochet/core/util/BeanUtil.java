@@ -18,9 +18,9 @@ public class BeanUtil {
 	 * @return объект справочника
 	 */
 	public static Model getReferenceByCode(List<Model> list, String code) {
-		for (Model entity : list)
-			if (((Reference)entity).getCode().equals(code))
-				return entity;
+		for (Model model : list)
+			if (((Reference)model).getCode().equals(code))
+				return model;
 		return null;
 	}
 }
