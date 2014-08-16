@@ -3,13 +3,11 @@ package kz.zvezdochet.core.bean;
 import kz.zvezdochet.core.service.ModelService;
 
 /**
- * Прототип объекта текстового справочника,
+ * Прототип текстового справочника,
  * структура которого имеет вид "идентификатор:код:значение"
  * @author Nataly Didenko
- * 
- * @see Model прототип объекта предметной области
  */
-public class Reference extends Model {
+public class Dictionary extends Model {
 	private static final long serialVersionUID = 211870081291580287L;
 
 	/**
