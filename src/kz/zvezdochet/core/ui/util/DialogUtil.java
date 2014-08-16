@@ -5,7 +5,7 @@ import kz.zvezdochet.core.util.PlatformUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 
 /**
- * Класс, предоставляющий вызов пользовательских сообщений
+ * Обработчик пользовательских сообщений
  * @author Nataly Didenko
  *
  */

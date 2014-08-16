@@ -6,7 +6,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IActionBars;
 
 /**
- * Класс, предоставляющий методы для работы со строкой состояния
+ * Обработчик строки состояния
  * @author Nataly Didenko
  *
  */

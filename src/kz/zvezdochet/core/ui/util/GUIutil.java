@@ -10,12 +10,11 @@ import org.eclipse.swt.widgets.Shell;
  * Класс обеспечивающий централизованное хранение
  * параметров, общедоступных для всех компонентов системы
  * @author Nataly Didenko
- *
+ * TODO сделать всё через мэсиджи в core
  */
 public class GUIutil {
 	/**
 	 * Пользовательские сообщения
-	 * TODO сделать всё через мэсиджи в core
 	 */
 	public static final String SOME_FIELDS_NOT_FILLED = Messages.getString("GUIutil.SomeFieldsNotFilled"); //$NON-NLS-1$
 	public static final String NO_PARENT_NODE_SELECTED = Messages.getString("GUIutil.NoParentNodeSelected"); //$NON-NLS-1$
@@ -39,6 +38,7 @@ public class GUIutil {
 	 * Установка цвета фона через диалоговое окно
 	 * @param shell окно приложения
 	 * @param control визуальный компонент, в котором нужно поменять фон
+	 * //TODO перенести в другое место
 	 */
 	public static void setBackgroundViaDialog(Shell shell, Control control) {
 		ColorDialog dlg = new ColorDialog(shell);
