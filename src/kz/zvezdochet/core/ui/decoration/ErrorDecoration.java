@@ -8,7 +8,7 @@ import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.swt.widgets.Control;
 
 /**
- * Класс, обеспечивающий декорирование полей ввода сообщением об ошибке
+ * Декоратор поля ввода с неправильным форматом значения
  * @author Nataly Didenko
  *
  */

@@ -8,7 +8,7 @@ import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.swt.widgets.Control;
 
 /**
- * Класс, обеспечивающий декорирование полей ввода предупреждающим сообщением
+ * Декоратор поля ввода с предупреждающим сообщением
  * @author Nataly Didenko
  *
  */

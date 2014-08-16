@@ -8,8 +8,7 @@ import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.swt.widgets.Control;
 
 /**
- * Класс, обеспечивающий декорирование полей ввода,
- * для которых включено автозаполнение из справочника
+ * Декоратор поля ввода с автозаполнением
  * @author Nataly Didenko
  *
  */
