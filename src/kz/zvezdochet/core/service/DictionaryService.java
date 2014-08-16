@@ -6,22 +6,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import kz.zvezdochet.core.bean.Dictionary;
 import kz.zvezdochet.core.bean.Model;
-import kz.zvezdochet.core.bean.Reference;
 import kz.zvezdochet.core.tool.Connector;
 
 /**
- * Реализация сервиса справочников
+ * Прототип сервиса модификации справочника
  * @author Nataly Didenko
- *
- * @see ModelService Реализация интерфейса сервиса управления объектами на уровне БД  
- * @see IReferenceService Интерфейс управления справочниками на уровне БД  
  */
-public abstract class ReferenceService extends ModelService implements IReferenceService {
+public abstract class DictionaryService extends ModelService implements IDictionaryService {
 
 	@Override
 	public Model find(String code) throws DataAccessException {
-        Reference type = new Reference();
+        Dictionary type = new Dictionary();
         PreparedStatement ps = null;
         ResultSet rs = null;
 		try {
@@ -71,33 +68,32 @@ public abstract class ReferenceService extends ModelService implements IReferenc
 	}
 
 	@Override
-	public Model save(Model element) throws DataAccessException {
-		Reference reference = (Reference)element;
+	public Model save(Model model) throws DataAccessException {
+		Dictionary dict = (Dictionary)model;
 		int result = -1;
         PreparedStatement ps = null;
 		try {
 			String sql;
-			if (element.getId() == null) 
+			if (model.getId() == null) 
 				sql = "insert into " + tableName + "(code, name, description) values(?,?,?)";
 			else
 				sql = "update " + tableName + " set " +
 					"code = ?, " +
 					"name = ?, " +
 					"description = ? " +
-					"where id = " + reference.getId();
+					"where id = " + dict.getId();
 			ps = Connector.getInstance().getConnection().prepareStatement(sql);
-			ps.setString(1, reference.getCode());
-			ps.setString(2, reference.getName());
-			ps.setString(3, reference.getDescription());
+			ps.setString(1, dict.getCode());
+			ps.setString(2, dict.getName());
+			ps.setString(3, dict.getDescription());
 			result = ps.executeUpdate();
 			if (result == 1) {
-				if (element.getId() == null) { 
+				if (model.getId() == null) { 
 					Long autoIncKeyFromApi = -1L;
 					ResultSet rsid = ps.getGeneratedKeys();
 					if (rsid.next()) {
 				        autoIncKeyFromApi = rsid.getLong(1);
-				        element.setId(autoIncKeyFromApi);
-//					    System.out.println("inserted " + tableName + "\t" + autoIncKeyFromApi);
+				        model.setId(autoIncKeyFromApi);
 					}
 					if (rsid != null) rsid.close();
 				}
@@ -112,16 +108,16 @@ public abstract class ReferenceService extends ModelService implements IReferenc
 			}
 			update();
 		}
-		return reference;
+		return dict;
 	}
 
 	@Override
-	public Reference init(ResultSet rs, Model model) throws DataAccessException, SQLException {
-		Reference type = null;
-		if (model != null && model instanceof Reference)
-			type = (Reference)model;
+	public Dictionary init(ResultSet rs, Model model) throws DataAccessException, SQLException {
+		Dictionary type = null;
+		if (model != null && model instanceof Dictionary)
+			type = (Dictionary)model;
 		else
-			type = new Reference();
+			type = new Dictionary();
 		type.setId(rs.getLong("ID"));
 		type.setCode(rs.getString("Code"));
 		type.setName(rs.getString("Name"));

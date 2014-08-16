@@ -14,13 +14,13 @@ import kz.zvezdochet.core.bean.Model;
 public interface IModelService {
 	/**
 	 * Сохранение объекта в БД
-	 * @param element объект
+	 * @param model объект
 	 * @return Base сохраненный объект
 	 */
-	public Model save(Model element) throws DataAccessException;
+	public Model save(Model model) throws DataAccessException;
 	/**
 	 * Удаление объекта из БД
-	 * @param element объект
+	 * @param id идентификатор объекта
 	 * @return результат выполнения операции
 	 */
 	public int delete(Long id) throws DataAccessException;

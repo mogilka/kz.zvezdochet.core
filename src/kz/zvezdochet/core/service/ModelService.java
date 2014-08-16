@@ -8,10 +8,8 @@ import java.util.List;
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.tool.Connector;
 
-
 /**
- * Реализация интерфейса сервиса управления сущностями
- * @see IModelService Интерфейс сервиса управления объектами на уровне БД  
+ * Сервис управления моделями на уровне БД
  */
 public abstract class ModelService implements IModelService {
 	/**
