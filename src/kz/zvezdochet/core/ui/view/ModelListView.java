@@ -4,8 +4,8 @@ import java.util.List;
 
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
-import kz.zvezdochet.core.ui.listener.IElementListListener;
-import kz.zvezdochet.core.ui.listener.ISelectElementListener;
+import kz.zvezdochet.core.ui.listener.IModelListListener;
+import kz.zvezdochet.core.ui.listener.ISelectModelListener;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
@@ -22,7 +22,6 @@ import org.eclipse.swt.widgets.TableColumn;
 
 /**
  * Прототип табличного представления моделей
- * @see View Прототип представления
  * @author Nataly Didenko
  */
 public abstract class ModelListView extends ListView {
@@ -39,7 +38,7 @@ public abstract class ModelListView extends ListView {
 	 */
 	protected IConfigurationElement[] extensions;
 	
-	protected ISelectElementListener selectListener;
+	protected ISelectModelListener selectListener;
 
 	/**
 	 * Метод, возвращающий выделенный элемент таблицы
@@ -85,11 +84,11 @@ public abstract class ModelListView extends ListView {
 	}
 
 	/**
-	 * Поиск в реестре приложения расширений списка
+	 * Инициализация расширений
 	 * @return массив расширений
 	 */
-	public IConfigurationElement[] getExtensions() {
-		if (extensions == null)
+	public IConfigurationElement[] initExtensions() {
+		if (null == extensions)
 			extensions = Platform.getExtensionRegistry()
 				.getExtensionPoint(extPointId).getConfigurationElements();
 		return extensions;
@@ -134,21 +133,11 @@ public abstract class ModelListView extends ListView {
 			tableViewer.refresh(element);
 	}
 	
-	/**
-	 * Делаем фильтр невидимым
-	 */
-	public void hideFilter() {}
-	
-	/**
-	 * Делаем фильтр видимым
-	 */
-	public void showFilter() {}
-
-	public ISelectElementListener getSelectListener() {
+	public ISelectModelListener getSelectListener() {
 		return selectListener;
 	}
 
-	public void setSelectListener(ISelectElementListener selectListener) {
+	public void setSelectListener(ISelectModelListener selectListener) {
 		this.selectListener = selectListener;
 	}
 
@@ -181,15 +170,14 @@ public abstract class ModelListView extends ListView {
 	}
 
 	/**
-	 * Обработчик событий добавления/удаления объектов
-	 * @see IElementListListener
+	 * Обработчик добавления/удаления объектов
 	 */
-	protected IElementListListener listListener;
+	protected IModelListListener listListener;
 	
 	/**
 	 * Инициализация обработчика событий списка
 	 */
-	public void setListListener(IElementListListener listener) {
+	public void setListListener(IModelListListener listener) {
 		this.listListener = listener;
 	}
 	

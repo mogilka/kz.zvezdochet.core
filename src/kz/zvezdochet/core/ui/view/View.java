@@ -15,8 +15,11 @@ public abstract class View {
 	/**
 	 * Создание элементов управления
 	 * @param parent композит-родитель
+	 * @return композит
 	 **/
-	public void create(Composite parent) {}
+	public Composite create(Composite parent) {
+		return null;
+	}
 	
 	/**
 	 * Закрытие представления
@@ -27,9 +30,9 @@ public abstract class View {
 	}
 	
 	/**
-	 * Очистка значений элементов управления
+	 * Очистка элементов управления
 	 */
-	public void clear() {}
+	public void reset() {}
 
 	/**
 	 * Выравнивание визуальных компонентов

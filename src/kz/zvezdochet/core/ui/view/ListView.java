@@ -20,7 +20,6 @@ import org.eclipse.swt.widgets.Table;
 
 /**
  * Прототип табличного представления данных
- * @see View Прототип представления
  * @author Nataly Didenko
  */
 public abstract class ListView extends View {
@@ -41,7 +40,7 @@ public abstract class ListView extends View {
 	protected TableViewer tableViewer;
 	
 	@Override
-	public void create(Composite parent) {
+	public Composite create(Composite parent) {
 		container = new Composite(parent, SWT.NONE);
 		container.setLayout(new FormLayout());
 		initFilter();
@@ -62,6 +61,7 @@ public abstract class ListView extends View {
 			tableViewer.addDoubleClickListener(listener);
 		}
 		initTable();
+		return null;
 	}
 
 	/**
@@ -85,7 +85,7 @@ public abstract class ListView extends View {
 	}
 
 	/**
-	 * Стандартный класс отображения содержимого таблицы
+	 * Обработчик отображения содержимого таблицы
 	 */
 	protected class ArrayLabelProvider extends LabelProvider
 									implements ITableLabelProvider, ITableColorProvider {
@@ -130,9 +130,7 @@ public abstract class ListView extends View {
 		return tableViewer != null;
 	}
 
-	public void initFilter() {
-//		createTableFilter();
-	}
+	public void initFilter() {}
 
 	/**
 	 * Инициализация содержимого таблицы
@@ -174,7 +172,7 @@ public abstract class ListView extends View {
 	/**
 	 * Очистка таблицы
 	 */
-	public void clear() {
+	public void reset() {
 		table.removeAll();
 	}
 
@@ -196,4 +194,14 @@ public abstract class ListView extends View {
 //			}
 //		}.start();				
     }
+
+	/**
+	 * Делаем фильтр невидимым
+	 */
+	public void hideFilter() {}
+	
+	/**
+	 * Делаем фильтр видимым
+	 */
+	public void showFilter() {}
 }
