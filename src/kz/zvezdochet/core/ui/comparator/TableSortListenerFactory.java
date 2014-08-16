@@ -20,12 +20,11 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 /**
- * Класс, предоставляющий методы для
- * сортировки столбцов таблицы
+ * Сортировщик столбцов таблицы
  * @author Nataly
  */
 public class TableSortListenerFactory implements Listener {
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private Comparator currentComparator = null;
 
 	private Collator collator = Collator.getInstance(Locale.getDefault());
@@ -54,8 +53,7 @@ public class TableSortListenerFactory implements Listener {
     private int columnIndex = 0;
     private int updown   = 1;
           
-    // Integer Comparator
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private Comparator intComparator = new Comparator() {
         public int compare(Object arg0, Object arg1) {
             TableItem t1 = (TableItem)arg0;
@@ -70,8 +68,7 @@ public class TableSortListenerFactory implements Listener {
         }    
     };
          
-    // String Comparator
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private Comparator strComparator = new Comparator() {
         public int compare(Object arg0, Object arg1) {
             TableItem t1 = (TableItem)arg0;
@@ -84,8 +81,7 @@ public class TableSortListenerFactory implements Listener {
         }    
     };
     
-    // Double Comparator
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private Comparator doubleComparator = new Comparator() {
         public int compare(Object arg0, Object arg1) {
             TableItem t1 = (TableItem)arg0;
@@ -100,8 +96,8 @@ public class TableSortListenerFactory implements Listener {
         }    
     };
     
+	@SuppressWarnings("rawtypes")
     // Hour Comparator (hh:mm:ss)
-    @SuppressWarnings("unchecked")
 	private Comparator timeComparator = new Comparator() {
         public int compare(Object arg0, Object arg1) {
             TableItem t1 = (TableItem)arg0;
@@ -130,7 +126,7 @@ public class TableSortListenerFactory implements Listener {
         }    
     };
     
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private Comparator dateComparator = new Comparator() {
         public int compare(Object arg0, Object arg1) {    
             TableItem t1 = (TableItem)arg0;
