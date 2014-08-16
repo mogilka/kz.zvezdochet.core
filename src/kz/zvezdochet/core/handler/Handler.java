@@ -16,7 +16,7 @@ public abstract class Handler {
 	 * @param msg сообщение
 	 * @param isError <true> - выводить красным цветом
 	 */
-	protected void updateStatus(String msg, boolean isError) {
+	public static void updateStatus(String msg, boolean isError) {
 //		StatusUtil.writeToStatusLine(msg, isError, view.getViewSite().getActionBars());
 	}
 
