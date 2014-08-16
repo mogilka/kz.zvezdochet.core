@@ -2,12 +2,9 @@ package kz.zvezdochet.core.ui.extension;
 
 import kz.zvezdochet.core.ui.view.ModelView;
 
-
 /**
- * Класс, отслеживающий изменение расширений объекта
- * @author Nataly
- * 
- * @see IExtensionStateListener Интерфейс слушателя расширений объекта
+ * Обработчик изменения расширения объекта
+ * @author Nataly Didenko
  */
 public class ExtensionStateListener implements IExtensionStateListener {
 	/**

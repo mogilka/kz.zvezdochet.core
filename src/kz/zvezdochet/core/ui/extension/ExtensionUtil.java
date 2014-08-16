@@ -8,18 +8,18 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
 
 /**
- * Класс, обеспечивающий методы для работы с расширениями объектов
+ * Класс, обеспечивающий методы для работы с расширениями
  * @author Nataly Didenko
  *
  */
-public class ExtensionUtil {
+public class ExtensionUtil { 
 	
 	/**
-	 * Метод, возвращающий из реестра массив расширителей 
-	 * точки расширения документа
-	 * @return массив расширителей
+	 * Поиск расширений в реестра
+	 * @param extPointID идентификатор точки расширения
+	 * @return массив расширений
 	 */
-	public static IConfigurationElement[] getExtPointExtensions(String extPointID) {
+	private static IConfigurationElement[] getExtensions(String extPointID) {
 		IConfigurationElement[] extensions = null;
 		IExtensionPoint point =
 			Platform.getExtensionRegistry().getExtensionPoint(extPointID);
@@ -30,24 +30,26 @@ public class ExtensionUtil {
 	}
 
 	/**
-	 * Формирование списка провайдеров расширений
-	 * @param extPointID
-	 * @return список расширителей
+	 * Поиск провайдеров расширений
+	 * @param extPointID идентификатор точки расширения
+	 * @return список провайдеров расширений
 	 */
-	public static List<IExtension> getExtensionProviders(String extPointID) {
-		IConfigurationElement[] extensions = getExtPointExtensions(extPointID); 
-		List<IExtension> providers = new ArrayList<IExtension>();
-		if (extensions != null)
+	public static List<ModelExtensionProvider> getExtensionProviders(String extPointID) {
+		IConfigurationElement[] extensions = getExtensions(extPointID); 
+		if (extensions != null) {
+			List<ModelExtensionProvider> providers = new ArrayList<ModelExtensionProvider>();
 			for (int i = 0; i < extensions.length; i++) {
 				try {
 					IExtension provider = (IExtension)extensions[i].
 							createExecutableExtension("class"); //$NON-NLS-1$
-					providers.add(provider);
+					providers.add((ModelExtensionProvider)provider);
 					//System.out.println("extensions.getClass()\t" + provider.getClass());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		return providers;
+			return providers;
+		}
+		return null;
 	}
 }

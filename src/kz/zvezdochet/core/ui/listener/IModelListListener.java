@@ -5,22 +5,22 @@ package kz.zvezdochet.core.ui.listener;
  * изменения элементов списка  
  * @author Nataly Didenko
  */
-public interface IElementListListener {
+public interface IModelListListener {
 	/**
 	 * Обработчик добавления элемента 
-	 * @param element новый элемент
+	 * @param model новый элемент
 	 */
-	public void onCreate(Object element);
+	public void onCreate(Object model);
 
 	/**
 	 * Обработчик удаления элемента 
-	 * @param element удаляемый элемент
+	 * @param model удаляемый элемент
 	 */
-	public void onDelete(Object element);
+	public void onDelete(Object model);
 
 	/**
 	 * Обработчик модификации элемента 
-	 * @param element изменяемый элемент
+	 * @param model изменяемый элемент
 	 */
-	public void onChange(Object element);
+	public void onChange(Object model);
 }

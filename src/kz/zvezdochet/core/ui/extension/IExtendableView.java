@@ -4,8 +4,8 @@ import java.util.List;
 
 /**
  * Интерфейс расширяемого представления,
- * в которое внедряются дополнительные композиты
- * @author nataly
+ * в которое встраиваются дополнительные композиты
+ * @author Nataly Didenko
  *
  */
 public interface IExtendableView {
@@ -16,5 +16,5 @@ public interface IExtendableView {
 	/**
 	 * Метод, возвращающий список расширителей представления
 	 */
-	public List<IExtension> getExtensionProviders();
+	public List<ModelExtensionProvider> getExtensionProviders();
 }
