@@ -9,7 +9,7 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 
 /**
- * Класс, предоставляющий общеупотребительные методы и константы
+ * Методы и константы общего назначения
  * @author Nataly Didenko
  */
 public class CoreUtil {

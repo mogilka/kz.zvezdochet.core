@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 /**
- * Класс, предоставляющий набор методов для управления строками
+ * Утилита для работы со строками
  * @author Nataly Didenko
  */
 public class StringUtil {

@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * Класс, предоставляющий набор методов для управления датами
+ * Утилита для работы с датами
  * @author Nataly Didenko
  */
 public class DateUtil {

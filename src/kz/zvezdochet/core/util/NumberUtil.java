@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
- * Класс, предоставляющий методы для работы с числами
+ * Утилита для работы с числами
  * @author Nataly Didenko
  */
 public class NumberUtil {

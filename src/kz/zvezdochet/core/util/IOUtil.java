@@ -15,7 +15,7 @@ import kz.zvezdochet.core.tool.ExtensionFileFilter;
 
 
 /**
- * Класс, предоставляющий методы для работы с файлами и потоками
+ * Утилита для работы с файлами и потоками
  * @author Nataly Didenko
  */
 public class IOUtil {
