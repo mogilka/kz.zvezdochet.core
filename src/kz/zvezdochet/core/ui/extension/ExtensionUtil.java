@@ -34,15 +34,15 @@ public class ExtensionUtil {
 	 * @param extPointID идентификатор точки расширения
 	 * @return список провайдеров расширений
 	 */
-	public static List<ModelExtensionProvider> getExtensionProviders(String extPointID) {
+	public static List<ModelExtension> getExtensionProviders(String extPointID) {
 		IConfigurationElement[] extensions = getExtensions(extPointID); 
 		if (extensions != null) {
-			List<ModelExtensionProvider> providers = new ArrayList<ModelExtensionProvider>();
+			List<ModelExtension> providers = new ArrayList<ModelExtension>();
 			for (int i = 0; i < extensions.length; i++) {
 				try {
 					IExtension provider = (IExtension)extensions[i].
 							createExecutableExtension("class"); //$NON-NLS-1$
-					providers.add((ModelExtensionProvider)provider);
+					providers.add((ModelExtension)provider);
 					//System.out.println("extensions.getClass()\t" + provider.getClass());
 				} catch (Exception e) {
 					e.printStackTrace();

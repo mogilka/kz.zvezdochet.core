@@ -14,7 +14,8 @@ public interface IExtendableView {
 	 */
 	public void initExtensions();
 	/**
-	 * Метод, возвращающий список расширителей представления
+	 * Возвращает расширения представления
+	 * @return массив расширений представления
 	 */
-	public List<ModelExtensionProvider> getExtensionProviders();
+	public List<ModelExtension> getExtensions();
 }

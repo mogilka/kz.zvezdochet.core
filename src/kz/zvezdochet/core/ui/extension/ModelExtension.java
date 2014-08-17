@@ -10,14 +10,14 @@ import kz.zvezdochet.core.ui.view.ModelComposite;
 import kz.zvezdochet.core.ui.view.ModelView;
 import kz.zvezdochet.core.ui.view.View;
 
+import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
 
 /**
  * Прототип расширения модели
  * @author Nataly Didenko
  */
-public abstract class ModelExtensionProvider implements IExtension {
+public abstract class ModelExtension implements IExtension {
 	/**
 	 * Расширяемая модель
 	 */
@@ -47,7 +47,7 @@ public abstract class ModelExtensionProvider implements IExtension {
 	public abstract String getExtensionViewId();
 
 	/** 
-	 * Метод, возвращающий контейнер виджетов расширителя
+	 * Возвращает контейнер виджетов расширения
 	 * @return композит
 	 */
 	public Composite getContainer() {
@@ -55,7 +55,7 @@ public abstract class ModelExtensionProvider implements IExtension {
 	}
 	
 	/** 
-	 * Инициализация контейнера виджетов расширителя
+	 * Инициализация контейнера виджетов расширения
 	 * @param сontainer композит расширяемого представления
 	 */
 	public void setСontainer(Composite сontainer) {
@@ -71,7 +71,7 @@ public abstract class ModelExtensionProvider implements IExtension {
 	}
 		
 	/**
-	 * Передача ссылки на основное представление в расширитель
+	 * Передача ссылки на основное представление в расширение
 	 */
 	public void setView(ModelView view) {
 		this.view = view;
@@ -105,13 +105,13 @@ public abstract class ModelExtensionProvider implements IExtension {
 	 */
 	public void addShowingView(View view) {}
 	/**
-	 * Добавление композитов расширителей в расширяемое представление
+	 * Добавление композитов расширения в расширяемое представление
 	 * @param parent композит-контейнер представления
 	 */
 	public void provideAdditionalControls(Composite parent) {}
 
 	/**
-	 * Отображение визуальных представлений расширителей
+	 * Отображение визуальных представлений расширений
 	 */
 	public abstract void initView();
 	
@@ -131,7 +131,7 @@ public abstract class ModelExtensionProvider implements IExtension {
 	}
 	
 	/**
-	 * Определение состояния расширителя
+	 * Определение состояния расширения
 	 * @return 
 	 * <b>true</b> - состояние было изменено<br> 
 	 * <b>false</b> - состояние не было изменено
@@ -284,14 +284,8 @@ public abstract class ModelExtensionProvider implements IExtension {
 	}
 
 	public List<Model> getModelList() throws DataAccessException {
-		return ((IModelService)getExtensionService()).getList();
+		return getExtensionService().getList();
 	}
-
-	/**
-	 * Инициализация значений справочника
-	 * @param table визуальная таблица
-	 */
-	public void setModelList(Table table) throws DataAccessException {}
 	/**
 	 * Инициализация композита расширения
 	 * @return композит расширения
@@ -311,5 +305,19 @@ public abstract class ModelExtensionProvider implements IExtension {
 		}
 		return false;
 	}
-	public void initTableColumns(Table table) {}
+	/**
+	 * Инициализация новой модели
+	 * @return модель
+	 */
+	public abstract Model create();
+	/**
+	 * Поиск колонок таблицы расширения
+	 * @return массив колонок таблицы
+	 */
+	public abstract String[] getTableColumns();
+	/**
+	 * Возвращает обработчик отображения столбцов таблицы
+	 * @return
+	 */
+	public abstract IBaseLabelProvider getLabelProvider();
 }
