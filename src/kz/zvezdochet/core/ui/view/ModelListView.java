@@ -4,19 +4,16 @@ import java.util.List;
 
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
+import kz.zvezdochet.core.ui.extension.ExtensionUtil;
+import kz.zvezdochet.core.ui.extension.ModelExtension;
 import kz.zvezdochet.core.ui.listener.IModelListListener;
 import kz.zvezdochet.core.ui.listener.ISelectModelListener;
 
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.TableColumn;
 
@@ -34,9 +31,9 @@ public abstract class ModelListView extends ListView {
 	protected ViewerFilter viewerFilter;
 	
 	/**
-	 * Массив расширителей точки расширения списка
+	 * Массив расширений списка
 	 */
-	protected IConfigurationElement[] extensions;
+	protected List<ModelExtension> extensions;
 	
 	protected ISelectModelListener selectListener;
 
@@ -87,10 +84,9 @@ public abstract class ModelListView extends ListView {
 	 * Инициализация расширений
 	 * @return массив расширений
 	 */
-	public IConfigurationElement[] initExtensions() {
+	public List<ModelExtension> getExtensions() {
 		if (null == extensions)
-			extensions = Platform.getExtensionRegistry()
-				.getExtensionPoint(extPointId).getConfigurationElements();
+			extensions = ExtensionUtil.getExtensionProviders(extPointId);
 		return extensions;
 	}
 	
@@ -189,17 +185,4 @@ public abstract class ModelListView extends ListView {
 	protected IBaseLabelProvider getLabelProvider() {
 		return new ModelLabelProvider();
 	}
-
-	/**
-	 * Обработчик отображения модели в таблице
-	 */
-	protected class ModelLabelProvider extends LabelProvider
-									implements ITableLabelProvider {
-		public Image getColumnImage(Object element, int columnIndex) {
-			return null;
-		}
-		public String getColumnText(Object element, int columnIndex) {
-			return (element == null) ? "" : element.toString(); //$NON-NLS-1$
-		}
-	}	
 }

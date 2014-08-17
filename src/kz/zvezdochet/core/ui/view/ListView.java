@@ -1,5 +1,6 @@
 package kz.zvezdochet.core.ui.view;
 
+import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
 import kz.zvezdochet.core.ui.listener.StateChangedListener;
 
 import org.eclipse.jface.layout.GridDataFactory;
@@ -17,6 +18,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 
 /**
  * Прототип табличного представления данных
@@ -67,7 +69,24 @@ public abstract class ListView extends View {
 	/**
 	 * Создание столбцов таблицы
 	 */
-	protected void addColumns() {}
+	protected void addColumns() {
+		for (TableColumn column : table.getColumns())
+			column.dispose();
+		String[] columns = initTableColumns();
+		if (columns != null)
+			for (String column : columns) {
+				TableColumn tableColumn = new TableColumn(table, SWT.NONE);
+				tableColumn.setText(column);		
+				tableColumn.addListener(SWT.Selection, TableSortListenerFactory.getListener(
+					TableSortListenerFactory.STRING_COMPARATOR));
+			}
+	}
+
+	/**
+	 * Инициализация массива столбцов таблицы
+	 * @return массив столбцов таблицы
+	 */
+	protected abstract String[] initTableColumns();
 
 	/**
 	 * Обновление содержимого таблицы
