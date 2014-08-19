@@ -19,7 +19,7 @@ public abstract class ModelService implements IModelService {
 	
 	@Override
 	public int delete(Long id) {
-		if (id == null) return -1;
+		if (null == id) return -1;
 		int result = -1;
         PreparedStatement ps = null;
 		try {
@@ -48,7 +48,7 @@ public abstract class ModelService implements IModelService {
 	 * @return строка SQL-запроса для оператора IN
 	 */
 	protected String arrayToString(Object[] array) {
-		if (array == null || array.length == 0)
+		if (null == array || array.length == 0)
 			return null;
 		StringBuffer s = new StringBuffer("");
 		for (Object value : array) {
@@ -86,7 +86,7 @@ public abstract class ModelService implements IModelService {
 
 	@Override
 	public Model find(Long id) throws DataAccessException {
-		if (id == null) return null;
+		if (null == id) return null;
 		Model model = create();
         PreparedStatement ps = null;
         ResultSet rs = null;

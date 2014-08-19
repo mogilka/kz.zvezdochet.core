@@ -74,7 +74,7 @@ public abstract class DictionaryService extends ModelService implements IDiction
         PreparedStatement ps = null;
 		try {
 			String sql;
-			if (model.getId() == null) 
+			if (null == model.getId()) 
 				sql = "insert into " + tableName + "(code, name, description) values(?,?,?)";
 			else
 				sql = "update " + tableName + " set " +
@@ -88,7 +88,7 @@ public abstract class DictionaryService extends ModelService implements IDiction
 			ps.setString(3, dict.getDescription());
 			result = ps.executeUpdate();
 			if (result == 1) {
-				if (model.getId() == null) { 
+				if (null == model.getId()) { 
 					Long autoIncKeyFromApi = -1L;
 					ResultSet rsid = ps.getGeneratedKeys();
 					if (rsid.next()) {

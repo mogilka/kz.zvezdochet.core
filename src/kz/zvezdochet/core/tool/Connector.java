@@ -17,7 +17,7 @@ public class Connector {
 	private Connector() {}
 	
 	public static Connector getInstance() {
-		if (instance == null) {
+		if (null == instance) {
 			instance = new Connector();
 			setLocalConnection();
 		}
