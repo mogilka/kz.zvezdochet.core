@@ -18,7 +18,7 @@ public class StringUtil {
 	 * @return исходная строка, или пустая строка
 	 */
 	public static String safeString(String text) {
-		return (text == null) ? "" : text;
+		return (null == text) ? "" : text;
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class StringUtil {
 	 * <b>false</b> - строка не является числовым выражением  
      */
     public static boolean isNumber(String s) {
-    	if (s == null || s.length() == 0) return false;
+    	if (null == s || s.length() == 0) return false;
     	try {
     		Double.parseDouble(replaceSymbols(s, ',', '.'));
     		return true;
@@ -129,7 +129,7 @@ public class StringUtil {
      * @return
      */
 	public static String safeString(Double d) {
-		return (d == null) ? "" : d.toString();
+		return (null == d) ? "" : d.toString();
 	}
 	/**
 	 * Возвращает признак содержит ли строка 1 подстроку 2
@@ -156,7 +156,7 @@ public class StringUtil {
 	 * @return true если строка есть null или "" или содержит только пробелы
 	 */
 	public static boolean isBlank(String str) {
-		return (str == null || str.length() == 0 || str.trim().length() == 0 );
+		return (null == str || str.length() == 0 || str.trim().length() == 0 );
 	}
 	/**
 	 * Возвращает признак, что строка не пуста
@@ -196,10 +196,9 @@ public class StringUtil {
 	 * в элементы со строчными буквами и первой заглавной
 	 * @param text строка
 	 * @return модифицированная строка
-	 * @sample АЛМАТЫ АЛМАЛИНСКИЙ >> Алматы Алмалинский
 	 */
 	public static String upperStringToCaps(String text) {
-		if (text == null) return null;
+		if (null == text) return null;
 		StringBuffer name = new StringBuffer("");
 		StringTokenizer st = new StringTokenizer(text, " ");
 		while (st.hasMoreTokens()) { 

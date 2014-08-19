@@ -48,7 +48,7 @@ public class CoreUtil {
 	 * @return
 	 */
 	public Object[] getArrayFromList(List<Model> list) {
-		if (list == null) return null;
+		if (null == list) return null;
 		Object[] array = null;
 //		try {
 //			array = new Object[list.size()];
@@ -86,7 +86,7 @@ public class CoreUtil {
 	 * @return цвет
 	 */
 	public static String colorToRGB(Color color) {
-		if (color == null) return null;
+		if (null == color) return null;
 		return color.getRed() + "," + color.getGreen() + "," + color.getBlue();
 	}
 	
@@ -96,7 +96,7 @@ public class CoreUtil {
 	 * @return 16-ричное представление цвета
 	 */
 	public static String colorToHex(Color color) {
-		if (color == null) return null;
+		if (null == color) return null;
 		String hexred = Integer.toHexString(color.getRed());
 		String hexgreen = Integer.toHexString(color.getGreen());
 		String hexblue = Integer.toHexString(color.getBlue());

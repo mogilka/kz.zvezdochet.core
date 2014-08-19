@@ -15,7 +15,7 @@ public class NumberUtil {
 	 * @return число
 	 */
 	public static Long getLongFromObject(Object object) {
-		if (object == null) return null;
+		if (null == object) return null;
 		if (object instanceof BigDecimal)
 			return new Long(((BigDecimal)object).longValue());
 		else if (object instanceof BigInteger)
@@ -29,7 +29,7 @@ public class NumberUtil {
 	 * @return число
 	 */
 	public static Integer getIntegerFromObject(Object object) {
-		if (object == null) return null;
+		if (null == object) return null;
 		return new Integer(((BigDecimal)object).intValue());
 	}
 

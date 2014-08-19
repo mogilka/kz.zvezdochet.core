@@ -19,7 +19,7 @@ public class DateUtil {
 	 * @param to конечная дата
 	 */
 	public static boolean isDateRangeValid(Date from, Date to) {
-		if (from == null || to == null) return true;
+		if (null == from || null == to) return true;
 		return (from.after(to)) ? false : true;
 	}
 
@@ -111,12 +111,12 @@ public class DateUtil {
 	public static int compareDate(Date date1, Date date2) {
 //		assert(date1 != null);
 //		assert(date2 != null);
-		if (date1 == null)
-			if (date2 == null)
+		if (null == date1)
+			if (null == date2)
 				return 0;
 			else
 				return -1;
-		if (date2 == null)
+		if (null == date2)
 			return 1;
 		Calendar calendar1 = new GregorianCalendar();
 		calendar1.setTime(date1);
@@ -224,7 +224,7 @@ public class DateUtil {
 	 * - начальную дату следующего месяца
 	 */
 	public static Date[] getMonthPeriodByDate(Date date) {
-		if (date == null) return null;
+		if (null == date) return null;
 		
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(date);
@@ -287,10 +287,10 @@ public class DateUtil {
 	 */
 	public boolean checkRangesConnected(Date rang1FirstDay, Date rang1LastDay,
 			Date rang2FirstDay, Date rang2LastDay) {
-		if (rang1FirstDay == null || rang1LastDay == null || rang2FirstDay == null)
+		if (null == rang1FirstDay || null == rang1LastDay || null == rang2FirstDay)
 			return false;
 		
-		return (rang2LastDay == null || (rang1FirstDay.before(rang2LastDay)) 
+		return (null == rang2LastDay || (rang1FirstDay.before(rang2LastDay)) 
 				&& rang1LastDay.after(rang2FirstDay)) ;
 	}
 	
