@@ -42,7 +42,7 @@ public abstract class ListView extends View {
 	protected TableViewer tableViewer;
 	
 	@Override
-	public Composite create(Composite parent) {
+	public View create(Composite parent) {
 		container = new Composite(parent, SWT.NONE);
 		container.setLayout(new FormLayout());
 		initFilter();

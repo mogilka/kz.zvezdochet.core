@@ -35,9 +35,7 @@ public abstract class ModelView extends View implements ISaveListener {
 	 * @param mode режим проверки элемента
 	 * @return true - поля заполнены корректно
 	 */
-	public boolean check(int mode) throws Exception {	
-		return false;
-	}
+	public abstract boolean check(int mode) throws Exception;
 
 	protected StateChangedListener stateChangedListener;
 
@@ -135,7 +133,7 @@ public abstract class ModelView extends View implements ISaveListener {
 	 * @param parent контейнер представления
 	 */
 	@Override
-	public Composite create(Composite parent) {
+	public View create(Composite parent) {
 		super.create(parent);
 //		this.viewTitle = this.getTitle();
 		decorate();
@@ -158,7 +156,7 @@ public abstract class ModelView extends View implements ISaveListener {
 	 * Синхронизация модели с представлением
 	 * @param mode режим синхронизации элемента
 	 */
-	protected abstract void syncModel(int mode) throws Exception;
+	public abstract void syncModel(int mode) throws Exception;
 	
 	/**
 	 * Управление доступом к функциям модификации данных

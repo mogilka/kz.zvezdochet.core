@@ -2,6 +2,8 @@ package kz.zvezdochet.core.ui.view;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
 import kz.zvezdochet.core.ui.extension.ExtensionUtil;
@@ -9,6 +11,7 @@ import kz.zvezdochet.core.ui.extension.ModelExtension;
 import kz.zvezdochet.core.ui.listener.IModelListListener;
 import kz.zvezdochet.core.ui.listener.ISelectModelListener;
 
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -185,4 +188,7 @@ public abstract class ModelListView extends ListView {
 	protected IBaseLabelProvider getLabelProvider() {
 		return new ModelLabelProvider();
 	}
+
+	@Inject
+	protected MPart part;
 }

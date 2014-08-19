@@ -62,7 +62,7 @@ public abstract class ModelComposite extends ModelView {
 	}
 
 	@Override
-	public Composite create(Composite composite) {
+	public View create(Composite composite) {
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 		GridLayoutFactory.swtDefaults().numColumns(1).applyTo(group);
 		return null;

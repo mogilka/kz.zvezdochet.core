@@ -15,6 +15,6 @@ public class ModelLabelProvider extends LabelProvider implements ITableLabelProv
 	}
 	@Override
 	public String getColumnText(Object element, int columnIndex) {
-		return (element == null) ? "" : element.toString(); //$NON-NLS-1$
+		return (null == element) ? "" : element.toString(); //$NON-NLS-1$
 	}
 }	

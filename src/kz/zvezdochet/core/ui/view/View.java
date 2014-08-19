@@ -15,9 +15,9 @@ public abstract class View {
 	/**
 	 * Создание элементов управления
 	 * @param parent композит-родитель
-	 * @return композит
+	 * @return представление
 	 **/
-	public Composite create(Composite parent) {
+	public View create(Composite parent) {
 		return null;
 	}
 	

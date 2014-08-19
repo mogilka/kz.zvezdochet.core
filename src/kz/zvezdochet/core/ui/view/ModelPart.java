@@ -39,7 +39,7 @@ public abstract class ModelPart extends ModelView {
 	 * @param parent Базовый композит представления
 	 */
 	@Override
-	public Composite create(Composite parent) {
+	public View create(Composite parent) {
 		super.create(parent);
 //		this.viewTitle = this.getTitle();
 		decorate();
