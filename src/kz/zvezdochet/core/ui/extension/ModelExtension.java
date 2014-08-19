@@ -19,14 +19,6 @@ import org.eclipse.swt.widgets.Composite;
  */
 public abstract class ModelExtension implements IExtension {
 	/**
-	 * Расширяемая модель
-	 */
-	protected Model extended = null;
-	/**
-	 * Модель расширения
-	 */
-	protected Model extension = null;
-	/**
 	 * Представление расширяемого объекта
 	 */
 	protected ModelView view;
@@ -87,9 +79,8 @@ public abstract class ModelExtension implements IExtension {
 	
 	/**
 	 * Проверка правильности заполненности полей расширяемого представления
-	 * @throws BusinessRuleException
 	 */
-	public void checkModelForSave() {
+	public void checkView() {
 		if (view != null)
 			try {
 				view.check(0);
@@ -97,18 +88,6 @@ public abstract class ModelExtension implements IExtension {
 				e.printStackTrace();
 			}
 	}
-
-	/**
-	 * Метод предназначен для сохранения открываемых представлений.
-	 * Данный метод при необходимости хранения ссылки на дополнительное представление 
-	 * должен быть переопределен в наследниках
-	 */
-	public void addShowingView(View view) {}
-	/**
-	 * Добавление композитов расширения в расширяемое представление
-	 * @param parent композит-контейнер представления
-	 */
-	public void provideAdditionalControls(Composite parent) {}
 
 	/**
 	 * Отображение визуальных представлений расширений
@@ -146,39 +125,34 @@ public abstract class ModelExtension implements IExtension {
 	}
 	
 	/**
-	 * Удаление композитов расширения
+	 * Удаление композита расширения
 	 */
-	public void disposeComposites() {
-		extension = null;
+	public void dispose() {
 		if (composite != null) {
-			composite.dispose();
+//			composite.dispose();TODO
 			composite = null;
 		}
 	}
 
 	/**
-	 * Метод, возвращающий композит расширения
-	 * @return композит расширения
-	 */
-	public ModelComposite getExtensionComposite() {
-		return composite;
-	}
-	/**
 	 * Инициализация расширяемого объекта
 	 * @param extended расширяемая модель
 	 */
-	public void initExtended(Model extended) {
-		this.extended = extended;
+	public void setModel(Model extended) {
+		this.model = extended;
 	}
+
 	/**
 	 * Инициализация расширения
 	 */
 	public void initExtension() {}
+	
 	/**
 	 * Проверка соответствия расширяемого объекта загружаемому расширению
 	 * @param object атрибут расширяемого объекта
 	 */
 	public abstract boolean canHandle(Object object);
+	
 	/**
 	 * Проверка соответствия параметров объекта конкретному расширению
 	 * @param true - модель является расширением исходной модели
@@ -186,62 +160,49 @@ public abstract class ModelExtension implements IExtension {
 	public boolean isAvailable() {
 		return false;
 	}
-	/**
-	 * Сохранение данных расширения
-	 * @param extended расширяемая модель
-	 */
-	public void save(Model extended) {}
+
 	/**
 	 * Возвращает имя расширения
 	 * @return имя расширения
 	 */
-	public String getExtensionName() {
+	public String getName() {
 		return "";
-	}
-	/**
-	 * Удаление расширения
-	 */
-	public void deleteExtension() {
-		if (extension == null || ((Model)extension).getId() == null)
-			initExtension();
-		IModelService service = getExtensionService();
-		if (service != null)
-			try {
-				service.delete(((Model)extension).getId());
-			} catch (DataAccessException e) {
-				e.printStackTrace();
-			}
-	}
-	/**
-	 * Возвращает расширение
-	 * @return модель расширения
-	 */
-	public Model getExtension() {
-		return extension;
 	}
 
 	/**
-	 * Возвращает расширяемый объект 
-	 * @return расширяемая модель
+	 * Удаление расширения
 	 */
-	public Model getExtended() {
-		return extended;
+	public void delete() {
+//		if (null == extension || null == ((Model)extension).getId())
+//			initExtension();
+//		IModelService service = getService();
+//		if (service != null)
+//			try {
+//				service.delete(((Model)extension).getId());
+//			} catch (DataAccessException e) {
+//				e.printStackTrace();
+//			}
 	}
+
 	/**
 	 * Возвращает сервис расширения
 	 * @return сервис расширения
 	 */
-	public abstract IModelService getExtensionService();
+	public abstract IModelService getService();
 	
 	/**
 	 * Композит расширения 
 	 */
-	protected ModelComposite composite = null;
+	protected ModelView composite = null;
 	/**
-	 * Модель расширения
+	 * Расширяемая модель
 	 */
 	protected Model model = null;
 
+	/**
+	 * Возвращает расширяемую модель
+	 * @return модель
+	 */
 	public Model getModel() {
 		if (composite != null) {
 			composite.setModel(model, false);
@@ -267,15 +228,11 @@ public abstract class ModelExtension implements IExtension {
 	 * @param parent композит-контейнер представления
 	 */
 	public void initComposites(Composite parent) {
-		if (model == null) return;
-		if (initExtensionComposite() != null) {}
-		else {
-			if (composite == null || 
-					composite.getGroup() == null || composite.getGroup().isDisposed()) {
-				composite = initExtensionComposite();
-				if (composite != null)
-					composite.create(parent);
-			}
+		if (null == model) return;
+		if (null == composite || 
+				null == ((ModelComposite)composite).getGroup() ||
+				((ModelComposite)composite).getGroup().isDisposed()) {
+			composite = (ModelView)initComposite(parent);
 		}
 		if (composite != null) {
 			composite.setModel(model, true);
@@ -284,15 +241,18 @@ public abstract class ModelExtension implements IExtension {
 	}
 
 	public List<Model> getModelList() throws DataAccessException {
-		return getExtensionService().getList();
+		return getService().getList();
 	}
+
 	/**
 	 * Инициализация композита расширения
+	 * @param parent контейнер виджетов
 	 * @return композит расширения
 	 */
-	public ModelComposite initExtensionComposite() {
+	public View initComposite(Composite parent) {
 		return null;
 	}
+
 	/**
 	 * Проверка заполненности и корректности расширения
 	 * @return true - необходимые поля заполнены верно
@@ -316,8 +276,28 @@ public abstract class ModelExtension implements IExtension {
 	 */
 	public abstract String[] getTableColumns();
 	/**
-	 * Возвращает обработчик отображения столбцов таблицы
-	 * @return
+	 * Возвращает обработчик отображения данных таблицы
+	 * @return обработчик отображения таблицы
 	 */
 	public abstract IBaseLabelProvider getLabelProvider();
+
+	/**
+	 * Синхронизации модели с представлением
+	 * @param mode режим синхронизации
+	 * @throws Exception
+	 */
+	public void syncModel(int mode) throws Exception {
+		try {
+			if (composite != null)
+				composite.syncModel(mode);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Возвращает путь к изображению расширения
+	 * @return путь к файлу иконки расширения
+	 */
+	public abstract String getIconURI();
 }

@@ -17,5 +17,5 @@ public interface IExtendableView {
 	 * Возвращает расширения представления
 	 * @return массив расширений представления
 	 */
-	public List<ModelExtension> getExtensions();
+//	public List<ModelExtension> getExtensions();
 }
