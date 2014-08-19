@@ -50,10 +50,8 @@ public class ModelOpenHandler extends Handler {
 			//Application does not have an active window
 		}
 		ModelView modelView = null;
-		if (model != null) {
+		if (model != null)
 			modelView = (ModelView)part.getObject();
-			modelView.setModel(model, true);
-		}
 	    return modelView;
 	}
 }
