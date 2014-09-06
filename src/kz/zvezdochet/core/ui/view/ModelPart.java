@@ -3,7 +3,6 @@ package kz.zvezdochet.core.ui.view;
 import javax.inject.Inject;
 
 import kz.zvezdochet.core.bean.Model;
-import kz.zvezdochet.core.service.DataAccessException;
 import kz.zvezdochet.core.ui.listener.IModelListListener;
 
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
@@ -44,12 +43,6 @@ public abstract class ModelPart extends ModelView {
 //		this.viewTitle = this.getTitle();
 		decorate();
 		init(parent);
-		try {
-			initControls();
-		} catch (DataAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		deactivateUnaccessable();
 		return null;
 	}

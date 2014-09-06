@@ -1,7 +1,6 @@
 package kz.zvezdochet.core.ui.view;
 
 import kz.zvezdochet.core.bean.Model;
-import kz.zvezdochet.core.service.DataAccessException;
 import kz.zvezdochet.core.ui.extension.IExtensionStateListener;
 import kz.zvezdochet.core.ui.listener.ISaveListener;
 
@@ -29,13 +28,6 @@ public abstract class ModelView extends View implements ISaveListener {
 	 * Модель
 	 */
 	protected Model model;
-
-	/**
-	 * Проверка введённых значений
-	 * @param mode режим проверки элемента
-	 * @return true - поля заполнены корректно
-	 */
-	public abstract boolean check(int mode) throws Exception;
 
 	protected StateChangedListener stateChangedListener;
 
@@ -138,11 +130,6 @@ public abstract class ModelView extends View implements ISaveListener {
 //		this.viewTitle = this.getTitle();
 		decorate();
 		init(parent);
-		try {
-			initControls();
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
 		deactivateUnaccessable();
 		return null;
 	}
@@ -168,11 +155,6 @@ public abstract class ModelView extends View implements ISaveListener {
 //			applyAction.setEnabled(changed);
 	}
 
-	/**
-	 * Инициализация элементов управления
-	 */
-	protected void initControls() throws DataAccessException {}
-	
 	/**
 	 * Признак того, что элементы представления
 	 * могут редактироваться

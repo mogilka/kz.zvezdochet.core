@@ -1,5 +1,7 @@
 package kz.zvezdochet.core.ui.view;
 
+import kz.zvezdochet.core.service.DataAccessException;
+
 import org.eclipse.swt.widgets.Composite;
 
 /**
@@ -18,6 +20,12 @@ public abstract class View {
 	 * @return представление
 	 **/
 	public View create(Composite parent) {
+		try {
+			initControls();
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
@@ -39,4 +47,14 @@ public abstract class View {
 	 * @param composite контейнер виджетов
 	 */
 	protected void init(Composite composite) {}
+	/**
+	 * Инициализация элементов управления
+	 */
+	protected void initControls() throws DataAccessException {}
+	/**
+	 * Проверка введённых значений
+	 * @param mode режим проверки содержимого
+	 * @return true - поля заполнены корректно
+	 */
+	public abstract boolean check(int mode) throws Exception;
 }

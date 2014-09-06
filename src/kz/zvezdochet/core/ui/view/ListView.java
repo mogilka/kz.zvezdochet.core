@@ -1,5 +1,7 @@
 package kz.zvezdochet.core.ui.view;
 
+import kz.zvezdochet.core.service.DataAccessException;
+import kz.zvezdochet.core.ui.ArrayLabelProvider;
 import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
 import kz.zvezdochet.core.ui.listener.StateChangedListener;
 
@@ -8,13 +10,8 @@ import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
-import org.eclipse.jface.viewers.ITableColorProvider;
-import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
@@ -53,6 +50,12 @@ public abstract class ListView extends View {
 		table.setLinesVisible(true);
 		addColumns();
 		init(parent);
+		try {
+			initControls();
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		tableViewer.setContentProvider(new ArrayContentProvider());
 		tableViewer.setLabelProvider(getLabelProvider());
@@ -104,39 +107,17 @@ public abstract class ListView extends View {
 	}
 
 	/**
-	 * Обработчик отображения содержимого таблицы
-	 */
-	protected class ArrayLabelProvider extends LabelProvider
-									implements ITableLabelProvider, ITableColorProvider {
-		@Override
-		public Image getColumnImage(Object element, int columnIndex) {
-			return null;
-		}
-		@Override
-		public String getColumnText(Object element, int columnIndex) {
-			Object[] array = (Object[])element;
-			Object val = array[columnIndex];
-			return (null == val) ? "" : val.toString();
-		}
-		@Override
-		public Color getForeground(Object element, int columnIndex) {
-			return null;
-		}
-		@Override
-		public Color getBackground(Object element, int columnIndex) {
-			return null;
-		}
-	}	
-
-	/**
 	 * Инициализация таблицы значениями из БД
 	 */
 	protected void initTable() {
 		try {
 			showBusy(true);
-			tableViewer.setInput(data);
+			if (data != null)
+				tableViewer.setInput(data);
 			for (int i = 0; i < table.getColumnCount(); i++)
 				table.getColumn(i).pack();
+		} catch(Exception e) {
+			e.printStackTrace();
 		} finally {
 			showBusy(false);
 		}
