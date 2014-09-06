@@ -23,8 +23,7 @@ public class ModelOpenHandler extends Handler {
 	 * Проверка состояния представления
 	 * @param model модель
 	 */
-	protected void checkPart(String viewid, Model model) {
-		MPart part = partService.findPart(viewid);
+	protected void checkPart(MPart part, Model model) {
 	    if (part.isDirty()) {
 			if (DialogUtil.alertConfirm(
 					"Открытый ранее объект не сохранён\n"
