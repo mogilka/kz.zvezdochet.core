@@ -18,7 +18,7 @@ public abstract class DictionaryService extends ModelService implements IDiction
 
 	@Override
 	public Model find(String code) throws DataAccessException {
-        Dictionary type = new Dictionary();
+        Dictionary type = (Dictionary)create();
         PreparedStatement ps = null;
         ResultSet rs = null;
 		try {
@@ -27,7 +27,7 @@ public abstract class DictionaryService extends ModelService implements IDiction
 			ps.setString(1, code);
 			rs = ps.executeQuery();
 			if (rs.next())
-				type = init(rs, null);
+				type = init(rs, type);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -117,11 +117,16 @@ public abstract class DictionaryService extends ModelService implements IDiction
 		if (model != null && model instanceof Dictionary)
 			type = (Dictionary)model;
 		else
-			type = new Dictionary();
+			type = (Dictionary)create();
 		type.setId(rs.getLong("ID"));
 		type.setCode(rs.getString("Code"));
 		type.setName(rs.getString("Name"));
 		type.setDescription(rs.getString("Description"));
 		return type;
+	}
+
+	@Override
+	public Model create() {
+		return new Dictionary();
 	}
 }

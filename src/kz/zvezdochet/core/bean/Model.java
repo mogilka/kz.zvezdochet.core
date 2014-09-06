@@ -10,7 +10,7 @@ import kz.zvezdochet.core.service.ModelService;
  */
 public abstract class Model implements Serializable {
 	private static final long serialVersionUID = 1419179855113656076L;
-
+	
 	/**
 	 * Идентификатор
 	 */
