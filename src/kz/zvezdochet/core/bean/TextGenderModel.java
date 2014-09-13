@@ -34,4 +34,9 @@ public abstract class TextGenderModel extends Model implements ITextGender {
 	 * Толкование для обоих полов и детей
 	 */
     private GenderText genderText;
+    
+    @Override
+    public String toString() {
+    	return text != null ? text : "";
+    }
 }

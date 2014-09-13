@@ -14,12 +14,10 @@ public class Dictionary extends Model {
 	 * Код
 	 */
 	protected String code;
-	
 	/**
 	 * Текстовое значение справочника
 	 */
 	protected String name;
-
 	/**
 	 * Описание
 	 */
