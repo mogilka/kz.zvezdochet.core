@@ -3,6 +3,7 @@ package kz.zvezdochet.core.service;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import kz.zvezdochet.core.bean.Model;
@@ -81,6 +82,27 @@ public abstract class ModelService implements IModelService {
 
 	@Override
 	public List<Model> getList() throws DataAccessException {
+        List<Model> list = new ArrayList<Model>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+		try {
+			String sql = "select * from " + tableName;
+			ps = Connector.getInstance().getConnection().prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Model type = init(rs, create());
+				list.add(type);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { 
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+			} catch (SQLException e) { 
+				e.printStackTrace(); 
+			}
+		}
 		return list;
 	}
 
