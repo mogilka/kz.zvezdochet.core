@@ -8,9 +8,14 @@ import java.text.DecimalFormat;
  *
  */
 public class CalcUtil {
-	
+
+	/**
+	 * Преобразование действительного значения в градусное
+	 * @param dec действительное значение
+	 * @return действительное значение, в котором
+	 * целая часть представляет градусы, а дробная - минуты
+	 */
 	public static double decToDeg(double dec) {
-		//преобразование действительного значения в градусное
 		double d = trunc(dec);
 		return roundToDeg(d, (dec - d) * 0.6);
 	}
@@ -64,10 +69,13 @@ public class CalcUtil {
 		return (int)d;
 	}
 
+	/**
+	 * Округление действительного числа до указанной точности
+	 * @param d число
+	 * @param n количество цифр после запятой. Не должно быть меньше нуля
+	 * @return огруглённое число
+	 */
 	public static double roundTo(double d, int n) {
-		//округление действительного числа до указанной точности
-		//параметр n указывает на количество цифр после запятой
-		//и не должен быть меньше нуля
 		if (n <= 0) {
 			return Math.round(d);
 		} else {
