@@ -13,18 +13,6 @@ import org.eclipse.swt.widgets.Display;
  * @author Nataly Didenko
  */
 public class CoreUtil {
-	/**
-	 * Проверка наличия строки в массиве
-	 * @param array строковый массив
-	 * @param string строка
-	 * @return признак наличия элемента
-	 */
-	public static boolean isArrayContainsString(String[] array, String string) {
-		for (String s : array)
-			if (s.equals(string))
-				return true;
-		return false;
-	}
 
 	/**
 	 * Объединение двух массивов
