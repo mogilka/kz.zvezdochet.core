@@ -147,20 +147,9 @@ public abstract class ModelExtension implements IExtension {
 	 */
 	public void initExtension() {}
 	
-	/**
-	 * Проверка соответствия расширяемого объекта загружаемому расширению
-	 * @param object атрибут расширяемого объекта
-	 */
+	@Override
 	public abstract boolean canHandle(Object object);
 	
-	/**
-	 * Проверка соответствия параметров объекта конкретному расширению
-	 * @param true - модель является расширением исходной модели
-	 */
-	public boolean isAvailable() {
-		return false;
-	}
-
 	/**
 	 * Возвращает имя расширения
 	 * @return имя расширения
@@ -244,11 +233,7 @@ public abstract class ModelExtension implements IExtension {
 		return getService().getList();
 	}
 
-	/**
-	 * Инициализация композита расширения
-	 * @param parent контейнер виджетов
-	 * @return композит расширения
-	 */
+	@Override
 	public View initComposite(Composite parent) {
 		return null;
 	}
@@ -300,4 +285,12 @@ public abstract class ModelExtension implements IExtension {
 	 * @return путь к файлу иконки расширения
 	 */
 	public abstract String getIconURI();
+
+	/**
+	 * Очистка композита расширения
+	 */
+	public void reset() {
+		if (composite != null) 
+			composite.reset();
+	}
 }

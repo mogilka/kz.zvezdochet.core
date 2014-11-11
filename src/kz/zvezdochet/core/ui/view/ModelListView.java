@@ -6,8 +6,6 @@ import javax.inject.Inject;
 
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
-import kz.zvezdochet.core.ui.extension.ExtensionUtil;
-import kz.zvezdochet.core.ui.extension.ModelExtension;
 import kz.zvezdochet.core.ui.listener.IModelListListener;
 import kz.zvezdochet.core.ui.listener.ISelectModelListener;
 
@@ -25,18 +23,12 @@ import org.eclipse.swt.widgets.TableColumn;
  * @author Nataly Didenko
  */
 public abstract class ModelListView extends ListView {
-	protected String extPointId = "";
 	
 	/**
 	 * Композит фильтра
 	 */
 	public Group grFilter;
 	protected ViewerFilter viewerFilter;
-	
-	/**
-	 * Массив расширений списка
-	 */
-	protected List<ModelExtension> extensions;
 	
 	protected ISelectModelListener selectListener;
 
@@ -84,38 +76,27 @@ public abstract class ModelListView extends ListView {
 	}
 
 	/**
-	 * Инициализация расширений
-	 * @return массив расширений
+	 * Добавление модели в таблицу
+	 * @param model модель
 	 */
-	public List<ModelExtension> getExtensions() {
-		if (null == extensions)
-			extensions = ExtensionUtil.getExtensionProviders(extPointId);
-		return extensions;
-	}
-	
-	/**
-	 * Добавление елемента в таблицу
-	 * @param model новый елемент
-	 */
-	public void addModel(Object model) {
+	public void addModel(Model model) {
 		@SuppressWarnings("unchecked")
 		List<Model> modelist = (List<Model>)data;
 		if (modelist.size() > 0) 
-			if (modelist.contains(model)) {
-				editModel(model);
+			if (modelist.contains(model))
 				return;
-			}
-		modelist.add(0, (Model)model);
+		modelist.add((Model)model);
 		data = modelist;
 		tableViewer.add(model);
 		tableViewer.setSelection(new StructuredSelection(model));
 	}
 	
 	/**
-	 * Удаление елемента из таблицы
-	 * @param model удаляемый елемент
+	 * Удаление модели из таблицы
+	 * @param model удаляемая модель
 	 */
-	public void deleteModel(Object model) {
+	public void deleteModel(Model model) {
+		tableViewer.refresh();
 		@SuppressWarnings("unchecked")
 		List<Model> modelist = (List<Model>)data;
 		modelist.remove(model);
@@ -178,10 +159,6 @@ public abstract class ModelListView extends ListView {
 	 */
 	public void setListListener(IModelListListener listener) {
 		this.listListener = listener;
-	}
-	
-	public Object addModel() {
-		return null;
 	}
 
 	@Override

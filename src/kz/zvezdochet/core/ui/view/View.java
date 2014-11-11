@@ -1,6 +1,10 @@
 package kz.zvezdochet.core.ui.view;
 
+import java.util.List;
+
 import kz.zvezdochet.core.service.DataAccessException;
+import kz.zvezdochet.core.ui.extension.ExtensionUtil;
+import kz.zvezdochet.core.ui.extension.ModelExtension;
 
 import org.eclipse.swt.widgets.Composite;
 
@@ -9,7 +13,7 @@ import org.eclipse.swt.widgets.Composite;
  * @author Nataly Didenko
  */
 public abstract class View {
-	
+
 	public void setTitle(String title) {
 //		setPartName(title);
 	}
@@ -57,4 +61,23 @@ public abstract class View {
 	 * @return true - поля заполнены корректно
 	 */
 	public abstract boolean check(int mode) throws Exception;
+
+	/**
+	 * Идентификатор точки расширения представления
+	 */
+	protected String extPointId = "";
+	/**
+	 * Массив расширений представления
+	 */
+	protected List<ModelExtension> extensions;
+
+	/**
+	 * Инициализация расширений
+	 * @return массив расширений
+	 */
+	public List<ModelExtension> getExtensions() {
+		if (null == extensions)
+			extensions = ExtensionUtil.getExtensionProviders(extPointId);
+		return extensions;
+	}
 }

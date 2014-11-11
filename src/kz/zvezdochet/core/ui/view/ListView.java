@@ -53,7 +53,6 @@ public abstract class ListView extends View {
 		try {
 			initControls();
 		} catch (DataAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

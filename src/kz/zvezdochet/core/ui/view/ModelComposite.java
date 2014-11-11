@@ -10,8 +10,7 @@ import org.eclipse.swt.widgets.Listener;
 
 /**
  * Прототип композита, встраиваемого в редактор модели
- * @author Nataly
- * //TODO сделать для композита и вьюшки одного предшественника ибо у них много общего
+ * @author Nataly Didenko
  */
 public abstract class ModelComposite extends ModelView {
 	protected Group group;
@@ -20,12 +19,6 @@ public abstract class ModelComposite extends ModelView {
 	 * Слушатель расширения
 	 */
 	protected Listener listener;
-	
-	/**
-	 * Базовый композит, на который будут 
-	 * добавляться элементы управления
-	 */
-	protected Composite parent;
 	
 	/**
 	 * Реакция на изменение состояния элементов управления
