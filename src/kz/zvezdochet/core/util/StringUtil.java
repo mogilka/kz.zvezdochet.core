@@ -13,15 +13,6 @@ import java.util.regex.Pattern;
 public class StringUtil {
 	
 	/**
-	 * Проверка строки на null
-	 * @param text строка
-	 * @return исходная строка, или пустая строка
-	 */
-	public static String safeString(String text) {
-		return (null == text) ? "" : text;
-	}
-
-	/**
 	 * Преобразование наименования, написанного заглавными буквами,
 	 * в строку со строчными буквами и первой заглавной
 	 * @param text наименование
@@ -122,73 +113,6 @@ public class StringUtil {
 			return false;
 		}
     }
-
-    /**
-     * Возвращает строковое значение переменной типа Double
-     * @param d
-     * @return
-     */
-	public static String safeString(Double d) {
-		return (null == d) ? "" : d.toString();
-	}
-	/**
-	 * Возвращает признак содержит ли строка 1 подстроку 2
-	 * @param string1 строка 1
-	 * @param string2 подстрока 2
-	 * @return признак
-	 */
-	public static boolean contains(String string1, String string2) {
-		if (string1 != null)
-			return string1.contains(string2);
-		return false;
-	}
-	/**
-	 * Отрезает с двух сторон строки пробелы и пустые символы
-	 * @param string1
-	 * @return
-	 */
-	public static String trim(String string1) {
-		return string1.trim();
-	}
-	/**
-	 * Возвращает признак пустой строки. 
-	 * @param str
-	 * @return true если строка есть null или "" или содержит только пробелы
-	 */
-	public static boolean isBlank(String str) {
-		return (null == str || str.length() == 0 || str.trim().length() == 0 );
-	}
-	/**
-	 * Возвращает признак, что строка не пуста
-	 * @param str
-	 * @return
-	 */
-	public static boolean isNotBlank(String str) {
-		return (str != null && str.trim().length() > 0);
-	}
-
-	/**
-	 * Удаляет в строке string1 все подстроки string2
-	 * @param string1
-	 * @param string2
-	 * @return
-	 */
-	public static String remove(String string1, String string2) {
-		return string1.replaceAll(string2, "");
-	}
-	
-	/**
-	 * Возвращает строку из символов до указанной построки
-	 * @param string
-	 * @param substr
-	 * @return
-	 */
-	public static String substringBefore(String string, String substr) {
-		int index = string.indexOf(substr);
-		if (index > 0)
-			return string.substring(0, index);
-		return "";
-	}
 
 	/**
 	 * Преобразование всех слов строки
