@@ -1,5 +1,6 @@
 package kz.zvezdochet.core.bean;
 
+import kz.zvezdochet.core.service.GenderTextService;
 import kz.zvezdochet.core.service.ModelService;
 
 /**
@@ -13,44 +14,57 @@ public class GenderText extends Model {
 	private static final long serialVersionUID = 7663798183215999740L;
 
 	/**
-	 * Текст для мужчины
+	 * Текст
 	 */
-    private String maletext;
+    private String text;
 	/**
-	 * Текст для женщины
+	 * Тип
+	 * man|woman|child мужчина|женщина|ребёнок
 	 */
-    private String femaletext;
+    private String type;
 	/**
-	 * Текст для ребёнка
+	 * Идентификатор связанного объекта
 	 */
-    private String childtext;
+    private long objectid;
+	/**
+	 * Наименование таблицы связанного объекта
+	 */
+    private String objectype;
 
-	public String getChildtext() {
-		return childtext;
+	public String getObjectType() {
+		return objectype;
 	}
 
-	public void setChildtext(String childtext) {
-		this.childtext = childtext;
+	public void setObjectType(String objectype) {
+		this.objectype = objectype;
 	}
 
-	public String getMaletext() {
-		return maletext;
+	public long getObjectId() {
+		return objectid;
 	}
 
-	public void setMaletext(String maletext) {
-		this.maletext = maletext;
+	public void setObjectId(long objectid) {
+		this.objectid = objectid;
 	}
 
-	public String getFemaletext() {
-		return femaletext;
+	public String getText() {
+		return text;
 	}
 
-	public void setFemaletext(String femaletext) {
-		this.femaletext = femaletext;
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	@Override
 	public ModelService getService() {
-		return null;
+		return new GenderTextService();
 	}
 }

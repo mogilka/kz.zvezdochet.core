@@ -39,15 +39,21 @@ public class GenderTextService extends ModelService implements IDictionaryServic
 		try {
 			String sql;
 			if (null == model.getId()) 
-				sql = "insert into " + tableName + "(male, female) values(?,?)";
+				sql = "insert into " + tableName + "(text, type, objectid, objectype) values(?,?,?,?)";
 			else
 				sql = "update " + tableName + " set " +
-					"male = ?, " +
-					"female = ? " +
-					"where id = " + dict.getId();
+					"text = ?, " +
+					"type = ?, " +
+					"objectid = ?, " +
+					"objectype = ? " +
+					"where id = ?";
 			ps = Connector.getInstance().getConnection().prepareStatement(sql);
-			ps.setString(1, dict.getMaletext());
-			ps.setString(2, dict.getFemaletext());
+			ps.setString(1, dict.getText());
+			ps.setString(2, dict.getType());
+			ps.setLong(3, dict.getObjectId());
+			ps.setString(4, dict.getObjectType());
+			if (model.getId() != null)
+				ps.setLong(5, model.getId());
 			result = ps.executeUpdate();
 			if (result == 1) {
 				if (null == model.getId()) { 
@@ -76,8 +82,8 @@ public class GenderTextService extends ModelService implements IDictionaryServic
 	public GenderText init(ResultSet rs, Model model) throws DataAccessException, SQLException {
 		GenderText genderText = (model != null) ? (GenderText)model : (GenderText)create();
 		genderText.setId(rs.getLong("ID"));
-		genderText.setMaletext(rs.getString("Male"));
-		genderText.setFemaletext(rs.getString("Female"));
+		genderText.setText(rs.getString("Male"));
+		genderText.setType(rs.getString("Female"));
 		//TODO child
 		return genderText;
 	}
