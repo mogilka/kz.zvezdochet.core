@@ -1,7 +1,7 @@
 package kz.zvezdochet.core.bean;
 
-import kz.zvezdochet.core.service.GenderTextService;
 import kz.zvezdochet.core.service.ModelService;
+import kz.zvezdochet.core.service.TextGenderService;
 
 /**
  * Толкование для различных типов персон:
@@ -10,7 +10,7 @@ import kz.zvezdochet.core.service.ModelService;
  * 	- дети
  * @author Nataly Didenko
  */
-public class GenderText extends Model {
+public class TextGender extends Model {
 	private static final long serialVersionUID = 7663798183215999740L;
 
 	/**
@@ -65,6 +65,6 @@ public class GenderText extends Model {
 
 	@Override
 	public ModelService getService() {
-		return new GenderTextService();
+		return new TextGenderService();
 	}
 }

@@ -1,6 +1,5 @@
 package kz.zvezdochet.core.ui.extension;
 
-import java.util.List;
 
 /**
  * Интерфейс расширяемого представления,

@@ -1,8 +1,9 @@
 package kz.zvezdochet.core.bean;
 
+import java.util.List;
+
 /**
- * Прототип справочника, содержащего толкования
- * для мужского, женского пола, а также для детей
+ * Прототип справочника, содержащего гендерные толкования
  * @author Nataly Didenko
  *
  */
@@ -19,12 +20,9 @@ public interface ITextGender {
 	public void setText(String text);
 	/**
 	 * Поиск гендерных толкований
-	 * @return толкование
+	 * @param female true|false женский|мужской
+	 * @param child true|false детский|взрослый
+	 * @return список толкований
 	 */
-	public GenderText getGenderText();
-	/**
-	 * Инициализация гендерных толкований
-	 * @param genderText толкование
-	 */
-	public void setGenderText(GenderText genderText);
+	public List<TextGender> getGenderTexts(boolean female, boolean child);
 }

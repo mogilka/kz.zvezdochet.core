@@ -6,7 +6,7 @@ import kz.zvezdochet.core.bean.Model;
  * Интерфейс управления моделями справочника
  * @author Nataly Didenko
  */
-public interface IDictionaryService extends IModelService {
+public interface IDictionaryService {
 	/**
 	 * Поиск значения справочника по коду
 	 * @param code код

@@ -1,13 +1,12 @@
 package kz.zvezdochet.core.bean;
 
-import kz.zvezdochet.core.service.ModelService;
 
 /**
  * Прототип текстового справочника,
- * структура которого имеет вид "идентификатор:код:значение"
+ * структура которого имеет вид "идентификатор:код:значение:описание"
  * @author Nataly Didenko
  */
-public class Dictionary extends Model {
+public abstract class Dictionary extends Model {
 	private static final long serialVersionUID = 211870081291580287L;
 
 	/**
@@ -49,9 +48,5 @@ public class Dictionary extends Model {
 	@Override
 	public String toString() {
 		return name;
-	}
-	@Override
-	public ModelService getService() {
-		return null;
 	}
 }

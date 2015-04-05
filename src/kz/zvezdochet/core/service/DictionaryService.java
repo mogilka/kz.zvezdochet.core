@@ -124,9 +124,9 @@ public abstract class DictionaryService extends ModelService implements IDiction
 		type.setDescription(rs.getString("Description"));
 		return type;
 	}
-
-	@Override
-	public Model create() {
-		return new Dictionary();
-	}
+//
+//	@Override
+//	public Model create() {
+//		return new Dictionary();
+//	}
 }

@@ -1,11 +1,16 @@
 package kz.zvezdochet.core.bean;
 
+import java.util.List;
+
+import kz.zvezdochet.core.service.DataAccessException;
+import kz.zvezdochet.core.service.TextGenderService;
+
 /**
  * Прототип модели с гендерным толкованием
  * @author Nataly Didenko
  */
 public abstract class TextGenderModel extends Model implements ITextGender {
-	private static final long serialVersionUID = 7203713223993014957L;
+	private static final long serialVersionUID = -2466065854923291059L;
 
 	@Override
 	public String getText() {
@@ -18,22 +23,19 @@ public abstract class TextGenderModel extends Model implements ITextGender {
 	}
 
 	@Override
-	public GenderText getGenderText() {
-		return genderText;
+	public List<TextGender> getGenderTexts(boolean female, boolean child) {
+		try {
+			return new TextGenderService().find(this, female, child);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
-	@Override
-	public void setGenderText(GenderText genderText) {
-		this.genderText = genderText;
-	}
 	/**
 	 * Текст
 	 */
     private String text;
-	/**
-	 * Толкование для обоих полов и детей
-	 */
-    private GenderText genderText;
     
     @Override
     public String toString() {
