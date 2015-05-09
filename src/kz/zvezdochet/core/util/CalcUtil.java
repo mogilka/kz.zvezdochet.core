@@ -64,8 +64,12 @@ public class CalcUtil {
 		return roundTo(tm + k * 0.01, 2);
 	}
 
+	/**
+	 * Извлечение целой части из действительного числа
+	 * @param d действительное число
+	 * @return целая часть
+	 */
 	public static int trunc(double d) {
-		//извлечение из действительного числа целой части
 		return (int)d;
 	}
 

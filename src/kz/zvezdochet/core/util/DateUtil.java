@@ -42,9 +42,12 @@ public class DateUtil {
 	/** Формат даты yyyy MM 
 	 * @sample 2009 03 */
 	public static DateFormat dfym = new SimpleDateFormat("yyyy MM"); //$NON-NLS-1$
-	/** Формат даты и времени, используемый в базе данных, dd.MM.yyyy HH:mm:ss 
+	/** Формат даты и времени, используемый в базе данных, yyyy-MM-dd HH:mm:ss 
 	 * @sample 2010-05-14 14:14:14 */
 	public static DateFormat dbdtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //$NON-NLS-1$
+	/** Формат даты, используемый в базе данных, yyyy-MM-dd 
+	 * @sample 2010-05-14 */
+	public static DateFormat dbdf = new SimpleDateFormat("yyyy-MM-dd"); //$NON-NLS-1$
 	/** Формат даты и времени EEE, d MMM yyyy HH:mm:ss Z 
 	 * @sample воскресенье, 21 Июль 1985 21:18:51 +0600 */
 	public static DateFormat fulldtf = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm:ss");
