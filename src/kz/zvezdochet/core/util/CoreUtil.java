@@ -102,4 +102,24 @@ public class CoreUtil {
 			if (n == value) return true;
 		return false;
 	}
+
+	/**
+	 * Определение строки, сочетающейся с величиной возраста
+	 * @param age возраст
+	 * @return строка, добавляемая к возрасту
+	 */
+	public static String getAgeString(int age) {
+		if (0 == age)
+			return "до 1 года";
+		String s = String.valueOf(age);
+		String lastChar = s.substring(s.length() - 1); 
+		if (age > 10 && age < 20)
+			return s + " лет";
+		else if (lastChar.equals("1"))
+			return s + " год";
+		else if (lastChar.endsWith("2") || lastChar.endsWith("3") || lastChar.endsWith("4"))
+			return s + " года";
+		else 
+			return s + " лет";
+	}
 }
