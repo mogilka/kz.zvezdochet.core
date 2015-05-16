@@ -41,4 +41,14 @@ public abstract class TextGenderModel extends Model implements ITextGender {
     public String toString() {
     	return text != null ? text : "";
     }
+
+	@Override
+	public TextGender getChildText() {
+		try {
+			return new TextGenderService().findChild(this);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

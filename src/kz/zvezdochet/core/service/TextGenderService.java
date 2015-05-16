@@ -95,7 +95,7 @@ public class TextGenderService extends ModelService implements IDictionaryServic
 
 	/**
 	 * Поиск гендерных связей модели
-	 * @param model модель
+	 * @param model модель справочника
 	 * @param female true|false женский|мужской
 	 * @param child true|false детский|взрослый
 	 * @return список гендерных моделей
@@ -138,5 +138,39 @@ public class TextGenderService extends ModelService implements IDictionaryServic
 			}
 		}
 		return list;
+	}
+
+	/**
+	 * Поиск гендерных связей модели для ребёнка
+	 * @param model модель справочника
+	 * @return гендерное толкование
+	 * @throws DataAccessException
+	 */
+	public TextGender findChild(Model model) throws DataAccessException {
+        TextGender type = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+		try {
+			String sql = "select * from " + tableName + 
+				" where objectid = ? " +
+					"and objectype = ? " +
+					"and type = 'child'";
+			ps = Connector.getInstance().getConnection().prepareStatement(sql);
+			ps.setLong(1, model.getId());
+			ps.setString(2, model.getService().getTableName());
+			rs = ps.executeQuery();
+			if (rs.next())
+				type = init(rs, create());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { 
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+			} catch (SQLException e) { 
+				e.printStackTrace(); 
+			}
+		}
+		return type;
 	}
 }

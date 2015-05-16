@@ -36,4 +36,14 @@ public abstract class TextGenderDictionary extends Dictionary implements ITextGe
 	 * Текст
 	 */
     private String text;
+
+	@Override
+	public TextGender getChildText() {
+		try {
+			return new TextGenderService().findChild(this);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

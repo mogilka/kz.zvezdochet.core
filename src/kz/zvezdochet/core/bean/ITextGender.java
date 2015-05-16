@@ -25,4 +25,9 @@ public interface ITextGender {
 	 * @return список толкований
 	 */
 	public List<TextGender> getGenderTexts(boolean female, boolean child);
+	/**
+	 * Поиск гендерного толкования для ребёнка
+	 * @return толкование
+	 */
+	public TextGender getChildText();
 }
