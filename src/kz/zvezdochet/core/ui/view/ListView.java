@@ -72,8 +72,7 @@ public abstract class ListView extends View {
 	 * Создание столбцов таблицы
 	 */
 	protected void addColumns() {
-		for (TableColumn column : table.getColumns())
-			column.dispose();
+		removeColumns();
 		String[] columns = initTableColumns();
 		if (columns != null)
 			for (String column : columns) {
@@ -203,4 +202,12 @@ public abstract class ListView extends View {
 	 * Делаем фильтр видимым
 	 */
 	public void showFilter() {}
+
+	/**
+	 * Удаление столбцов таблицы
+	 */
+	protected void removeColumns() {
+		for (TableColumn column : table.getColumns())
+			column.dispose();
+	}
 }
