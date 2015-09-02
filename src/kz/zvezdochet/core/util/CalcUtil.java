@@ -119,4 +119,17 @@ public class CalcUtil {
 		}
 		return res;
 	}
+
+	/**
+	 * Определение координаты точки окружности при отложении от неё заданного отрезка
+	 * @param coord начальная координата точки (положительное число)
+	 * @param age угол, который нужно отложить от начальной точки
+	 * @return конечная координата точки на окружности с учётом начала отсчёта (нулевого градуса)
+	 */
+	public static double getAgedCoord(double coord, double age) {
+		coord += age;
+		if (coord > 360)
+			coord -= 360;
+		return coord;
+	}
 }

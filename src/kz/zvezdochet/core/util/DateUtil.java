@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Утилита для работы с датами
@@ -477,4 +478,31 @@ public class DateUtil {
   	  	String time = formatCustomDateTime(date, new SimpleDateFormat("H").toPattern());
     	return Integer.valueOf(time) < 12;
     }
+
+    /**
+     * Get a diff between two dates
+     * @param date1 the oldest date
+     * @param date2 the newest date
+     * @param timeUnit the unit in which you want the diff
+     * @return the diff value, in the provided unit
+     * @author Sebastien Lorber
+     * @see http://stackoverflow.com/questions/1555262/calculating-the-difference-between-two-java-date-instances
+     */
+    public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * Проверка, является ли год високосным
+     * @param year номер года
+     * @return признак високосного года
+     * @author cletus
+     * @see http://stackoverflow.com/questions/1021324/java-code-for-calculating-leap-year
+     */
+    public static boolean isLeapYear(int year) {
+    	Calendar cal = Calendar.getInstance();
+    	cal.set(Calendar.YEAR, year);
+    	return cal.getActualMaximum(Calendar.DAY_OF_YEAR) > 365;
+	}
 }
