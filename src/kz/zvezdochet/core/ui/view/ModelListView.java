@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
 import kz.zvezdochet.core.ui.listener.IModelListListener;
-import kz.zvezdochet.core.ui.listener.ISelectModelListener;
 
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
@@ -30,8 +29,6 @@ public abstract class ModelListView extends ListView {
 	public Group grFilter;
 	protected ViewerFilter viewerFilter;
 	
-	protected ISelectModelListener selectListener;
-
 	/**
 	 * Метод, возвращающий выделенный элемент таблицы
 	 * @return Object выделенный элемент таблицы
@@ -113,14 +110,6 @@ public abstract class ModelListView extends ListView {
 			tableViewer.refresh(element);
 	}
 	
-	public ISelectModelListener getSelectListener() {
-		return selectListener;
-	}
-
-	public void setSelectListener(ISelectModelListener selectListener) {
-		this.selectListener = selectListener;
-	}
-
 	/**
 	 * Изменяет значение заданного элемента в списке
 	 * @param model объект-модель

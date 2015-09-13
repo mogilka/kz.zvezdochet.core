@@ -3,7 +3,7 @@ package kz.zvezdochet.core.ui.view;
 import kz.zvezdochet.core.service.DataAccessException;
 import kz.zvezdochet.core.ui.ArrayLabelProvider;
 import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
-import kz.zvezdochet.core.ui.listener.StateChangedListener;
+import kz.zvezdochet.core.ui.listener.ListSelectionListener;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -59,11 +59,9 @@ public abstract class ListView extends View {
 		tableViewer.setContentProvider(new ArrayContentProvider());
 		tableViewer.setLabelProvider(getLabelProvider());
 		
-		if (tableViewer != null) {
-			StateChangedListener listener = new StateChangedListener();
-			tableViewer.addSelectionChangedListener(listener);
-			tableViewer.addDoubleClickListener(listener);
-		}
+		ListSelectionListener listener = getSelectionListener();
+		tableViewer.addSelectionChangedListener(listener);
+		tableViewer.addDoubleClickListener(listener);
 		initTable();
 		return null;
 	}
@@ -209,5 +207,13 @@ public abstract class ListView extends View {
 	protected void removeColumns() {
 		for (TableColumn column : table.getColumns())
 			column.dispose();
+	}
+
+	/**
+	 * Поиск обработчика выделения элементов списка
+	 * @return обработчик выделения элементов списка
+	 */
+	public ListSelectionListener getSelectionListener() {
+		return new ListSelectionListener();
 	}
 }
