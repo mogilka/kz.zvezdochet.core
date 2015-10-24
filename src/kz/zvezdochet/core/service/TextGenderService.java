@@ -122,6 +122,7 @@ public class TextGenderService extends ModelService implements IDictionaryServic
 			ps = Connector.getInstance().getConnection().prepareStatement(sql);
 			ps.setLong(1, model.getId());
 			ps.setString(2, model.getService().getTableName());
+			//System.out.println(ps);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				TextGender type = init(rs, create());
