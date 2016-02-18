@@ -216,4 +216,12 @@ public abstract class ListView extends View {
 	public ListSelectionListener getSelectionListener() {
 		return new ListSelectionListener();
 	}
+
+	/**
+	 * Возвращает содержимое представления
+	 * @return табличное содержимое
+	 */
+	public Object getData() {
+		return data;
+	}
 }
