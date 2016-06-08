@@ -32,7 +32,14 @@ Export-Package: kz.zvezdochet.core.bean,
  kz.zvezdochet.core.ui.provider,
  kz.zvezdochet.core.ui.util,
  kz.zvezdochet.core.ui.view,
- kz.zvezdochet.core.util
+ kz.zvezdochet.core.util,
+ org.apache.http.entity,
+ org.apache.http.message,
+ org.json
 Bundle-ClassPath: .,
  lib/sqlite.jar,
- lib/mysql.jar
+ lib/mysql.jar,
+ lib/json.jar,
+ lib/httpcore.jar,
+ lib/httpclient.jar,
+ lib/commons-logging.jar

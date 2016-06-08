@@ -1,5 +1,7 @@
 package kz.zvezdochet.core.util;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,6 +15,12 @@ import java.nio.channels.FileChannel;
 
 import kz.zvezdochet.core.tool.ExtensionFileFilter;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 /**
  * Утилита для работы с файлами и потоками
@@ -188,4 +196,39 @@ public class IOUtil {
 		FilenameFilter filter = new ExtensionFileFilter(extension);
 		return directory.list(filter);
 	}
+
+	/**
+	 * Получение содержимого URI с сервера через GET-метод
+	 * @param uri URI в строковом представлении с GET-параметрами
+	 * @return содержимое URI в строковом представлении
+	 * @throws IOException
+	 */
+	public static String getUriContent(final String uri) throws IOException {
+        HttpEntity entity = null;
+        InputStream input = null;
+        DataInputStream dis = null;
+        try {
+        	HttpClient httpClient = HttpClientBuilder.create().build();
+        	final HttpResponse res = httpClient.execute(new HttpGet(uri));
+            entity = res.getEntity();
+            final BufferedHttpEntity bufferedEntity = new BufferedHttpEntity(entity);
+            input = bufferedEntity.getContent();
+            
+            ByteArrayOutputStream buff = new ByteArrayOutputStream();
+            dis = new DataInputStream(input);
+            byte[] stuff = new byte[1024];
+            int read = 0;
+            while ((read = dis.read(stuff)) != -1)
+            	buff.write(stuff, 0, read);
+            return new String(buff.toByteArray());
+   		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+        } finally {
+        	if (dis != null)
+        		dis.close();
+        	if (input != null)
+        		input.close();
+        }
+        return null;
+    }
 }
