@@ -24,14 +24,14 @@ public abstract class ModelComposite extends ModelView {
 	 * Реакция на изменение состояния элементов управления
 	 * после операции сохранения
 	 */
-	public void notifySave() {
-		setChanged(false);
-	}
-	
-	@Override
-	public void notifyChange() {
-		setChanged(true);
-	}
+//	public void notifySave() {
+//		setChanged(false);
+//	}
+//	
+//	@Override
+//	public void notifyChange() {
+//		setChanged(true);
+//	}
 
 	/**
 	 * Инициализация слушателя расширения
@@ -47,12 +47,12 @@ public abstract class ModelComposite extends ModelView {
 		return listener;
 	}
 	
-	@Override
-	public void setChanged(boolean changed) {
-		super.setChanged(changed);
-		if (listener != null)
-			listener.handleEvent(null);
-	}
+//	@Override
+//	public void setChanged(boolean changed) {
+//		super.setChanged(changed);
+//		if (listener != null)
+//			listener.handleEvent(null);
+//	}
 
 	@Override
 	public View create(Composite composite) {

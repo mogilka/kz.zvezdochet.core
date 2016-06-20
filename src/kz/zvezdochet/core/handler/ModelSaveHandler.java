@@ -15,7 +15,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
  * @author Nataly Didenko
  *
  */
-public class SaveHandler extends Handler {
+public class ModelSaveHandler extends Handler {
 	
 	@Execute
 	public void execute(@Active MPart activePart) {

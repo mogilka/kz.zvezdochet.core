@@ -92,7 +92,7 @@ public abstract class ModelListView extends ListView {
 	 * Удаление модели из таблицы
 	 * @param model удаляемая модель
 	 */
-	public void deleteModel(Model model) {
+	public void onDelete(Model model) {
 		tableViewer.refresh();
 		@SuppressWarnings("unchecked")
 		List<Model> modelist = (List<Model>)data;
@@ -105,7 +105,7 @@ public abstract class ModelListView extends ListView {
 	 * Редактирование елемента таблицы
 	 * @param element редактируемый елемент
 	 */
-	public void editModel(Object element) {
+	public void onUpdate(Object element) {
 		if (element != null)
 			tableViewer.refresh(element);
 	}
@@ -157,4 +157,10 @@ public abstract class ModelListView extends ListView {
 
 	@Inject
 	protected MPart part;
+
+	/**
+	 * Создание экземпляра модели
+	 * @return модель
+	 */
+	public abstract Model createModel();
 }
