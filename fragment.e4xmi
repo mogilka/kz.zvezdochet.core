@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmi:id="_3RRoQDO4EeamVt0DJCGKag">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_5eOA8DO4EeamVt0DJCGKag" featurename="commands" parentElementId="org.eclipse.e4.ide.application">
+    <elements xsi:type="commands:Command" xmi:id="_8Wsp8DO4EeamVt0DJCGKag" elementId="kz.zvezdochet.core.command.openmodel" commandName="openModelCommand">
+      <parameters xmi:id="_CoFIcDO5EeamVt0DJCGKag" elementId="kz.zvezdochet.core.commandparameter.openmodel" name="partid" optional="false"/>
+    </elements>
+    <elements xsi:type="commands:Command" xmi:id="_s6wa8DRpEeabx9tcaBjnJA" elementId="kz.zvezdochet.core.command.addmodel" commandName="addModelCommand">
+      <parameters xmi:id="_GOrWQDRqEeabx9tcaBjnJA" elementId="kz.zvezdochet.core.commandparameter.addmodel" name="partid" optional="false"/>
+    </elements>
+    <elements xsi:type="commands:Command" xmi:id="_YXCsADR5Eeabx9tcaBjnJA" elementId="kz.zvezdochet.core.command.savemodel" commandName="saveModelCommand"/>
+    <elements xsi:type="commands:Command" xmi:id="_tF6kcDSdEeabx9tcaBjnJA" elementId="kz.zvezdochet.core.command.delmodel" commandName="deleteModelCommand"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="__u1DYDO4EeamVt0DJCGKag" featurename="handlers" parentElementId="org.eclipse.e4.ide.application">
+    <elements xsi:type="commands:Handler" xmi:id="_J8X1cDO5EeamVt0DJCGKag" elementId="kz.zvezdochet.core.handler.openmodel" contributionURI="bundleclass://kz.zvezdochet.core/kz.zvezdochet.core.handler.ModelOpenHandler" command="_8Wsp8DO4EeamVt0DJCGKag"/>
+    <elements xsi:type="commands:Handler" xmi:id="_M6K94DRqEeabx9tcaBjnJA" elementId="kz.zvezdochet.core.handler.addmodel" contributionURI="bundleclass://kz.zvezdochet.core/kz.zvezdochet.core.handler.ModelAddHandler" command="_s6wa8DRpEeabx9tcaBjnJA"/>
+    <elements xsi:type="commands:Handler" xmi:id="_cBBqcDR5Eeabx9tcaBjnJA" elementId="kz.zvezdochet.core.handler.savemodel" contributionURI="bundleclass://kz.zvezdochet.core/kz.zvezdochet.core.handler.ModelSaveHandler" command="_YXCsADR5Eeabx9tcaBjnJA"/>
+    <elements xsi:type="commands:Handler" xmi:id="_wV68oDSdEeabx9tcaBjnJA" elementId="kz.zvezdochet.core.handler.delmodel" contributionURI="bundleclass://kz.zvezdochet.core/kz.zvezdochet.core.handler.ModelDeleteHandler" command="_tF6kcDSdEeabx9tcaBjnJA"/>
+  </fragments>
+</fragment:ModelFragments>

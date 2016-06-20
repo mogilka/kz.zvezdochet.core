@@ -1,34 +1,55 @@
 package kz.zvezdochet.core.handler;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.ui.util.DialogUtil;
+import kz.zvezdochet.core.ui.view.ModelListView;
 import kz.zvezdochet.core.ui.view.ModelView;
 
+import org.eclipse.e4.core.contexts.Active;
+import org.eclipse.e4.core.di.annotations.CanExecute;
+import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
 /**
- * Обработчик открытия представления модели
+ * Обработчик открытия модели из списка в редакторе
  * @author Nataly Didenko
  *
  */
 public class ModelOpenHandler extends Handler {
 	@Inject
 	protected EPartService partService;
+	protected String partid;
+	protected ModelListView listpart;
+
+	@Execute
+	public void execute(@Active MPart activePart, @Named("kz.zvezdochet.core.commandparameter.openmodel") String partid) {
+		this.partid = partid;
+		listpart = (ModelListView)activePart.getObject();
+		Model model = (Model)listpart.getModel();
+		checkPart(model);
+	}
+
+	@CanExecute
+	public boolean canExecute() {
+		return true;
+	}
 
 	/**
 	 * Проверка состояния представления
 	 * @param model модель
 	 */
-	protected void checkPart(MPart part, Model model) {
+	protected void checkPart(Model model) {
+		MPart part = partService.findPart(partid);
 	    if (part.isDirty()) {
 			if (DialogUtil.alertConfirm(
-					"Открытый ранее объект не сохранён\n"
-					+ "и утратит все внесённые изменения,\n"
-					+ "если Вы откроете новый. Продолжить?")) {
+				"Открытый ранее объект не сохранён\n"
+					+ "и утратит внесённые изменения,\n"
+					+ "если вы откроете новый. Продолжить?")) {
 				openPart(part, model);
 			}
 	    } else
@@ -41,16 +62,21 @@ public class ModelOpenHandler extends Handler {
 	 * @param model модель
 	 * @return представление модели
 	 */
-	protected ModelView openPart(MPart part, Model model) {
+	protected void openPart(MPart part, Model model) {
+		if (model != null)
+			((ModelView)part.getObject()).setModel(model, true);
+
 	    part.setVisible(true);
 	    try {
 		    partService.showPart(part, PartState.VISIBLE);
+		    afterOpenPart();
 		} catch (IllegalStateException e) {
 			//Application does not have an active window
 		}
-		ModelView modelView = null;
-		if (model != null)
-			modelView = (ModelView)part.getObject();
-	    return modelView;
 	}
+
+	/**
+	 * Операции, выполняемые после открытия модели в редакторе
+	 */
+	protected void afterOpenPart() {};
 }

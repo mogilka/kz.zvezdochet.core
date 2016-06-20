@@ -27,12 +27,6 @@ public abstract class ModelPart extends ModelView {
 	}
 	
 	/**
-	 * Создание модели
-	 * @return модель
-	 */
-	public abstract Model addModel();
-	
-	/**
 	 * Создание представления. 
 	 * Реализовано по шаблону Template method
 	 * @param parent Базовый композит представления

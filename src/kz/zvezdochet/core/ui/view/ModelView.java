@@ -17,7 +17,6 @@ import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.PlatformUI;
 
 /**
  * Прототип представления модели
@@ -84,29 +83,6 @@ public abstract class ModelView extends View implements ISaveListener {
 			syncView();
 		} else if (this.model != null && model.getId() != null)
 			((Model)this.model).setId(model.getId());
-		setChanged(false);
-	}
-
-	/**
-	 * Состояние представления
-	 */
-	private boolean changed = false;
-
-	/**
-	 * Фиксируем изменение состояния представления
-	 * @param changed состояние
-	 */
-	public void setChanged(boolean changed) {
-		if (changed == this.changed) return;
-		this.changed = changed;
-	}
-
-	/**
-	 * Проверка состояния представления
-	 * @return true|false - изменилось|не изменилось
-	 */
-	public boolean isChanged() {
-		return changed;
 	}
 
 	/**
@@ -183,18 +159,18 @@ public abstract class ModelView extends View implements ISaveListener {
 	 * @param busy признак блокировки графического интерфейса представления
 	 */
     public void showBusy(final boolean busy) {
-		new Thread() {
-			public void run() {
-				PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-					public void run() {
-						if (busy)
-							updateStatus(Messages.getString("ElementView.DataInitializing"), false); //$NON-NLS-1$
-						else
-							updateStatus(Messages.getString("ElementView.DataLoaded"), false); //$NON-NLS-1$
-					}
-				});
-			}
-		}.start();				
+//		new Thread() {
+//			public void run() {
+//				PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+//					public void run() {
+//						if (busy)
+//							updateStatus(Messages.getString("ElementView.DataInitializing"), false); //$NON-NLS-1$
+//						else
+//							updateStatus(Messages.getString("ElementView.DataLoaded"), false); //$NON-NLS-1$
+//					}
+//				});
+//			}
+//		}.start();				
     }
     
 	/**

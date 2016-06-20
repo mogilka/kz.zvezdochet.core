@@ -119,8 +119,8 @@ public abstract class ModelExtension implements IExtension {
 		boolean changed = false; 
 //		if (view != null) 
 //			changed = view.isStateChanged();
-		if (composite != null) 
-			changed = composite.isChanged();
+//		if (composite != null)
+//			changed = composite.isChanged();
 		return changed;
 	}
 	
