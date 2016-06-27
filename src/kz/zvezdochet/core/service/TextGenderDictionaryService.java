@@ -64,7 +64,7 @@ public abstract class TextGenderDictionaryService extends DictionaryService {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			update();
+			afterSave();
 		}
 		return dict;
 	}

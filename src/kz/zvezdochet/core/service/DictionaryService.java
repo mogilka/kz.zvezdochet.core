@@ -106,7 +106,7 @@ public abstract class DictionaryService extends ModelService implements IDiction
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			update();
+			afterSave();
 		}
 		return dict;
 	}

@@ -82,7 +82,7 @@ public abstract class TextGenderDiagramService extends TextGenderDictionaryServi
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			update();
+			afterSave();
 		}
 		return dict;
 	}
