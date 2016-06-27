@@ -51,10 +51,17 @@ public interface IModelService {
 	/**
 	 * Обновление справочника после модификации данных
 	 */
-	public void update();
+	public void afterSave();
 	/**
 	 * Возвращает имя ТБД
 	 * @return имя таблицы БД
 	 */
 	public String getTableName();
+	/**
+	 * Обновление объекта в БД
+	 * @param id идентификатор объекта
+	 * @param params обновляемые параметры, каждый из которых представлен массивом из 3 элементов: поле|тип|значение
+	 * @return результат выполнения операции
+	 */
+	public int update(Long id, List<Object> params) throws DataAccessException;
 }

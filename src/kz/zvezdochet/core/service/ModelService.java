@@ -24,7 +24,7 @@ public abstract class ModelService implements IModelService {
 		int result = -1;
         PreparedStatement ps = null;
 		try {
-			update();
+			afterSave();
 			String sql = "delete from " + tableName + " where id = ?";
 			ps = Connector.getInstance().getConnection().prepareStatement(sql);
 			ps.setLong(1, id);
@@ -71,7 +71,7 @@ public abstract class ModelService implements IModelService {
 	protected List<Model> list = null;
 
 	@Override
-	public void update() {
+	public void afterSave() {
 		list = null;
 	}
 	
@@ -131,4 +131,44 @@ public abstract class ModelService implements IModelService {
 		}
 		return model;
 	}
+
+	@Override
+	public int update(Long id, List<Object> params) {
+		if (null == id) return -1;
+		int result = -1;
+        PreparedStatement ps = null;
+		try {
+			int count = params.size();
+			String sql = "update " + tableName + " set ";
+			int i = 0;
+			for (Object object : params) {
+				Object[] vals = (Object[])object;
+				sql += vals[0] + " = ?";
+				if (++i < count)
+					sql += ", ";
+			}
+			sql += " where id = ?";
+			ps = Connector.getInstance().getConnection().prepareStatement(sql);
+			i = 0;
+			for (Object object : params) {
+				Object[] vals = (Object[])object;
+				Object val = vals[2];
+				String type = vals[1].toString();
+				if (type.equals("String"))
+					ps.setString(++i, val.toString());
+			}
+			ps.setLong(count + 1, id);
+			System.out.println(ps);
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)	ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}	
 }
