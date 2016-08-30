@@ -21,39 +21,12 @@ public abstract class ModelExtension implements IExtension {
 	/**
 	 * Представление расширяемого объекта
 	 */
-	protected ModelView view;
-	/**
-	 * Композит расширяемого представления,
-	 * который выполняет роль контейнера виджетов расширения
-	 */
-	private Composite сontainer;
+	protected ModelView part;
 	/**
 	 * Обработчик изменений элемента расширения
 	 */
 	protected IExtensionStateListener stateListener = null;
 
-	/**
-	 * Возвращает идентификатор расширяемого представления
-	 * @return идентификатор представления
-	 */
-	public abstract String getExtensionViewId();
-
-	/** 
-	 * Возвращает контейнер виджетов расширения
-	 * @return композит
-	 */
-	public Composite getContainer() {
-		return сontainer;
-	}
-	
-	/** 
-	 * Инициализация контейнера виджетов расширения
-	 * @param сontainer композит расширяемого представления
-	 */
-	public void setСontainer(Composite сontainer) {
-		this.сontainer = сontainer;
-	}
-	
 	/**
 	 * Инициализация обработчика состояния представления
 	 * @param listener обработчик состояния представления
@@ -65,35 +38,22 @@ public abstract class ModelExtension implements IExtension {
 	/**
 	 * Передача ссылки на основное представление в расширение
 	 */
-	public void setView(ModelView view) {
-		this.view = view;
+	public void setPart(ModelView view) {
+		this.part = view;
 	}
 
 	/**
-	 * Метод, возвращающий расширяемое представление
-	 * @return представление
-	 */
-	public ModelView getView() {
-		return view;
-	}
-	
-	/**
 	 * Проверка правильности заполненности полей расширяемого представления
 	 */
-	public void checkView() {
-		if (view != null)
+	public void checkPart() {
+		if (part != null)
 			try {
-				view.check(0);
+				part.check(0);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 	}
 
-	/**
-	 * Отображение визуальных представлений расширений
-	 */
-	public abstract void initView();
-	
 	/**
 	 * Закрытие визуальных представлений расширения
 	 */
@@ -202,14 +162,6 @@ public abstract class ModelExtension implements IExtension {
 			}
 		}
 		return model;
-	}
-
-	/**
-	 * Инициализация представления расширяемого объекта
-	 * @param view представление модели
-	 */
-	public void initExtensionView(ModelView view) {
-		this.view = view;
 	}
 
 	/**
