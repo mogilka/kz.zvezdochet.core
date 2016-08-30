@@ -29,6 +29,18 @@ public abstract class ModelView extends View implements ISaveListener {
 	protected Model model;
 
 	protected StateChangedListener stateChangedListener;
+	/**
+	 * Связанное представление списка
+	 */
+	protected ModelListView listView;
+
+	public ModelListView getListView() {
+		return listView;
+	}
+
+	public void setListView(ModelListView listView) {
+		this.listView = listView;
+	}
 
 	/**
 	 * Обработчик событий представления
@@ -125,8 +137,8 @@ public abstract class ModelView extends View implements ISaveListener {
 	 * Управление доступом к функциям модификации данных
 	 */
 	protected void deactivateUnaccessable() {
-		boolean changed = (model != null) 
-			&& isEditable();
+//		boolean changed = (model != null)
+//			&& isEditable();
 //		if (applyAction != null)
 //			applyAction.setEnabled(changed);
 	}
@@ -207,8 +219,10 @@ public abstract class ModelView extends View implements ISaveListener {
 	protected void decorate() {}
 
 	@Override
-	public void onSave(Model model) {
+	public void onSave(Model model, boolean update) {
 		setModel(model, false);
+		if (listView != null)
+			listView.onUpdate(model, update);
 //		deactivateUnaccessable();
 	}
 	@Override

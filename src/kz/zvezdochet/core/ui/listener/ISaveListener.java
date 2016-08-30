@@ -10,8 +10,9 @@ public interface ISaveListener {
 	/**
 	 * Обрабатывает модель после сохранения
 	 * @param model модель
+	 * @param update true|false модифицированная|новая модель
 	 */
-	public void onSave(Model model);
+	public void onSave(Model model, boolean update);
 	/**
 	 * Обрабатывает модель после отмены сохранения
 	 * @param model модель

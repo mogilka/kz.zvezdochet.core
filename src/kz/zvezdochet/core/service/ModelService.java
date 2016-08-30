@@ -158,7 +158,7 @@ public abstract class ModelService implements IModelService {
 					ps.setString(++i, val.toString());
 			}
 			ps.setLong(count + 1, id);
-			System.out.println(ps);
+//			System.out.println(ps);
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

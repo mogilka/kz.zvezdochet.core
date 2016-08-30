@@ -72,8 +72,8 @@ public abstract class ModelPart extends ModelView {
 	protected MPart part;
 	  
 	@Override
-	public void onSave(Model model) {
+	public void onSave(Model model, boolean update) {
 		part.setDirty(false);
-		super.onSave(model);
+		super.onSave(model, update);
 	}
 }

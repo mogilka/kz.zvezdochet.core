@@ -1,14 +1,13 @@
 package kz.zvezdochet.core.handler;
 
-import kz.zvezdochet.core.bean.Model;
-import kz.zvezdochet.core.service.IModelService;
-import kz.zvezdochet.core.ui.listener.ISaveListener;
-import kz.zvezdochet.core.ui.util.DialogUtil;
-import kz.zvezdochet.core.ui.view.ModelView;
-
 import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+
+import kz.zvezdochet.core.bean.Model;
+import kz.zvezdochet.core.service.IModelService;
+import kz.zvezdochet.core.ui.util.DialogUtil;
+import kz.zvezdochet.core.ui.view.ModelView;
 
 /**
  * Обработчик сохранения модели
@@ -25,10 +24,11 @@ public class ModelSaveHandler extends Handler {
 			ModelView part = (ModelView)activePart.getObject();
 			if (!part.check(mode)) return;
 			Model model = part.getModel(mode, true);
+			boolean existing = model.getId() != null;
 			model = saveModel(model);
 			updateStatus(Messages.getString("ApplyElementAction.ElementSaved"), false); //$NON-NLS-1$
 			//TODO после сохранения делать недоступным сохранение пока данные снова не изменятся
-			((ISaveListener)part).onSave(model);
+			part.onSave(model, existing);
 		} catch (Exception e) {
 			DialogUtil.alertError(e.getMessage());
 			updateStatus(Messages.getString("ApplyElementAction.ErrorSavingElement"), true); //$NON-NLS-1$

@@ -104,10 +104,15 @@ public abstract class ModelListView extends ListView {
 	/**
 	 * Редактирование елемента таблицы
 	 * @param element редактируемый елемент
+	 * @param update true|false модифицированная|новая модель
 	 */
-	public void onUpdate(Object element) {
-		if (element != null)
+	public void onUpdate(Object element, boolean update) {
+		if (null == element)
+			return;
+		if (update)
 			tableViewer.refresh(element);
+		else
+			tableViewer.add(element);
 	}
 	
 	/**

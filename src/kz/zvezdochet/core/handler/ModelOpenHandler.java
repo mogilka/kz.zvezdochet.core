@@ -63,15 +63,19 @@ public class ModelOpenHandler extends Handler {
 	 * @return представление модели
 	 */
 	protected void openPart(MPart part, Model model) {
-		if (model != null)
-			((ModelView)part.getObject()).setModel(model, true);
-
+		if (model != null) {
+			ModelView view = (ModelView)part.getObject();
+			view.setListView(listpart);
+			view.setModel(model, true);
+//			view.setListener(listpart);
+		}
 	    part.setVisible(true);
 	    try {
 		    partService.showPart(part, PartState.VISIBLE);
 		    afterOpenPart();
 		} catch (IllegalStateException e) {
 			//Application does not have an active window
+			e.printStackTrace();
 		}
 	}
 
