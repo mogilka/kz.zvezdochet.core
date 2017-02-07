@@ -4,10 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import kz.zvezdochet.core.bean.Model;
-import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
-import kz.zvezdochet.core.ui.listener.IModelListListener;
-
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -16,6 +12,10 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.TableColumn;
+
+import kz.zvezdochet.core.bean.Model;
+import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
+import kz.zvezdochet.core.ui.listener.IModelListListener;
 
 /**
  * Прототип табличного представления моделей

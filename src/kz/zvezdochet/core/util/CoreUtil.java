@@ -2,11 +2,11 @@ package kz.zvezdochet.core.util;
 
 import java.util.List;
 
-import kz.zvezdochet.core.bean.Model;
-
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
+
+import kz.zvezdochet.core.bean.Model;
 
 /**
  * Методы и константы общего назначения

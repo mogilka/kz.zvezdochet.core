@@ -1,10 +1,5 @@
 package kz.zvezdochet.core.ui.view;
 
-import kz.zvezdochet.core.service.DataAccessException;
-import kz.zvezdochet.core.ui.ArrayLabelProvider;
-import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
-import kz.zvezdochet.core.ui.listener.ListSelectionListener;
-
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -16,6 +11,11 @@ import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+
+import kz.zvezdochet.core.service.DataAccessException;
+import kz.zvezdochet.core.ui.ArrayLabelProvider;
+import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
+import kz.zvezdochet.core.ui.listener.ListSelectionListener;
 
 /**
  * Прототип табличного представления данных

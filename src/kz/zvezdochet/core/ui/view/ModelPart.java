@@ -2,11 +2,11 @@ package kz.zvezdochet.core.ui.view;
 
 import javax.inject.Inject;
 
-import kz.zvezdochet.core.bean.Model;
-import kz.zvezdochet.core.ui.listener.IModelListListener;
-
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.swt.widgets.Composite;
+
+import kz.zvezdochet.core.bean.Model;
+import kz.zvezdochet.core.ui.listener.IModelListListener;
 
 /**
  * Прототип редактора модели

@@ -2,6 +2,9 @@ package kz.zvezdochet.core.ui.extension;
 
 import java.util.List;
 
+import org.eclipse.jface.viewers.IBaseLabelProvider;
+import org.eclipse.swt.widgets.Composite;
+
 import kz.zvezdochet.core.bean.Dictionary;
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.service.DataAccessException;
@@ -9,9 +12,6 @@ import kz.zvezdochet.core.service.IModelService;
 import kz.zvezdochet.core.ui.view.ModelComposite;
 import kz.zvezdochet.core.ui.view.ModelView;
 import kz.zvezdochet.core.ui.view.View;
-
-import org.eclipse.jface.viewers.IBaseLabelProvider;
-import org.eclipse.swt.widgets.Composite;
 
 /**
  * Прототип расширения модели

@@ -1,11 +1,11 @@
 package kz.zvezdochet.core.ui.decoration;
 
-import kz.zvezdochet.core.ui.util.GUIutil;
-
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.swt.widgets.Control;
+
+import kz.zvezdochet.core.ui.util.GUIutil;
 
 /**
  * Декоратор поля ввода с автозаполнением

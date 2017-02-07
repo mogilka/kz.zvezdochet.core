@@ -2,16 +2,16 @@ package kz.zvezdochet.core.handler;
 
 import javax.inject.Inject;
 
-import kz.zvezdochet.core.bean.Model;
-import kz.zvezdochet.core.service.IModelService;
-import kz.zvezdochet.core.ui.util.DialogUtil;
-import kz.zvezdochet.core.ui.view.ModelListView;
-
 import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
+
+import kz.zvezdochet.core.bean.Model;
+import kz.zvezdochet.core.service.IModelService;
+import kz.zvezdochet.core.ui.util.DialogUtil;
+import kz.zvezdochet.core.ui.view.ModelListView;
 
 /**
  * Обработчик удаления модели из списка

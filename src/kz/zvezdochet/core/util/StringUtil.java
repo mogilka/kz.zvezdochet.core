@@ -214,6 +214,8 @@ public class StringUtil {
      * @return строка без тегов
      */
     public static String removeTags(String html) {
+    	if (null == html)
+    		return null;
     	return html.replaceAll("\\<.*?>", "");
 	}
 }

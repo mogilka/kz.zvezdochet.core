@@ -1,10 +1,10 @@
 package kz.zvezdochet.core.ui.view;
 
-import kz.zvezdochet.core.ui.ArrayLabelProvider;
-
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
+
+import kz.zvezdochet.core.ui.ArrayLabelProvider;
 
 /**
  * Обработчик отображения модели в таблице

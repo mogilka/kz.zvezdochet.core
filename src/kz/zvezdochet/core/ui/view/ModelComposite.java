@@ -1,12 +1,12 @@
 package kz.zvezdochet.core.ui.view;
 
-import kz.zvezdochet.core.service.DataAccessException;
-
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Listener;
+
+import kz.zvezdochet.core.service.DataAccessException;
 
 /**
  * Прототип композита, встраиваемого в редактор модели

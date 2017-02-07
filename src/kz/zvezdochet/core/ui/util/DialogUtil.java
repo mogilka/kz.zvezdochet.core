@@ -1,8 +1,8 @@
 package kz.zvezdochet.core.ui.util;
 
-import kz.zvezdochet.core.util.PlatformUtil;
-
 import org.eclipse.jface.dialogs.MessageDialog;
+
+import kz.zvezdochet.core.util.PlatformUtil;
 
 /**
  * Обработчик пользовательских сообщений

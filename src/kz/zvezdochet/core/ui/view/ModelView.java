@@ -1,9 +1,5 @@
 package kz.zvezdochet.core.ui.view;
 
-import kz.zvezdochet.core.bean.Model;
-import kz.zvezdochet.core.ui.extension.IExtensionStateListener;
-import kz.zvezdochet.core.ui.listener.ISaveListener;
-
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -17,6 +13,10 @@ import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
+
+import kz.zvezdochet.core.bean.Model;
+import kz.zvezdochet.core.ui.extension.IExtensionStateListener;
+import kz.zvezdochet.core.ui.listener.ISaveListener;
 
 /**
  * Прототип представления модели

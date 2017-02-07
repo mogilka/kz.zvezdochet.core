@@ -10,14 +10,14 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import kz.zvezdochet.core.util.DateUtil;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+
+import kz.zvezdochet.core.util.DateUtil;
 
 /**
  * Сортировщик столбцов таблицы

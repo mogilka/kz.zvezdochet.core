@@ -13,14 +13,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 
-import kz.zvezdochet.core.tool.ExtensionFileFilter;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+
+import kz.zvezdochet.core.tool.ExtensionFileFilter;
 
 /**
  * Утилита для работы с файлами и потоками

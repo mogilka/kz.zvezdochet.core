@@ -1,8 +1,8 @@
 package kz.zvezdochet.core.ui.extension;
 
-import kz.zvezdochet.core.ui.view.View;
-
 import org.eclipse.swt.widgets.Composite;
+
+import kz.zvezdochet.core.ui.view.View;
 
 /**
  * Прототип интерфейса расширений

@@ -1,8 +1,8 @@
 package kz.zvezdochet.core.ui.provider;
 
-import kz.zvezdochet.core.bean.Dictionary;
-
 import org.eclipse.jface.viewers.LabelProvider;
+
+import kz.zvezdochet.core.bean.Dictionary;
 
 /**
  * Обработчик отображения значений справочника
