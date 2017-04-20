@@ -103,11 +103,11 @@ public class TextGenderService extends ModelService implements IDictionaryServic
 	 */
 	public List<TextGender> find(Model model, boolean female, boolean child) throws DataAccessException {
         List<TextGender> list = new ArrayList<TextGender>();
-        String types = "";
+        String types = "'health'";
         if (female)
-        	types += "'female'";
+        	types += ", 'female'";
         else
-        	types += "'male'";
+        	types += ", 'male'";
         
         if (child)
         	types += ",'child'";
