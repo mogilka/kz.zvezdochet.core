@@ -42,4 +42,17 @@ public abstract class Model implements Serializable {
 	public void setData(Object data) {
 		this.data = data;
 	}
+
+	/**
+	 * Поле для хранения временного статуса модели
+	 */
+	protected boolean done = false;
+
+	public boolean isDone() {
+		return done;
+	}
+
+	public void setDone(boolean done) {
+		this.done = done;
+	}
 }
