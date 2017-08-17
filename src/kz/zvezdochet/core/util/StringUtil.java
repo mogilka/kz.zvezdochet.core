@@ -218,4 +218,16 @@ public class StringUtil {
     		return null;
     	return html.replaceAll("\\<.*?>", "");
 	}
+
+    /**
+     * Проверка наличия значения в строке
+     * @param s строка
+     * @return true|false пуста|инициализирована
+     */
+    public static boolean isEmpty(String s) {
+    	if (null == s)
+    		return true;
+    	s = s.trim();
+    	return s.isEmpty();
+    }
 }
