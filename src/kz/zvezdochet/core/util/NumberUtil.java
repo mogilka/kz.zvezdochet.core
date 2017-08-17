@@ -2,6 +2,7 @@ package kz.zvezdochet.core.util;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 
 /**
  * Утилита для работы с числами
@@ -42,4 +43,15 @@ public class NumberUtil {
   		return (s.indexOf('0') == 0) ?
   			String.valueOf(s.charAt(1)) : s;
   	}
+
+	/**
+	 * Округление действительного числа до нужного количества цифр после запятой
+	 * @param val действительное число
+	 * @param pres точность округления
+	 * @return округлённое число
+	 * @author Luca Vix https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places#answer-25645952
+	 */
+	public static double round(double val, int pres) {
+		return new BigDecimal(String.valueOf(val)).setScale(pres, RoundingMode.HALF_UP).doubleValue();
+	}
 }
