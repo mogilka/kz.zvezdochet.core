@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -39,7 +40,7 @@ public class DateUtil {
 	public static SimpleDateFormat sdfmy = new SimpleDateFormat("MMMMM yyyy"); //$NON-NLS-1$
 	/** Формат даты d MMMMM yyyy г. 
 	 * @sample 3 Сентябрь 2009 г. */
-	public static String fulldf = "d MMMMM yyyy г."; //$NON-NLS-1$
+	public static DateFormat fulldf = new SimpleDateFormat("d MMMMM yyyy г."); //$NON-NLS-1$
 	/** Формат даты yyyy MM 
 	 * @sample 2009 03 */
 	public static DateFormat dfym = new SimpleDateFormat("yyyy MM"); //$NON-NLS-1$
@@ -505,4 +506,29 @@ public class DateUtil {
     	cal.set(Calendar.YEAR, year);
     	return cal.getActualMaximum(Calendar.DAY_OF_YEAR) > 365;
 	}
+
+    /**
+     * Вычисление количества лет между датами
+     * @param first первая дата
+     * @param last вторая дата
+     * @return разница в годах
+     * @author sinuhepop
+     * @see https://stackoverflow.com/questions/7906301/how-can-i-find-the-number-of-years-between-two-dates-in-android
+     */
+    public static int getDiffYears(Date first, Date last) {
+        Calendar a = getCalendar(first);
+        Calendar b = getCalendar(last);
+        int diff = b.get(Calendar.YEAR) - a.get(Calendar.YEAR);
+        if (a.get(Calendar.MONTH) > b.get(Calendar.MONTH) || 
+            (a.get(Calendar.MONTH) == b.get(Calendar.MONTH) && a.get(Calendar.DATE) > b.get(Calendar.DATE))) {
+            diff--;
+        }
+        return diff;
+    }
+
+    private static Calendar getCalendar(Date date) {
+        Calendar cal = Calendar.getInstance(Locale.US);
+        cal.setTime(date);
+        return cal;
+    }
 }
