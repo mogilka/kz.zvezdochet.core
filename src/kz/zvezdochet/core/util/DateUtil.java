@@ -40,7 +40,7 @@ public class DateUtil {
 	public static SimpleDateFormat sdfmy = new SimpleDateFormat("MMMMM yyyy"); //$NON-NLS-1$
 	/** Формат даты d MMMMM yyyy г. 
 	 * @sample 3 Сентябрь 2009 г. */
-	public static DateFormat fulldf = new SimpleDateFormat("d MMMMM yyyy г."); //$NON-NLS-1$
+	public static DateFormat fulldf = new SimpleDateFormat("EEEE, d MMMM yyyy"); //$NON-NLS-1$
 	/** Формат даты yyyy MM 
 	 * @sample 2009 03 */
 	public static DateFormat dfym = new SimpleDateFormat("yyyy MM"); //$NON-NLS-1$
