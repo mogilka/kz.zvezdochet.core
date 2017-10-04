@@ -46,4 +46,14 @@ public abstract class TextGenderDictionary extends Dictionary implements ITextGe
 			return null;
 		}
 	}
+
+	@Override
+	public TextGender getGenderText(String type) {
+		try {
+			return new TextGenderService().find(this, type);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

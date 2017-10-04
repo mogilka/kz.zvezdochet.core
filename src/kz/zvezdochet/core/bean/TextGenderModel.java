@@ -51,4 +51,14 @@ public abstract class TextGenderModel extends Model implements ITextGender {
 			return null;
 		}
 	}
+
+	@Override
+	public TextGender getGenderText(String type) {
+		try {
+			return new TextGenderService().find(this, type);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

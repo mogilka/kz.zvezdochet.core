@@ -30,4 +30,10 @@ public interface ITextGender {
 	 * @return толкование
 	 */
 	public TextGender getChildText();
+	/**
+	 * Поиск гендерных толкований по типу
+	 * @param type love|family|deal любовный|семейный|партнёрский гороскоп
+	 * @return список толкований
+	 */
+	public TextGender getGenderText(String type);
 }

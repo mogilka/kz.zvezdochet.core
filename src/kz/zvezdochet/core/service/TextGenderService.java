@@ -174,4 +174,41 @@ public class TextGenderService extends ModelService implements IDictionaryServic
 		}
 		return type;
 	}
+
+	/**
+	 * Поиск гендерных связей модели по типу
+	 * @param model модель справочника
+	 * @param type love|family|deal любовный|семейный|партнёрский
+	 * @return гендерное толкование
+	 * @throws DataAccessException
+	 */
+	public TextGender find(Model model, String type) throws DataAccessException {
+        TextGender text = new TextGender();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+		try {
+			String sql = "select * from " + tableName + 
+				" where objectid = ? " +
+					"and objectype = ? " +
+					"and type = ?";
+			ps = Connector.getInstance().getConnection().prepareStatement(sql);
+			ps.setLong(1, model.getId());
+			ps.setString(2, model.getService().getTableName());
+			ps.setString(3, type);
+			//System.out.println(ps);
+			rs = ps.executeQuery();
+			if (rs.next())
+				text = init(rs, create());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { 
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+			} catch (SQLException e) { 
+				e.printStackTrace(); 
+			}
+		}
+		return text;
+	}
 }
