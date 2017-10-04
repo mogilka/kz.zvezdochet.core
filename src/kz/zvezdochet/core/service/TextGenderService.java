@@ -183,7 +183,6 @@ public class TextGenderService extends ModelService implements IDictionaryServic
 	 * @throws DataAccessException
 	 */
 	public TextGender find(Model model, String type) throws DataAccessException {
-        TextGender text = new TextGender();
         PreparedStatement ps = null;
         ResultSet rs = null;
 		try {
@@ -198,7 +197,7 @@ public class TextGenderService extends ModelService implements IDictionaryServic
 			//System.out.println(ps);
 			rs = ps.executeQuery();
 			if (rs.next())
-				text = init(rs, create());
+				return init(rs, create());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -209,6 +208,6 @@ public class TextGenderService extends ModelService implements IDictionaryServic
 				e.printStackTrace(); 
 			}
 		}
-		return text;
+		return null;
 	}
 }
