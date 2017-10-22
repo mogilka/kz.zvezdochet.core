@@ -64,6 +64,7 @@ public class ModelOpenHandler extends Handler {
 	 */
 	protected void openPart(MPart part, Model model) {
 		if (model != null) {
+			model.init(false);
 			ModelView view = (ModelView)part.getObject();
 			view.setListView(listpart);
 			view.setModel(model, true);

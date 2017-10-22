@@ -67,4 +67,7 @@ public class TextGender extends Model {
 	public ModelService getService() {
 		return new TextGenderService();
 	}
+
+	@Override
+	public void init(boolean mode) {}
 }

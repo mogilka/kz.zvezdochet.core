@@ -55,4 +55,10 @@ public abstract class Model implements Serializable {
 	public void setDone(boolean done) {
 		this.done = done;
 	}
+
+	/**
+	 * Инициализация модели
+	 * @param mode параметр для выполнения условия инициализации
+	 */
+	public abstract void init(boolean mode);
 }

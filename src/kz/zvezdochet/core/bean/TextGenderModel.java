@@ -61,4 +61,7 @@ public abstract class TextGenderModel extends Model implements ITextGender {
 			return null;
 		}
 	}
+
+	@Override
+	public void init(boolean mode) {}
 }

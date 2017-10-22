@@ -12,7 +12,8 @@ Bundle-ClassPath: .,
  lib/commons-logging.jar
 Bundle-Activator: kz.zvezdochet.core.Activator
 Bundle-Vendor: Звездочёт
-Export-Package: kz.zvezdochet.core.bean,
+Export-Package: kz.zvezdochet.core,
+ kz.zvezdochet.core.bean,
  kz.zvezdochet.core.handler,
  kz.zvezdochet.core.service,
  kz.zvezdochet.core.tool,

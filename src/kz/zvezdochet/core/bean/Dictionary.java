@@ -49,4 +49,7 @@ public abstract class Dictionary extends Model {
 	public String toString() {
 		return name;
 	}
+
+	@Override
+	public void init(boolean mode) {}
 }
