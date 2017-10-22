@@ -18,9 +18,8 @@ public class ModelAddHandler extends ModelOpenHandler {
 
 	@Execute
 	public void execute(@Active MPart activePart, @Named("kz.zvezdochet.core.commandparameter.addmodel") String partid) {
-		this.partid = partid;
 		listpart = (ModelListView)activePart.getObject();
 		Model model = listpart.createModel();
-		checkPart(model);
+		checkPart(model, partid);
 	}
 }

@@ -23,15 +23,13 @@ import kz.zvezdochet.core.ui.view.ModelView;
 public class ModelOpenHandler extends Handler {
 	@Inject
 	protected EPartService partService;
-	protected String partid;
 	protected ModelListView listpart;
 
 	@Execute
 	public void execute(@Active MPart activePart, @Named("kz.zvezdochet.core.commandparameter.openmodel") String partid) {
-		this.partid = partid;
 		listpart = (ModelListView)activePart.getObject();
 		Model model = (Model)listpart.getModel();
-		checkPart(model);
+		checkPart(model, partid);
 	}
 
 	@CanExecute
@@ -43,7 +41,7 @@ public class ModelOpenHandler extends Handler {
 	 * Проверка состояния представления
 	 * @param model модель
 	 */
-	protected void checkPart(Model model) {
+	protected void checkPart(Model model, String partid) {
 		MPart part = partService.findPart(partid);
 	    if (part.isDirty()) {
 			if (DialogUtil.alertConfirm(
@@ -63,6 +61,13 @@ public class ModelOpenHandler extends Handler {
 	 * @return представление модели
 	 */
 	protected void openPart(MPart part, Model model) {
+	    part.setVisible(true);
+	    try {
+		    partService.showPart(part, PartState.VISIBLE);
+		} catch (IllegalStateException e) {
+			//Application does not have an active window
+			e.printStackTrace();
+		}
 		if (model != null) {
 			model.init(false);
 			ModelView view = (ModelView)part.getObject();
@@ -70,18 +75,12 @@ public class ModelOpenHandler extends Handler {
 			view.setModel(model, true);
 //			view.setListener(listpart);
 		}
-	    part.setVisible(true);
-	    try {
-		    partService.showPart(part, PartState.VISIBLE);
-		    afterOpenPart();
-		} catch (IllegalStateException e) {
-			//Application does not have an active window
-			e.printStackTrace();
-		}
+	    afterOpenPart(null);
 	}
 
 	/**
 	 * Операции, выполняемые после открытия модели в редакторе
+	 * @param object объект
 	 */
-	protected void afterOpenPart() {};
+	protected void afterOpenPart(Object object) {};
 }
