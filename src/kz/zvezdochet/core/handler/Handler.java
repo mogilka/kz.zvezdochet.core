@@ -1,6 +1,5 @@
 package kz.zvezdochet.core.handler;
 
-
 /**
  * Прототип визуального действия
  * @author Nataly Didenko

@@ -9,6 +9,7 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
+import org.eclipse.swt.SWT;
 
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.ui.util.DialogUtil;
@@ -44,7 +45,7 @@ public class ModelOpenHandler extends Handler {
 	protected void checkPart(Model model, String partid) {
 		MPart part = partService.findPart(partid);
 	    if (part.isDirty()) {
-			if (DialogUtil.alertConfirm(
+			if (SWT.OK == DialogUtil.alertConfirm(
 				"Открытый ранее объект не сохранён\n"
 					+ "и утратит внесённые изменения,\n"
 					+ "если вы откроете новый. Продолжить?")) {

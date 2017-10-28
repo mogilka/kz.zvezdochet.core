@@ -1,6 +1,7 @@
 package kz.zvezdochet.core.ui.util;
 
-import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MessageBox;
 
 import kz.zvezdochet.core.util.PlatformUtil;
 
@@ -12,52 +13,47 @@ import kz.zvezdochet.core.util.PlatformUtil;
 public class DialogUtil {
 
 	/**
-	 * Вывод диалогового предупреждения
-	 * @param title - заголовок окна
-	 * @param messageBody - сообщение
-	 * */
-	public static void alertError(String messageBody) {
-		MessageDialog.openError(
-			PlatformUtil.getDisplayShell(), Messages.getString("DialogUtil.Error"), messageBody); //$NON-NLS-1$
+	 * Вывод ошибки
+	 * @param message сообщение
+	 */
+	public static int alertError(String message) {
+		return alert(SWT.ICON_ERROR, "Ошибка", message);
 	} 
 
 	/**
-	 * Вывод диалогового предупреждения
-	 * @param title - заголовок окна
-	 * @param messageBody - сообщение
-	 * */
-	public static void alertWarning(String messageBody) {
-		MessageDialog.openWarning(
-			PlatformUtil.getDisplayShell(), Messages.getString("DialogUtil.Warning"), messageBody); //$NON-NLS-1$
+	 * Вывод предупреждения
+	 * @param message сообщение
+	 */
+	public static int alertWarning(String message) {
+		return alert(SWT.ICON_WARNING, "Предупреждение", message);
 	} 
 
 	/**
-	 * Вывод диалогового предупреждения
-	 * @param title - заголовок окна
-	 * @param messageBody - сообщение
-	 * */
-	public static boolean alertConfirm(String messageBody) {
-		return MessageDialog.openConfirm(
-			PlatformUtil.getDisplayShell(), Messages.getString("DialogUtil.Confirmation"), messageBody); //$NON-NLS-1$
+	 * Вывод подтверждения
+	 * @param message сообщение
+	 */
+	public static int alertConfirm(String message) {
+		return alert(SWT.ICON_QUESTION, "Подтверждение", message);
 	} 
 
 	/**
-	 * Вывод диалогового предупреждения
-	 * @param title - заголовок окна
-	 * @param messageBody - сообщение
+	 * Вывод информации
+	 * @param message сообщение
 	 * */
-	public static void alertInfo(String messageBody) {
-		MessageDialog.openInformation(
-			PlatformUtil.getDisplayShell(), Messages.getString("DialogUtil.Information"), messageBody); //$NON-NLS-1$
-	} 
+	public static int alertInfo(String message) {
+		return alert(SWT.ICON_INFORMATION, "Информация", message);
+	}
 
 	/**
-	 * Вывод диалогового предупреждения
-	 * @param title - заголовок окна
-	 * @param messageBody - сообщение
+	 * Генерация диалогового окна
+	 * @param type тип иконки
+	 * @param title заголовок
+	 * @param message сообщение
 	 * */
-	public static boolean alertQuestion(String messageBody) {
-		return MessageDialog.openQuestion(
-			PlatformUtil.getDisplayShell(), Messages.getString("DialogUtil.Confirmation"), messageBody); //$NON-NLS-1$
+	private static int alert(int type, String title, String message) {
+		MessageBox dialog = new MessageBox(PlatformUtil.getDisplayShell(), type|SWT.OK|SWT.CANCEL);
+		dialog.setText(title);
+		dialog.setMessage(message);
+		return dialog.open();
 	} 
 }

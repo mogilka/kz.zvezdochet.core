@@ -22,7 +22,8 @@ public class ModelSaveHandler extends Handler {
 		try {
 			int mode = Handler.MODE_SAVE;
 			ModelView part = (ModelView)activePart.getObject();
-			if (!part.check(mode)) return;
+			if (!part.check(mode))
+				return;
 			Model model = part.getModel(mode, true);
 			boolean existing = model.getId() != null;
 			model = saveModel(model);
