@@ -1,6 +1,10 @@
 package kz.zvezdochet.core.ui.util;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Device;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
 
 import kz.zvezdochet.core.util.PlatformUtil;
@@ -56,4 +60,14 @@ public class DialogUtil {
 		dialog.setMessage(message);
 		return dialog.open();
 	} 
+
+	/**
+	 * Поиск размера экрана
+	 * @return точка с размерами
+	 * */
+	public static Point getScreenSize() {
+		Device device = Display.getDefault();
+		Rectangle rect = device.getClientArea();
+		return new Point(rect.width, rect.height);
+	}
 }
