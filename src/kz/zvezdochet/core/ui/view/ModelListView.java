@@ -22,7 +22,7 @@ import kz.zvezdochet.core.ui.listener.IModelListListener;
  * @author Nataly Didenko
  */
 public abstract class ModelListView extends ListView {
-	
+
 	/**
 	 * Композит фильтра
 	 */

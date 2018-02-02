@@ -21,7 +21,7 @@ import kz.zvezdochet.core.ui.listener.ListSelectionListener;
  * Прототип табличного представления данных
  * @author Nataly Didenko
  */
-public abstract class ListView extends View {
+public abstract class ListView extends View implements IFilterable {
 	
 	/**
 	 * Визуальный контейнер
@@ -42,7 +42,7 @@ public abstract class ListView extends View {
 	public View create(Composite parent) {
 		container = new Composite(parent, SWT.NONE);
 		container.setLayout(new FormLayout());
-		initFilter();
+		initFilter(parent);
 
 		tableViewer = new TableViewer(container, SWT.BORDER | SWT.FULL_SELECTION);
 		table = tableViewer.getTable();
@@ -126,7 +126,8 @@ public abstract class ListView extends View {
 		return tableViewer != null;
 	}
 
-	public void initFilter() {}
+	@Override
+	public void initFilter(Composite parent) {}
 
 	/**
 	 * Инициализация содержимого таблицы
