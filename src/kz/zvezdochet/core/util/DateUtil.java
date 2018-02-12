@@ -9,6 +9,9 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import jodd.datetime.JDateTime;
+import jodd.datetime.JulianDateStamp;
+
 /**
  * Утилита для работы с датами
  * @author Nataly Didenko
@@ -531,4 +534,15 @@ public class DateUtil {
         cal.setTime(date);
         return cal;
     }
+
+    /**
+     * Конвертация Юлианского дня в дату
+     * @param julianDay номер Юлианского дня
+     * @return дата
+     */
+  	public static Date jul2date(double julianDay) {
+  		JulianDateStamp julianStamp = new JulianDateStamp(julianDay);
+  		JDateTime jdate = new JDateTime(julianStamp);
+  		return new Date(jdate.getTimeInMillis());
+  	}
 }
