@@ -9,10 +9,12 @@ Bundle-ClassPath: .,
  lib/json.jar,
  lib/httpcore.jar,
  lib/httpclient.jar,
- lib/commons-logging.jar
+ lib/commons-logging.jar,
+ lib/jodd.jar
 Bundle-Activator: kz.zvezdochet.core.Activator
 Bundle-Vendor: Звездочёт
-Export-Package: kz.zvezdochet.core,
+Export-Package: jodd.datetime,
+ kz.zvezdochet.core,
  kz.zvezdochet.core.bean,
  kz.zvezdochet.core.handler,
  kz.zvezdochet.core.service,
@@ -43,4 +45,5 @@ Import-Package: javax.inject;version="1.0.0",
  org.eclipse.swt.graphics,
  org.eclipse.swt.widgets,
  org.eclipse.ui,
- org.eclipse.ui.forms.widgets
+ org.eclipse.ui.forms.widgets,
+ swisseph

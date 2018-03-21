@@ -3,6 +3,7 @@ package kz.zvezdochet.core.util;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -52,7 +53,7 @@ public class DateUtil {
 	public static DateFormat dbdtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //$NON-NLS-1$
 	/** Формат даты, используемый в базе данных, yyyy-MM-dd 
 	 * @sample 2010-05-14 */
-	public static DateFormat dbdf = new SimpleDateFormat("yyyy-MM-dd"); //$NON-NLS-1$
+	public static SimpleDateFormat dbdf = new SimpleDateFormat("yyyy-MM-dd"); //$NON-NLS-1$
 	/** Формат даты и времени EEE, d MMM yyyy HH:mm:ss Z 
 	 * @sample воскресенье, 21 Июль 1985 21:18:51 +0600 */
 	public static DateFormat fulldtf = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm:ss");
@@ -541,8 +542,126 @@ public class DateUtil {
      * @return дата
      */
   	public static Date jul2date(double julianDay) {
-  		JulianDateStamp julianStamp = new JulianDateStamp(julianDay);
-  		JDateTime jdate = new JDateTime(julianStamp);
-  		return new Date(jdate.getTimeInMillis());
+  		try {
+  	  		JulianDateStamp julianStamp = new JulianDateStamp(julianDay);
+  	  		JDateTime jdate = new JDateTime(julianStamp);
+  	  		return new Date(jdate.getTimeInMillis());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+  		return null;
   	}
+
+	/**
+	 * Разбиваем дату на массив из 6 элементов: гггг|мм|дд|чч|мм|сс
+	 * @param date время
+	 * @return массив чисел
+	 */
+	public static int[] splitDateTime(Date date) {
+		int[] res = new int[6];
+		String sdate = dbdtf.format(date);
+		res[0] = Integer.parseInt(sdate.substring(0, 4));
+		res[1] = Integer.parseInt(sdate.substring(5, 7));
+		res[2] = Integer.parseInt(sdate.substring(8, 10));
+		res[3] = Integer.parseInt(NumberUtil.trimLeadZero(sdate.substring(11, 13)));
+		res[4] = Integer.parseInt(sdate.substring(14, 16));
+		res[5] = Integer.parseInt(sdate.substring(17, 19));
+		return res;
+	}
+
+	/**
+	 * Разбиваем дату на массив из 6 элементов: гггг|мм|дд|чч|мм|сс
+	 * @param date время
+	 * @return массив чисел
+	 */
+	public static Date mergeDateTime(int[] arr) {
+		String sdate = arr[0] + "-";
+		int n = arr[1];
+		sdate += (n < 10 ? "0" + n : n) + "-";
+		n = arr[2];
+		sdate += (n < 10 ? "0" + n : n) + " ";
+		n = arr[3];
+		sdate += (n < 10 ? "0" + n : n) + ":";
+		n = arr[4];
+		sdate += (n < 10 ? "0" + n : n) + ":";
+		n = arr[5];
+		sdate += (n < 10 ? "0" + n : n);
+		return getDatabaseDateTime(sdate);
+	}
+
+	/**
+	 * Разбиваем дату на массив из 6 элементов: гггг|мм|дд|чч|мм|сс
+	 * @param date время
+	 * @return массив чисел
+	 */
+	public static Date zoneDateTime(Date date, double dzone) {
+		int[] arr = splitDateTime(date);
+		int zone = (int)dzone;
+
+		int y = arr[0];
+		int m = arr[1];
+		int d = arr[2];
+		int h = arr[3];
+		int min = arr[4];
+		int s = arr[5];
+
+  		if (zone < 0) {
+  			if (h >= Math.abs(zone))
+  				h += zone;
+  			else {
+  				/*
+  				 * Если час больше разности 24 часов и зоны, значит по Гринвичу будет следующий день,
+  				 * поэтому нужно увеличить указанную дату на 1 день
+  				 */
+  				h += 24 + zone;
+  				if (d > 1)
+  					--d;
+  				else {
+  					if (1 == m) {
+  						--y;
+  						m = 12;
+  						d = 31;
+  					} else if (3 == m) {
+  						m = 2;
+  						d = DateUtil.isLeapYear(y) ? 29 : 28;
+  					} else if (Arrays.asList(new Integer[] {2,4,6,8,9,11}).contains(m)) {
+  						--m;
+  						d = 31;
+  					} else if (Arrays.asList(new Integer[] {5,7,10,12}).contains(m)) {
+  						--m;
+  						d = 30;
+  					}
+  					
+  				}
+  			}
+  		} else {
+  			if (h < 24 - zone)
+  				h += zone;
+  			else {
+  				/*
+  				 * Если, прибавив зону к текущему часу, мы получим следующий день,
+  				 * увеличиваем текущую дату на 1 день
+  				 */
+  				h = h + zone - 24;
+  				int maxday = 31;
+  				if (Arrays.asList(new Integer[] {4,6,9,11}).contains(m))
+  					maxday = 30;
+  				else if (2 == m)
+  					maxday = DateUtil.isLeapYear(y) ? 29 : 28;
+
+  				if (d < maxday)
+  					++d;
+  				else {
+  					d = 1;
+  					++m;
+  					if (12 == m)
+  						++y;
+  				}
+  			}
+  		}
+  		if (h >= 24)
+  			h -= 24;
+		
+		return mergeDateTime(new int[] {y,m,d,h,min,s});
+	}
 }

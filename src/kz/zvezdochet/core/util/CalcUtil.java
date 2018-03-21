@@ -1,6 +1,9 @@
 package kz.zvezdochet.core.util;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
+
+import swisseph.SweDate;
 
 /**
  * Набор методов для вычислений
@@ -161,4 +164,102 @@ public class CalcUtil {
 		//оставляем координаты как есть
 		return new double[] {margin2, point};
 	}
+
+	/**
+	 * Расчет конфигурации гороскопа
+	 * @param args массив данных
+	 * java -jar /var/www/tablo.moe/backend/Stargazer.jar calc 2017-11-02 01:45:00 6 37.22 -5.58 zvezdochet.guru
+	 */
+  	public static double getTdjut(int iyear, int imonth, int iday, int ihour, int imin, int isec, double dlat, double dlon, double dzone) {
+		try {
+	  		//обрабатываем координаты места
+	  		if (0 == dlat && 0 == dlon)
+	  			dlat = 51.48; //по умолчанию Гринвич
+
+	  		//обрабатываем время
+	  	  	double timing = (double)ihour; //час по местному времени
+	  		if (dzone < 0) {
+	  			if (timing < (24 + dzone))
+	  				timing -= dzone;
+	  			else {
+	  				/*
+	  				 * Если час больше разности 24 часов и зоны, значит по Гринвичу будет следующий день,
+	  				 * поэтому нужно увеличить указанную дату на 1 день
+	  				 */
+	  				timing = timing - dzone - 24;
+	  				if (iday < 28)
+	  					++iday;
+	  				else if (31 == iday) {
+	  					iday = 1;  							
+	  					if (12 == imonth) {
+	  	  					++iyear;
+	  	  					imonth = 1;
+	  					} else
+	  						++imonth;
+	  				} else if (30 == iday) {
+	  					if (Arrays.asList(new Integer[] {4,6,9,11}).contains(imonth)) {
+	  						++imonth;
+	  						iday = 1;
+	  					} else
+	  						iday = 31;
+	  				} else if (2 == imonth) {
+	  					if (29 == iday) {
+	  	  					imonth = 3;
+	  	  					iday = 1;
+	  					} else if (28 == iday) {
+	  						if (DateUtil.isLeapYear(iyear))
+	  							iday = 29;
+	  						else {
+	  							imonth = 3;
+	  							iday = 1;
+	  						}
+	  					}
+	  				} else //28 и 29 числа месяцев кроме февраля
+	  					++iday;
+	  			}
+	  		} else {
+	  			if (timing >= dzone)
+	  				timing -= dzone;
+	  			else {
+	  				/*
+	  				 * Если час меньше зоны, значит по Гринвичу будет предыдущий день,
+	  				 * поэтому нужно уменьшить указанную дату на 1 день
+	  				 */
+	  				timing = timing + 24 - dzone;
+	  				if (iday > 1)
+	  					--iday;
+	  				else {
+	  					if (1 == imonth) {
+	  						--iyear;
+	  						imonth = 12;
+	  						iday = 31;
+	  					} else if (3 == imonth) {
+	  						imonth = 2;
+	  						iday = DateUtil.isLeapYear(iyear) ? 29 : 28;
+	  					} else if (Arrays.asList(new Integer[] {2,4,6,8,9,11}).contains(imonth)) {
+	  						--imonth;
+	  						iday = 31;
+	  					} else if (Arrays.asList(new Integer[] {5,7,10,12}).contains(imonth)) {
+	  						--imonth;
+	  						iday = 30;
+	  					}
+	  				}
+	  			}
+	  		}
+	  		if (timing >= 24)
+	  			timing -= 24;
+	  		ihour = (int)timing; //гринвичский час
+
+	  		//обрабатываем дату
+			double tjd, tjdut, dhour;
+	  		dhour = ihour + imin / 60.0 + isec / 3600.0;
+	  		tjd = SweDate.getJulDay(iyear, imonth, iday, dhour);
+	  		//Universal Time
+	  		tjdut = tjd;
+	  		return tjdut;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+  	}
 }
