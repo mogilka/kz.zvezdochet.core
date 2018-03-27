@@ -559,13 +559,15 @@ public class DateUtil {
 	 */
 	public static int[] splitDateTime(Date date) {
 		int[] res = new int[6];
-		String sdate = dbdtf.format(date);
-		res[0] = Integer.parseInt(sdate.substring(0, 4));
-		res[1] = Integer.parseInt(sdate.substring(5, 7));
-		res[2] = Integer.parseInt(sdate.substring(8, 10));
-		res[3] = Integer.parseInt(NumberUtil.trimLeadZero(sdate.substring(11, 13)));
-		res[4] = Integer.parseInt(sdate.substring(14, 16));
-		res[5] = Integer.parseInt(sdate.substring(17, 19));
+		if (date != null) {
+			String sdate = dbdtf.format(date);
+			res[0] = Integer.parseInt(sdate.substring(0, 4));
+			res[1] = Integer.parseInt(sdate.substring(5, 7));
+			res[2] = Integer.parseInt(sdate.substring(8, 10));
+			res[3] = Integer.parseInt(NumberUtil.trimLeadZero(sdate.substring(11, 13)));
+			res[4] = Integer.parseInt(sdate.substring(14, 16));
+			res[5] = Integer.parseInt(sdate.substring(17, 19));
+		}
 		return res;
 	}
 
