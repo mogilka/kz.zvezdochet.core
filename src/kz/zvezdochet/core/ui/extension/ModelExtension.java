@@ -103,22 +103,6 @@ public abstract class ModelExtension implements IExtension {
 	}
 
 	/**
-	 * Инициализация расширения
-	 */
-	public void initExtension() {}
-	
-	@Override
-	public abstract boolean canHandle(Object object);
-	
-	/**
-	 * Возвращает имя расширения
-	 * @return имя расширения
-	 */
-	public String getName() {
-		return "";
-	}
-
-	/**
 	 * Удаление расширения
 	 */
 	public void delete() {
@@ -133,12 +117,6 @@ public abstract class ModelExtension implements IExtension {
 //			}
 	}
 
-	/**
-	 * Возвращает сервис расширения
-	 * @return сервис расширения
-	 */
-	public abstract IModelService getService();
-	
 	/**
 	 * Композит расширения 
 	 */
@@ -181,13 +159,13 @@ public abstract class ModelExtension implements IExtension {
 		}
 	}
 
+	/**
+	 * Возвращает все модели расширения
+	 * @return массив моделей
+	 * @throws DataAccessException
+	 */
 	public List<Model> getModelList() throws DataAccessException {
 		return getService().getList();
-	}
-
-	@Override
-	public View initComposite(Composite parent) {
-		return null;
 	}
 
 	/**
@@ -202,24 +180,9 @@ public abstract class ModelExtension implements IExtension {
 		}
 		return false;
 	}
-	/**
-	 * Инициализация новой модели
-	 * @return модель
-	 */
-	public abstract Model create();
-	/**
-	 * Поиск колонок таблицы расширения
-	 * @return массив колонок таблицы
-	 */
-	public abstract String[] getTableColumns();
-	/**
-	 * Возвращает обработчик отображения данных таблицы
-	 * @return обработчик отображения таблицы
-	 */
-	public abstract IBaseLabelProvider getLabelProvider();
 
 	/**
-	 * Синхронизации модели с представлением
+	 * Синхронизация модели с представлением
 	 * @param mode режим синхронизации
 	 * @throws Exception
 	 */
@@ -231,12 +194,6 @@ public abstract class ModelExtension implements IExtension {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Возвращает путь к изображению расширения
-	 * @return путь к файлу иконки расширения
-	 */
-	public abstract String getIconURI();
 
 	/**
 	 * Очистка композита расширения

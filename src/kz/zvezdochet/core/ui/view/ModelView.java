@@ -16,6 +16,7 @@ import org.eclipse.swt.widgets.Composite;
 
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.ui.extension.IExtensionStateListener;
+import kz.zvezdochet.core.ui.extension.ModelExtension;
 import kz.zvezdochet.core.ui.listener.ISaveListener;
 
 /**
@@ -224,10 +225,14 @@ public abstract class ModelView extends View implements ISaveListener {
 		if (listView != null)
 			listView.onUpdate(model, update);
 //		deactivateUnaccessable();
+
+		if (extensions != null)
+			for (ModelExtension extension : extensions)
+				extension.save();
 	}
+
 	@Override
-	public void onCancel(Model model) {
-	}
+	public void onCancel(Model model) {}
 
 	/**
 	 * Очистка элементов управления

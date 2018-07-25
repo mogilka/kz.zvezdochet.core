@@ -77,48 +77,45 @@ public abstract class View {
 
 	/**
 	 * Инициализация расширений
-	 * @return массив расширений
 	 */
-	public List<ModelExtension> getExtensions() {
+	public void initExtensions() {
 		if (null == extensions)
-			extensions = getExtensionProviders(extPointId);
-		return extensions;
+			extensions = getExtensions(extPointId);
 	}
 
 	/**
-	 * Поиск расширений в реестра
+	 * Поиск расширений в реестре
 	 * @param extPointID идентификатор точки расширения
 	 * @return массив расширений
 	 */
-	private IConfigurationElement[] getExtensions(String extPointID) {
-		IConfigurationElement[] extensions = null;
+	private IConfigurationElement[] getConfigurationElements(String extPointID) {
+		IConfigurationElement[] elements = null;
 		IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(extPointID);
 		if (point != null)
-			extensions = Platform.getExtensionRegistry()
+			elements = Platform.getExtensionRegistry()
 				.getExtensionPoint(extPointID).getConfigurationElements();
-		return extensions;
+		return elements;
 	}
 
 	/**
-	 * Поиск провайдеров расширений
+	 * Поиск расширений
 	 * @param extPointID идентификатор точки расширения
 	 * @return список провайдеров расширений
 	 */
-	public List<ModelExtension> getExtensionProviders(String extPointID) {
-		IConfigurationElement[] extensions = getExtensions(extPointID);
-		if (extensions != null) {
-			List<ModelExtension> providers = new ArrayList<ModelExtension>();
-			for (int i = 0; i < extensions.length; i++) {
+	private List<ModelExtension> getExtensions(String extPointID) {
+		IConfigurationElement[] elements = getConfigurationElements(extPointID);
+		if (elements != null) {
+			List<ModelExtension> extensions = new ArrayList<ModelExtension>();
+			for (int i = 0; i < elements.length; i++) {
 				try {
-					IExtension provider = (IExtension)extensions[i].
-							createExecutableExtension("class"); //$NON-NLS-1$
-					providers.add((ModelExtension)provider);
+					IExtension provider = (IExtension)elements[i].createExecutableExtension("class"); //$NON-NLS-1$
+					extensions.add((ModelExtension)provider);
 					//System.out.println("extensions.getClass()\t" + provider.getClass());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-			return providers;
+			return extensions;
 		}
 		return null;
 	}

@@ -26,24 +26,19 @@ public abstract class TextGenderDictionaryService extends DictionaryService {
 			String sql;
 			if (null == model.getId()) 
 				sql = "insert into " + tableName + 
-					"(text, genderid, code, name, description) values(?,?,?,?,?)";
+					"(text, code, name, description) values(?,?,?,?)";
 			else
 				sql = "update " + tableName + " set " +
 					"text = ?, " +
-					"genderid = ?, " +
 					"code = ?, " +
 					"name = ?, " +
 					"description = ? " +
 					"where id = " + dict.getId();
 			ps = Connector.getInstance().getConnection().prepareStatement(sql);
 			ps.setString(1, dict.getText());
-//			if (dict.getGenderTexts() != null)
-//				ps.setLong(2, dict.getGenderTexts().getId());
-//			else
-//				ps.setLong(2, java.sql.Types.NULL);
-			ps.setString(3, dict.getCode());
-			ps.setString(4, dict.getName());
-			ps.setString(5, dict.getDescription());
+			ps.setString(2, dict.getCode());
+			ps.setString(3, dict.getName());
+			ps.setString(4, dict.getDescription());
 			result = ps.executeUpdate();
 			if (result == 1) {
 				if (null == model.getId()) { 
@@ -82,9 +77,4 @@ public abstract class TextGenderDictionaryService extends DictionaryService {
 //		}
 		return type;
 	}
-//
-//	@Override
-//	public Model create() {
-//		return new TextGenderDictionary();
-//	}
 }
