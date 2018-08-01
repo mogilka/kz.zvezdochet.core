@@ -72,6 +72,7 @@ public class Connector {
 	/**
 	 * Инициализация соединения с БД
 	 * @todo вынести в конфиг
+	 * db.url=jdbc:mysql://localhost:3306/db_name?useUnicode=true&character_set_server=utf8mb4
 	 */
 	private static void setLocalConnection() {
 		try {
@@ -79,12 +80,12 @@ public class Connector {
 	    	String userpass = "dolphin";
 	    	String dburl = "jdbc:mysql://localhost:3306/stargazer";
 	    	String driverClassName = "com.mysql.jdbc.Driver";
-	    	String characterEncoding = "utf8";
+	    	String characterEncoding = "utf8mb4";
 	    	String useUnicode = "true";
 			Properties properties = new Properties();
 			properties.put("user", username);
 			properties.put("password", userpass);
-			properties.put("characterEncoding", characterEncoding);
+			properties.put("character_set_server", characterEncoding);
 			properties.put("useUnicode", useUnicode);
 			Class.forName(driverClassName);
 			connection = (Connection)DriverManager.getConnection(dburl, properties);
