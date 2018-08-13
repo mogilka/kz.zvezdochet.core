@@ -209,17 +209,6 @@ public class StringUtil {
     }
 
     /**
-     * Удаляет из html-текста все теги
-     * @param html HTML-текст
-     * @return строка без тегов
-     */
-    public static String removeTags(String html) {
-    	if (null == html)
-    		return null;
-    	return html.replaceAll("\\<.*?>", "");
-	}
-
-    /**
      * Проверка наличия значения в строке
      * @param s строка
      * @return true|false пуста|инициализирована
