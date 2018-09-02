@@ -18,8 +18,6 @@ public abstract class TextGenderDictionaryService extends DictionaryService {
 	@Override
 	public Model save(Model model) throws DataAccessException {
 		TextGenderDictionary dict = (TextGenderDictionary)model;
-		//TODO реализовать сохранение гендерных значений перед сохранением модели
-		//dict.setGenderText((TextGender)new TextGenderService().save(dict.getGenderTexts()));
 		int result = -1;
         PreparedStatement ps = null;
 		try {
