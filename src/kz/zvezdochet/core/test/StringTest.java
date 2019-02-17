@@ -2,6 +2,8 @@ package kz.zvezdochet.core.test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Разбиение длинного текста на порции
@@ -32,14 +34,33 @@ public class StringTest {
 			"\n" + 
 			"<p>Вы стремитесь быть понятым и любимым, а также понимать и любить других, но последнего достигнете только в случае объективного подхода к окружающим, – без этого не добиться счастья и успеха. Меньше циклитесь на своих эмоциях, пробудите в себе сострадание, проявите искренний интерес к людям, добейтесь их понимания, действуя так, чтобы они отнеслись к вам с одобрением. Направьте свою интуицию на моральную помощь нуждающимся, на творческую работу в бизнесе, науке и искусстве. Стремление пользоваться всеми возможностями мира, преображаться, доказывать и проявлять любовь заменит вашу глубинную склонность довольствоваться тем, что есть. Повернитесь к миру лицом, и перед вами откроются все двери. Но этого не произойдёт, если ваш взгляд будет по-прежнему обращён внутрь себя.</p>";
 
-		List<String> parts = new ArrayList<>();
-		int LIMIT = 2000;
-		int total = text.length();
-		int steps = total / LIMIT + 1;
-		for (int i = 0; i < steps; i++) {
-			int pos = text.indexOf("</p>", LIMIT * (i + 1));
-			parts.add(text.substring(LIMIT * i, pos + 3));
+		Matcher m = Pattern.compile("(?=(</p>))").matcher(text);
+		List<Integer> pos = new ArrayList<Integer>();
+		while (m.find()) 
+		    pos.add(m.start());
+		System.out.println(pos); //[410, 997, 1506, 2427, 3187, 3318, 3698, 4483]
+
+		int LIMIT = 2300;
+		List<Integer> pos2 = new ArrayList<Integer>();
+		for (int i = 0; i < pos.size(); i++) {
+			int p = pos.get(i);
+			int l = pos2.isEmpty() ? LIMIT : LIMIT + pos2.get(pos2.size() - 1);
+			if (p >= l)
+				if (i > 0)
+					pos2.add(pos.get(i - 1));
 		}
-		System.out.println(steps);
+		pos2.add(text.length());
+		System.out.println(pos2); //[1506, 3698]
+
+		List<String> parts = new ArrayList<String>();
+		int steps = pos2.size();
+		for (int i = 0; i < steps; i++) {
+			int beginIndex = (0 == i) ? 0 : pos2.get(i - 1) + 4;
+			int endIndex = pos2.get(i) + 4;
+			parts.add(i == steps - 1
+				? text.substring(beginIndex)
+				: text.substring(beginIndex, endIndex));
+		}
+		System.out.println(parts);
 	}
 }
