@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Прототип справочника, содержащего гендерные толкования
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public interface ITextGender {

@@ -12,7 +12,7 @@ import kz.zvezdochet.core.tool.Connector;
 
 /**
  * Сервис толкований для гендерных и возрастных групп
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public class TextGenderService extends ModelService implements IDictionaryService {
 

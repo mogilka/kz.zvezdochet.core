@@ -4,13 +4,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.tool.Connector;
+import kz.zvezdochet.core.util.DateUtil;
 
 /**
  * Сервис управления моделями на уровне БД
+ * @author Natalie Didenko
  */
 public abstract class ModelService implements IModelService {
 	/**
@@ -171,4 +174,27 @@ public abstract class ModelService implements IModelService {
 		}
 		return result;
 	}	
+
+	@Override
+	public Date getLastModified() {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+		try {
+			String sql = "select max(date) from " + tableName;
+			ps = Connector.getInstance().getConnection().prepareStatement(sql);
+			rs = ps.executeQuery();
+			if (rs.next())
+				return DateUtil.dbdtf.parse(rs.getString(0));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { 
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+			} catch (SQLException e) { 
+				e.printStackTrace(); 
+			}
+		}
+		return null;
+	}
 }

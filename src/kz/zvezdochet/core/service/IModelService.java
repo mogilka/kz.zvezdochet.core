@@ -2,6 +2,7 @@ package kz.zvezdochet.core.service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import kz.zvezdochet.core.bean.Model;
@@ -9,7 +10,7 @@ import kz.zvezdochet.core.bean.Model;
 
 /**
  * Общий интерфейс сервиса по управлению сущностями предметной области в БД
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public interface IModelService {
 	/**
@@ -64,4 +65,9 @@ public interface IModelService {
 	 * @return результат выполнения операции
 	 */
 	public int update(Long id, List<Object> params) throws DataAccessException;
+	/**
+	 * Поиск даты последнего изменения
+	 * @return дата
+	 */
+	public Date getLastModified();
 }

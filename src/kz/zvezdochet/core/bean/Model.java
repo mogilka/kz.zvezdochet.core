@@ -6,7 +6,7 @@ import kz.zvezdochet.core.service.ModelService;
 
 /**
  * Прототип объекта предметной области
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class Model implements Serializable {
 	private static final long serialVersionUID = 1419179855113656076L;
@@ -61,4 +61,17 @@ public abstract class Model implements Serializable {
 	 * @param mode параметр для выполнения условия инициализации
 	 */
 	public abstract void init(boolean mode);
+
+	/**
+	 * Признак импортируемой модели
+	 */
+	protected boolean importable = false;
+
+	public boolean isImportable() {
+		return importable;
+	}
+
+	public void setImportable(boolean importable) {
+		this.importable = importable;
+	}
 }
