@@ -108,10 +108,13 @@ public abstract class ListView extends View implements IFilterable {
 	protected void initTable() {
 		try {
 			showBusy(true);
-			if (data != null)
+			if (null == data)
+				table.removeAll();
+			else {
 				tableViewer.setInput(data);
-			for (int i = 0; i < table.getColumnCount(); i++)
-				table.getColumn(i).pack();
+				for (int i = 0; i < table.getColumnCount(); i++)
+					table.getColumn(i).pack();
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

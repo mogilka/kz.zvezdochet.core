@@ -11,8 +11,8 @@ import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.tool.Connector;
 
 /**
- * Прототип сервиса модификации справочника
- * @author Nataly Didenko
+ * Прототип сервиса справочника
+ * @author Natalie Didenko
  */
 public abstract class DictionaryService extends ModelService implements IDictionaryService {
 
