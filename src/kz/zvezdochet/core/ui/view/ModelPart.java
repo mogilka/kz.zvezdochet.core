@@ -24,6 +24,7 @@ public abstract class ModelPart extends ModelView {
 	public void setModel(Model model, boolean sync) {
 		super.setModel(model, sync);
 		deactivateUnaccessable();
+		part.setDirty(false);
 	}
 	
 	/**
