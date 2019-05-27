@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Shell;
 /**
  * Класс обеспечивающий централизованное хранение
  * параметров, общедоступных для всех компонентов системы
- * @author Nataly Didenko
+ * @author Natalie Didenko
  * TODO сделать всё через мэсиджи в core
  */
 public class GUIutil {

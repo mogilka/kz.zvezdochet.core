@@ -4,7 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kz.zvezdochet.core.bean.Dictionary;
 import kz.zvezdochet.core.bean.Model;
@@ -129,4 +131,33 @@ public abstract class DictionaryService extends ModelService implements IDiction
 //	public Model create() {
 //		return new Dictionary();
 //	}
+
+	@Override
+	public Map<Long, Model> getMap() throws DataAccessException {
+		if (null == map) {
+			map = new HashMap<>();
+	        PreparedStatement ps = null;
+	        ResultSet rs = null;
+			String sql;
+			try {
+				sql = "select * from " + tableName + " order by name";
+				ps = Connector.getInstance().getConnection().prepareStatement(sql);
+				rs = ps.executeQuery();
+				while (rs.next()) {
+					Model type = init(rs, create());
+					map.put(type.getId(), type);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try { 
+					if (rs != null) rs.close();
+					if (ps != null) ps.close();
+				} catch (SQLException e) { 
+					e.printStackTrace(); 
+				}
+			}
+		}
+		return map;
+	}
 }

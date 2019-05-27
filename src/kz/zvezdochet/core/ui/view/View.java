@@ -14,7 +14,7 @@ import kz.zvezdochet.core.ui.extension.ModelExtension;
 
 /**
  * Прототип представления
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class View {
 

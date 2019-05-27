@@ -7,7 +7,7 @@ import kz.zvezdochet.core.service.TextGenderService;
 
 /**
  * Прототип модели с гендерным толкованием
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class TextGenderModel extends Model implements ITextGender {
 	private static final long serialVersionUID = -2466065854923291059L;

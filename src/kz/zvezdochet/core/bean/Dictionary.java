@@ -4,7 +4,7 @@ package kz.zvezdochet.core.bean;
 /**
  * Прототип текстового справочника,
  * структура которого имеет вид "идентификатор:код:значение:описание"
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class Dictionary extends Model {
 	private static final long serialVersionUID = 211870081291580287L;

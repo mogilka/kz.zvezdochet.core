@@ -4,7 +4,7 @@ import kz.zvezdochet.core.bean.Model;
 
 /**
  * Интерфейс управления моделями справочника
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public interface IDictionaryService {
 	/**

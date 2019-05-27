@@ -2,7 +2,7 @@ package kz.zvezdochet.core.ui.extension;
 
 /**
  * Интерфейс обработки изменений состояния элемента расширения
- * @author Nataly
+ * @author Natalie Didenko
  */
 public interface IExtensionStateListener {
 	/**

@@ -21,7 +21,7 @@ import kz.zvezdochet.core.ui.listener.ISaveListener;
 
 /**
  * Прототип представления модели
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class ModelView extends View implements ISaveListener {
 	/**
@@ -92,6 +92,7 @@ public abstract class ModelView extends View implements ISaveListener {
 	public void setModel(Model model, boolean sync) {		
 		if (null == model) return;
 		if (sync) {
+			model.init(true); //TODO процесс м.б. долгий сделать прогресс
 			this.model = model;
 			syncView();
 		} else if (this.model != null && model.getId() != null)

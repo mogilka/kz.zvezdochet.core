@@ -16,7 +16,7 @@ import kz.zvezdochet.core.ui.view.ModelListView;
 
 /**
  * Обработчик удаления модели из списка
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class ModelDeleteHandler extends Handler {

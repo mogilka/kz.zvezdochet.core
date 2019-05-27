@@ -4,7 +4,7 @@ import kz.zvezdochet.core.bean.Model;
 
 /**
  * Интерфейс обратной связи действия сохранения с представлением
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public interface ISaveListener {
 	/**

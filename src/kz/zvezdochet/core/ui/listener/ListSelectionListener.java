@@ -7,7 +7,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 
 /**
  * Обработчик выделения элементов списка
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class ListSelectionListener implements ISelectionChangedListener, 

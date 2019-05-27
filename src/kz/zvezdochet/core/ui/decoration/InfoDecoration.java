@@ -9,7 +9,7 @@ import kz.zvezdochet.core.ui.util.GUIutil;
 
 /**
  * Декоратор поля ввода с информационным сообщением
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class InfoDecoration extends ControlDecoration {

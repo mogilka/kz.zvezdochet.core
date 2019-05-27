@@ -9,7 +9,7 @@ import org.eclipse.swt.graphics.Image;
 /**
  * Обработчик отображения содержимого таблицы
  * 
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public class ArrayLabelProvider extends LabelProvider implements
 		ITableLabelProvider, ITableColorProvider {

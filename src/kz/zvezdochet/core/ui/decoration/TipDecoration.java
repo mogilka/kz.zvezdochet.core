@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Control;
 
 /**
  * Декоратор поля ввода с рекомендательным сообщением
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class TipDecoration extends ControlDecoration {

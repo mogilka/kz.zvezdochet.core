@@ -2,7 +2,7 @@ package kz.zvezdochet.core.handler;
 
 /**
  * Прототип визуального действия
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class Handler {
 	/**

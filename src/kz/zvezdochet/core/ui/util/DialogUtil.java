@@ -11,7 +11,7 @@ import kz.zvezdochet.core.util.PlatformUtil;
 
 /**
  * Обработчик пользовательских сообщений
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class DialogUtil {

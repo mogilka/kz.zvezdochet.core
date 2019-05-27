@@ -18,7 +18,7 @@ import org.eclipse.swt.events.SelectionListener;
 
 /**
  * Обработчик визуальных событий
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class StateChangedListener implements ModifyListener, ISelectionChangedListener, 

@@ -5,7 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.tool.Connector;
@@ -69,7 +71,7 @@ public abstract class ModelService implements IModelService {
 	}
 
 	/**
-	 * Кэшированный список часто используемых объектов сущности
+	 * Кэшированный список всех объектов модели
 	 */
 	protected List<Model> list = null;
 
@@ -197,4 +199,41 @@ public abstract class ModelService implements IModelService {
 		}
 		return null;
 	}
+
+	/**
+	 * Возвращает данные справочника в виде карты
+	 * @return массив данных с ключом в виде идентификатора
+	 */
+	public Map<Long, Model> getMap() throws DataAccessException {
+		if (null == map) {
+			map = new HashMap<>();
+	        PreparedStatement ps = null;
+	        ResultSet rs = null;
+			String sql;
+			try {
+				sql = "select * from " + tableName + " order by id";
+				ps = Connector.getInstance().getConnection().prepareStatement(sql);
+				rs = ps.executeQuery();
+				while (rs.next()) {
+					Model type = init(rs, create());
+					map.put(type.getId(), type);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try { 
+					if (rs != null) rs.close();
+					if (ps != null) ps.close();
+				} catch (SQLException e) { 
+					e.printStackTrace(); 
+				}
+			}
+		}
+		return map;
+	}
+
+	/**
+	 * Кэшированная карта всех объектов модели
+	 */
+	protected Map<Long, Model> map = null;
 }

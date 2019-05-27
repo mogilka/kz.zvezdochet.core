@@ -12,7 +12,7 @@ import kz.zvezdochet.core.ui.view.ModelView;
 
 /**
  * Прототип расширения модели
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class ModelExtension implements IExtension {
 	/**

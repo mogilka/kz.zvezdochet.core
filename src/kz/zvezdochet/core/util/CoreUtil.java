@@ -10,7 +10,7 @@ import kz.zvezdochet.core.bean.Model;
 
 /**
  * Методы и константы общего назначения
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public class CoreUtil {
 

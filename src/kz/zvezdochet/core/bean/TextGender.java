@@ -8,7 +8,7 @@ import kz.zvezdochet.core.service.TextGenderService;
  * 	- мужчины
  * 	- женщины
  * 	- дети
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public class TextGender extends Model {
 	private static final long serialVersionUID = 7663798183215999740L;

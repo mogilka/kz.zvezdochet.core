@@ -11,7 +11,7 @@ import kz.zvezdochet.core.tool.Connector;
 
 /**
  * Прототип сервиса гендерного справочника
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class TextGenderDictionaryService extends DictionaryService {
 

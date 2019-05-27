@@ -9,7 +9,7 @@ import kz.zvezdochet.core.ui.util.GUIutil;
 
 /**
  * Декоратор поля ввода, обязательного для заполнения
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class RequiredDecoration extends ControlDecoration {

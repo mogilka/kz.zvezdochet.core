@@ -10,7 +10,7 @@ import kz.zvezdochet.core.ui.view.View;
 
 /**
  * Прототип интерфейса расширений
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public interface IExtension {

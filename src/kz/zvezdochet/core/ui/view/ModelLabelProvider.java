@@ -8,7 +8,7 @@ import kz.zvezdochet.core.ui.ArrayLabelProvider;
 
 /**
  * Обработчик отображения модели в таблице
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public class ModelLabelProvider extends ArrayLabelProvider implements ITableLabelProvider {
 	@Override

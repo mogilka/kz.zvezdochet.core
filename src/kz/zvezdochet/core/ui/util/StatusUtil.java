@@ -7,7 +7,7 @@ import org.eclipse.ui.IActionBars;
 
 /**
  * Обработчик строки состояния
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class StatusUtil {

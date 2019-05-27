@@ -4,7 +4,7 @@ import org.eclipse.swt.graphics.Color;
 
 /**
  * Прототип диаграммного объекта
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class DiagramObject extends Dictionary implements IColorizedObject, IDiagramObject {
 	private static final long serialVersionUID = 3257825153209037032L;

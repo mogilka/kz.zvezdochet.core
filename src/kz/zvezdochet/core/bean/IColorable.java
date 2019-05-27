@@ -4,7 +4,7 @@ import org.eclipse.swt.graphics.Color;
 
 /**
  * Интерфейс объекта, имеющего цвет
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public interface IColorable {

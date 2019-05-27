@@ -7,7 +7,7 @@ import kz.zvezdochet.core.service.TextGenderService;
 
 /**
  * Прототип справочника гендерных значений
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class TextGenderDictionary extends Dictionary implements ITextGender {
 	private static final long serialVersionUID = 6051185469564751147L;

@@ -18,7 +18,7 @@ import kz.zvezdochet.core.ui.view.ModelView;
 
 /**
  * Обработчик открытия модели из списка в редакторе
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class ModelOpenHandler extends Handler {
@@ -59,7 +59,6 @@ public class ModelOpenHandler extends Handler {
 	 * Отображение модели в представлении
 	 * @param part представление
 	 * @param model модель
-	 * @return представление модели
 	 */
 	protected void openPart(MPart part, Model model) {
 	    part.setVisible(true);
@@ -70,7 +69,6 @@ public class ModelOpenHandler extends Handler {
 			e.printStackTrace();
 		}
 		if (model != null) {
-			model.init(false);
 			ModelView view = (ModelView)part.getObject();
 			view.setListView(listpart);
 			view.setModel(model, true);

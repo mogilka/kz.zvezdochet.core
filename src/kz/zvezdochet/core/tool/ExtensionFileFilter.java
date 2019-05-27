@@ -5,7 +5,7 @@ import java.io.FilenameFilter;
 
 /**
  * Фильтр файлов по расширению
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class ExtensionFileFilter implements FilenameFilter {

@@ -12,7 +12,7 @@ import org.osgi.framework.Bundle;
 
 /**
  * Утилита для работы с объектами рабочей среды
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class PlatformUtil { 

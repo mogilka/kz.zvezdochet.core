@@ -3,7 +3,7 @@ package kz.zvezdochet.core.ui.extension;
 /**
  * Интерфейс расширяемого представления,
  * в которое встраиваются дополнительные композиты
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public interface IExtendableView {

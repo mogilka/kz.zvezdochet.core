@@ -7,7 +7,7 @@ import swisseph.SweDate;
 
 /**
  * Набор методов для вычислений
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class CalcUtil {

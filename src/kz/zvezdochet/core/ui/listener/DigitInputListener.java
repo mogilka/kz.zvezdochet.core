@@ -5,7 +5,7 @@ import org.eclipse.swt.widgets.Listener;
 
 /**
  * Обработчик ввода числовых данных
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class DigitInputListener implements Listener {

@@ -7,7 +7,7 @@ import java.util.Properties;
 
 /**
  * Класс, обеспечивающий соединение с БД SQLite
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class Connector {

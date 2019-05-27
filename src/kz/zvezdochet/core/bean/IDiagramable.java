@@ -2,7 +2,7 @@ package kz.zvezdochet.core.bean;
 
 /**
  * Интерфейс объекта, отображаемого в диаграмме
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public interface IDiagramable {

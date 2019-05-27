@@ -11,7 +11,7 @@ import kz.zvezdochet.core.ui.view.ModelListView;
 
 /**
  * Обработчик добавления новой модели в список и открытия её в редакторе
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class ModelAddHandler extends ModelOpenHandler {

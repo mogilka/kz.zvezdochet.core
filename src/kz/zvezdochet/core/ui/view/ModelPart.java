@@ -10,7 +10,7 @@ import kz.zvezdochet.core.ui.listener.IModelListListener;
 
 /**
  * Прототип редактора модели
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class ModelPart extends ModelView {
 	

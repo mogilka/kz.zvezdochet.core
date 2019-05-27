@@ -9,7 +9,7 @@ import kz.zvezdochet.core.ui.util.GUIutil;
 
 /**
  * Декоратор поля ввода с автозаполнением
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class ContentProposalDecoration extends ControlDecoration {

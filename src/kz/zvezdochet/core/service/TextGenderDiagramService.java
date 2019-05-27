@@ -13,7 +13,7 @@ import kz.zvezdochet.core.util.CoreUtil;
 
 /**
  * Прототип сервиса диаграммных объектов
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class TextGenderDiagramService extends TextGenderDictionaryService {
 

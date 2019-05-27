@@ -6,7 +6,7 @@ import kz.zvezdochet.core.bean.Dictionary;
 
 /**
  * Обработчик отображения значений справочника
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class DictionaryLabelProvider extends LabelProvider { 

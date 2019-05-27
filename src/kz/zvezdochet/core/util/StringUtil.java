@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 /**
  * Утилита для работы со строками
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public class StringUtil {
 	

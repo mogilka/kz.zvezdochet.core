@@ -19,7 +19,7 @@ import kz.zvezdochet.core.ui.listener.ListSelectionListener;
 
 /**
  * Прототип табличного представления данных
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class ListView extends View implements IFilterable {
 	

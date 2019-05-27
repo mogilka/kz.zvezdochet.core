@@ -11,7 +11,7 @@ import kz.zvezdochet.core.ui.view.ModelView;
 
 /**
  * Обработчик сохранения модели
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public class ModelSaveHandler extends Handler {

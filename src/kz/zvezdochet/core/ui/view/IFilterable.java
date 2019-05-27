@@ -4,7 +4,7 @@ import org.eclipse.swt.widgets.Composite;
 
 /**
  * Интерфейс представления, имеющего фильтр объектов
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public abstract interface IFilterable {

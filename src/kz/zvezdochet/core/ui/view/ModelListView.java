@@ -19,7 +19,7 @@ import kz.zvezdochet.core.ui.listener.IModelListListener;
 
 /**
  * Прототип табличного представления моделей
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class ModelListView extends ListView {
 

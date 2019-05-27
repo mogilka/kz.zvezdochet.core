@@ -15,7 +15,7 @@ import jodd.datetime.JulianDateStamp;
 
 /**
  * Утилита для работы с датами
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public class DateUtil {
 	

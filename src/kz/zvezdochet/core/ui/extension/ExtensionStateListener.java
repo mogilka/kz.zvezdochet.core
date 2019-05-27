@@ -4,7 +4,7 @@ import kz.zvezdochet.core.ui.view.ModelView;
 
 /**
  * Обработчик изменения расширения объекта
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public class ExtensionStateListener implements IExtensionStateListener {
 	/**

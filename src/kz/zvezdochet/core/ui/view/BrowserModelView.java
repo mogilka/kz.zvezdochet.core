@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Composite;
 
 /**
  * Прототип представления браузера для отображения в нем элемента
- * @author Nataly Didenko
+ * @author Natalie Didenko
  *
  */
 public abstract class BrowserModelView extends ModelView {

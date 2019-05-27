@@ -5,7 +5,7 @@ import org.eclipse.swt.widgets.Control;
 
 /**
  * Вспомогательный класс для формирования визуальных вкладок
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public class Tab {
 	public String name;

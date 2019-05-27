@@ -10,7 +10,7 @@ import kz.zvezdochet.core.service.DataAccessException;
 
 /**
  * Прототип композита, встраиваемого в редактор модели
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public abstract class ModelComposite extends ModelView {
 	protected Group group;

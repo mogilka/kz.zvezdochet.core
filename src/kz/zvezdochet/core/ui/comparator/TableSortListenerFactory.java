@@ -21,7 +21,7 @@ import kz.zvezdochet.core.util.DateUtil;
 
 /**
  * Сортировщик столбцов таблицы
- * @author Nataly
+ * @author Natalie Didenko
  */
 public class TableSortListenerFactory implements Listener {
 	@SuppressWarnings("rawtypes")

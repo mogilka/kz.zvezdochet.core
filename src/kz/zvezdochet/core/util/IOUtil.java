@@ -24,7 +24,7 @@ import kz.zvezdochet.core.tool.ExtensionFileFilter;
 
 /**
  * Утилита для работы с файлами и потоками
- * @author Nataly Didenko
+ * @author Natalie Didenko
  */
 public class IOUtil {
 
