@@ -57,7 +57,7 @@ public abstract class ModelListView extends ListView {
 	 * @param comparatorType вид сортировки столбца, определяемый содержащимися в нем данными
 	 */
 	protected void addColumn(int width, String title, int comparatorType) {
-		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
+		TableColumn tableColumn = new TableColumn(tableViewer.getTable(), SWT.NONE);
 		tableColumn.setWidth(width);
 		tableColumn.setText(title);		
 		tableColumn.addListener(
