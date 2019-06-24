@@ -129,11 +129,14 @@ public class CalcUtil {
 	 * @param age угол, который нужно отложить от начальной точки
 	 * @return конечная координата точки на окружности с учётом начала отсчёта (нулевого градуса)
 	 */
-	public static double getAgedCoord(double coord, double age) {
-		coord += age;
-		if (coord > 360)
-			coord -= 360;
-		return coord;
+	public static double incrementCoord(double coord, double age, boolean increment) {
+		double res;
+		if (increment) {
+			double val = coord + age;
+			res = (val > 360) ? val - 360 : val;
+		} else
+			res = (coord > age) ? res = coord - age : coord + 360 - age;
+		return res;
 	}
 
 	/**
