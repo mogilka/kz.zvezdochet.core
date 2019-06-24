@@ -7,8 +7,10 @@ import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
@@ -35,17 +37,22 @@ public abstract class ListView extends View implements IFilterable {
 	/**
 	 * Таблица елементов
 	 */
-	protected Table table;
 	protected TableViewer tableViewer;
+	protected SashForm sashForm;
+	protected Group group;
 	
 	@Override
 	public View create(Composite parent) {
 		container = new Composite(parent, SWT.NONE);
-		container.setLayout(new FormLayout());
+		container.setLayout(new FillLayout());
 		initFilter(parent);
 
-		tableViewer = new TableViewer(container, SWT.BORDER | SWT.FULL_SELECTION);
-		table = tableViewer.getTable();
+		sashForm = new SashForm(container, SWT.HORIZONTAL);
+		tableViewer = new TableViewer(sashForm, SWT.BORDER | SWT.FULL_SELECTION);
+		group = new Group(sashForm, SWT.NONE); 
+		sashForm.setWeights(new int[] { 5, 1 });
+
+		Table table = tableViewer.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		addColumns();
@@ -63,6 +70,7 @@ public abstract class ListView extends View implements IFilterable {
 		tableViewer.addSelectionChangedListener(listener);
 		tableViewer.addDoubleClickListener(listener);
 		initTable();
+		initGroup();
 		return null;
 	}
 
@@ -74,7 +82,7 @@ public abstract class ListView extends View implements IFilterable {
 		String[] columns = initTableColumns();
 		if (columns != null)
 			for (String column : columns) {
-				TableColumn tableColumn = new TableColumn(table, SWT.NONE);
+				TableColumn tableColumn = new TableColumn(tableViewer.getTable(), SWT.NONE);
 				tableColumn.setText(column);		
 				tableColumn.addListener(SWT.Selection, TableSortListenerFactory.getListener(
 					TableSortListenerFactory.STRING_COMPARATOR));
@@ -108,6 +116,7 @@ public abstract class ListView extends View implements IFilterable {
 	protected void initTable() {
 		try {
 			showBusy(true);
+			Table table = tableViewer.getTable();
 			if (null == data)
 				table.removeAll();
 			else {
@@ -151,7 +160,9 @@ public abstract class ListView extends View implements IFilterable {
 		GridLayoutFactory.swtDefaults().applyTo(parent);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(container);
 		GridLayoutFactory.swtDefaults().applyTo(container);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(table);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(sashForm);
+		GridLayoutFactory.swtDefaults().applyTo(sashForm);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(tableViewer.getTable());
 	}
 
 	/**
@@ -173,7 +184,7 @@ public abstract class ListView extends View implements IFilterable {
 	 * Очистка таблицы
 	 */
 	public void reset() {
-		table.removeAll();
+		tableViewer.getTable().removeAll();
 	}
 
 	public ColumnViewer getColumnViewer() {
@@ -209,7 +220,7 @@ public abstract class ListView extends View implements IFilterable {
 	 * Удаление столбцов таблицы
 	 */
 	protected void removeColumns() {
-		for (TableColumn column : table.getColumns())
+		for (TableColumn column : tableViewer.getTable().getColumns())
 			column.dispose();
 	}
 
@@ -228,4 +239,9 @@ public abstract class ListView extends View implements IFilterable {
 	public Object getData() {
 		return data;
 	}
+
+	/**
+	 * Инициализация контейнера справа от таблицы
+	 */
+	protected void initGroup() {}
 }
