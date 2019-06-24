@@ -236,4 +236,28 @@ public class CalcUtil {
 		}
 		return 0;
   	}
+
+	/**
+	 * Сравнение значений координат двух точек
+	 * @param one координата первой точки
+	 * @param two координата второй точки
+	 * @param diff угол между точками
+	 * @return true - первая точка больше или равна второй
+	 */
+	public static boolean compareAngles(double one, double two, double diff) {
+		int compared = Double.compare(one, two);
+		if (0 == compared)
+			return true;
+
+		if (compared > 0) {
+			if (diff < 1)
+				return false;
+
+			if (diff >= 180)
+				return false;
+			else
+				return true;
+		}
+		return false;
+	}
 }
