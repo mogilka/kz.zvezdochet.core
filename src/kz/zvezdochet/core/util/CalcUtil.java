@@ -257,6 +257,10 @@ public class CalcUtil {
 				return false;
 			else
 				return true;
+		} else {
+			double res = two - one;
+			if (res >= 189)
+				return true;
 		}
 		return false;
 	}
