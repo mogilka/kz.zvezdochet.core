@@ -46,9 +46,9 @@ public abstract class ModelPart extends ModelView {
 	 * Управление доступом к функциям модификации данных
 	 */
 	protected void deactivateUnaccessable() {
-		boolean changed = (model != null) 
-			&& part.isDirty() 
-			&& isEditable();
+//		boolean changed = (model != null) 
+//			&& part.isDirty() 
+//			&& isEditable();
 //		if (applyAction != null)
 //			applyAction.setEnabled(changed);
 	}

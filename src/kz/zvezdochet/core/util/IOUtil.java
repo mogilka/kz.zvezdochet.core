@@ -154,6 +154,7 @@ public class IOUtil {
 	 * @param out целевой файл
 	 * @throws IOException
 	 */
+	@SuppressWarnings("resource")
 	public static void copyFile(File in, File out) throws IOException {
 		FileChannel inChannel = new FileInputStream(in).getChannel();
 		FileChannel outChannel = new FileOutputStream(out).getChannel();

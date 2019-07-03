@@ -57,6 +57,7 @@ public class Connector {
 	 * Инициализация соединения с БД
 	 * @todo вынести в конфиг + назначить местонахождение БД
 	 */
+	@SuppressWarnings("unused")
 	private static void setLocalConnection2() {
 		try {
 			Class.forName("org.sqlite.JDBC");
