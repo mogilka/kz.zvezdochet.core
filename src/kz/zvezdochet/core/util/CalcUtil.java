@@ -241,19 +241,19 @@ public class CalcUtil {
 	 * Сравнение значений координат двух точек
 	 * @param one координата первой точки
 	 * @param two координата второй точки
-	 * @param diff угол между точками
 	 * @return true - первая точка больше или равна второй
 	 */
-	public static boolean compareAngles(double one, double two, double diff) {
+	public static boolean compareAngles(double one, double two) {
 		int compared = Double.compare(one, two);
 		if (0 == compared)
 			return true;
 
 		if (compared > 0) {
+			double diff = Math.abs(one - two);
 			if (diff < 1)
 				return false;
 
-			if (diff >= 180)
+			if (diff >= 179)
 				return false;
 			else
 				return true;
