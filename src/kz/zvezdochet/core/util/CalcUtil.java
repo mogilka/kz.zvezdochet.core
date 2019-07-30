@@ -127,6 +127,7 @@ public class CalcUtil {
 	 * Определение координаты точки окружности при отложении от неё заданного отрезка
 	 * @param coord начальная координата точки (положительное число)
 	 * @param age угол, который нужно отложить от начальной точки
+	 * @param increment true|false увеличиваем|уменьшаем значение
 	 * @return конечная координата точки на окружности с учётом начала отсчёта (нулевого градуса)
 	 */
 	public static double incrementCoord(double coord, double age, boolean increment) {
