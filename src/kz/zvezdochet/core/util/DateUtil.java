@@ -317,32 +317,19 @@ public class DateUtil {
 	/**Возвращает название месяца по его номеру (1 - Январь, ...)*/
 	public static String getMonthName(int month) {
 		switch (month) {
-		case 1:
-			return Messages.getString("DateUtil.JUN"); //$NON-NLS-1$
-		case 2:
-			return Messages.getString("DateUtil.FEB"); //$NON-NLS-1$
-		case 3:
-			return Messages.getString("DateUtil.MAR"); //$NON-NLS-1$
-		case 4:
-			return Messages.getString("DateUtil.APR"); //$NON-NLS-1$
-		case 5:
-			return Messages.getString("DateUtil.MAY"); //$NON-NLS-1$
-		case 6:
-			return Messages.getString("DateUtil.JUNE"); //$NON-NLS-1$
-		case 7:
-			return Messages.getString("DateUtil.JUL"); //$NON-NLS-1$
-		case 8:
-			return Messages.getString("DateUtil.AVG"); //$NON-NLS-1$
-		case 9:
-			return Messages.getString("DateUtil.SEP"); //$NON-NLS-1$
-		case 10:
-			return Messages.getString("DateUtil.OCT"); //$NON-NLS-1$
-		case 11:
-			return Messages.getString("DateUtil.NOV"); //$NON-NLS-1$
-		case 12:
-			return Messages.getString("DateUtil.DEC"); //$NON-NLS-1$
-		default:
-			return null;
+			case 1: return "Январь";
+			case 2: return "Февраль";
+			case 3: return "Март";
+			case 4: return "Апрель";
+			case 5: return "Май";
+			case 6: return "Июнь";
+			case 7: return "Июль";
+			case 8: return "Август";
+			case 9: return "Сентябрь";
+			case 10: return "Октябрь";
+			case 11: return "Ноябрь";
+			case 12: return "Декабрь";
+			default: return "";
 		}
 	}
 
