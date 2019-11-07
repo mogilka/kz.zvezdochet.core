@@ -90,10 +90,13 @@ public abstract class ModelView extends View implements ISaveListener {
 	 * @param sync признак, требуется ли предварительная синхронизация модели с представлением
 	 */
 	public void setModel(Model model, boolean sync) {		
-		if (null == model) return;
+		this.model = model;
+		if (null == model) {
+			reset();
+			return;
+		}
 		if (sync) {
 			model.init(true); //TODO процесс м.б. долгий сделать прогресс
-			this.model = model;
 			syncView();
 		} else if (this.model != null && model.getId() != null)
 			((Model)this.model).setId(model.getId());
