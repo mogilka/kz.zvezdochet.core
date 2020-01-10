@@ -2,7 +2,6 @@ package kz.zvezdochet.core.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,7 +10,11 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -34,16 +37,10 @@ public class IOUtil {
 	 * @return текст в виде строки
 	 */
 	public static String getTextFromFile(String fileName) {
-		FileInputStream is = null;
-		byte buf[];
 		try {
-			
-			is = new FileInputStream(fileName);
-			buf = new byte[is.available()];
-			is.read(buf);
-			is.close();
-			if (buf != null && buf.length > 0)
-				return new String(buf);
+			String encoding = StandardCharsets.UTF_8.name();
+			byte[] encoded = Files.readAllBytes(Paths.get(fileName));
+			return new String(encoded, encoding);
 		} catch (FileNotFoundException ex) {
 			ex.printStackTrace();
 		} catch (SecurityException ex) {
@@ -60,26 +57,12 @@ public class IOUtil {
 	 * @param data данные
 	 * @return новый файл
 	 */
-	public static File createFile(String fileName, String data) {
-		File f = new File(fileName);
-		try {
-			//создание физического файла
-			FileOutputStream fos = new FileOutputStream(f);
-			//запись данных в файл
-			DataOutputStream dos = new DataOutputStream(fos);
-			for (int i = 0; i < 10; i++)
-				dos.writeBytes(data);
-			dos.close();
-	
-			System.out.println("Absolute path: " + f.getAbsolutePath());
-			System.out.println("Canonical path: " + f.getCanonicalPath());
-			System.out.println("Length: " + f.length());
+	public static void createFile(String fileName, String data) {
+		try (PrintWriter out = new PrintWriter(fileName)) {
+		    out.println(data);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
-		return f;
 	}
 
 	/**
@@ -232,4 +215,14 @@ public class IOUtil {
         }
         return null;
     }
+
+	/**
+	 * Проверка наличия файла
+	 * @param path путь к файлу
+	 * @return true - файл по указанному пути существует и не является директорией
+	 */
+	public static boolean isFileExists(String path) {
+		File f = new File(path);
+		return f.exists() && !f.isDirectory();
+	}
 }
