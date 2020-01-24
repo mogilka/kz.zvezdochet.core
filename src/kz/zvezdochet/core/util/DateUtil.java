@@ -50,7 +50,7 @@ public class DateUtil {
 	public static DateFormat dfym = new SimpleDateFormat("yyyy MM"); //$NON-NLS-1$
 	/** Формат даты и времени, используемый в базе данных, yyyy-MM-dd HH:mm:ss 
 	 * @sample 2010-05-14 14:14:14 */
-	public static DateFormat dbdtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //$NON-NLS-1$
+	public static SimpleDateFormat dbdtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //$NON-NLS-1$
 	/** Формат даты, используемый в базе данных, yyyy-MM-dd 
 	 * @sample 2010-05-14 */
 	public static SimpleDateFormat dbdf = new SimpleDateFormat("yyyy-MM-dd"); //$NON-NLS-1$
