@@ -6,6 +6,8 @@ import java.util.List;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.widgets.Composite;
 
@@ -137,7 +139,12 @@ public abstract class View {
 	 * Выравнивание визуальных элементов
 	 * @param composite контейнер виджетов
 	 */
-	protected void arrange(Composite composite) {}
+	protected void arrange(Composite composite) {
+		GridLayoutFactory.swtDefaults().applyTo(composite);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(composite);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(sashForm);
+		GridLayoutFactory.swtDefaults().applyTo(sashForm);
+	}
 
 	/**
 	 * Декорирование визуальных компонентов

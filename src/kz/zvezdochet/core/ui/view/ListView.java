@@ -1,7 +1,6 @@
 package kz.zvezdochet.core.ui.view;
 
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
@@ -135,10 +134,7 @@ public abstract class ListView extends View implements IFilterable {
 
 	@Override
 	protected void arrange(Composite parent) {
-		GridLayoutFactory.swtDefaults().applyTo(parent);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(parent);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(sashForm);
-		GridLayoutFactory.swtDefaults().applyTo(sashForm);
+		super.arrange(parent);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(tableViewer.getTable());
 	}
 
