@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.widgets.Composite;
 
 import kz.zvezdochet.core.service.DataAccessException;
@@ -17,21 +18,32 @@ import kz.zvezdochet.core.ui.extension.ModelExtension;
  * @author Natalie Didenko
  */
 public abstract class View {
+	/**
+	 * Визуальный контейнер
+	 */
+	protected Composite container;
+	/**
+	 * Контейнер с разделителем
+	 */
+	protected SashForm sashForm;
 
 	public void setTitle(String title) {
 //		setPartName(title);
 	}
 	
 	/**
-	 * Создание элементов управления
+	 * Создание представления
 	 * @param parent композит-родитель
 	 * @return представление
 	 **/
 	public View create(Composite parent) {
 		try {
+			init(parent);
 			initControls();
+			arrange(parent);
+			decorate();
+			deactivateUnaccessable();
 		} catch (DataAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -51,7 +63,7 @@ public abstract class View {
 	public void reset() {}
 
 	/**
-	 * Выравнивание визуальных компонентов
+	 * Инициализация представления
 	 * @param composite контейнер виджетов
 	 */
 	protected void init(Composite composite) {}
@@ -118,5 +130,26 @@ public abstract class View {
 			return extensions;
 		}
 		return null;
+	}
+
+	/**
+	 * Выравнивание визуальных элементов
+	 * @param composite контейнер виджетов
+	 */
+	protected void arrange(Composite composite) {}
+
+	/**
+	 * Декорирование визуальных компонентов
+	 */
+	protected void decorate() {}
+
+	/**
+	 * Управление доступом к функциям модификации данных
+	 */
+	protected void deactivateUnaccessable() {
+//		boolean changed = (model != null)
+//			&& isEditable();
+//		if (applyAction != null)
+//			applyAction.setEnabled(changed);
 	}
 }

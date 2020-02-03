@@ -4,6 +4,7 @@ import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.ModifyEvent;
@@ -12,6 +13,7 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import kz.zvezdochet.core.bean.Model;
@@ -114,20 +116,6 @@ public abstract class ModelView extends View implements ISaveListener {
 	}
 	
 	/**
-	 * Инициализация представления
-	 * @param parent контейнер представления
-	 */
-	@Override
-	public View create(Composite parent) {
-		super.create(parent);
-//		this.viewTitle = this.getTitle();
-		decorate();
-		init(parent);
-		deactivateUnaccessable();
-		return null;
-	}
-	
-	/**
 	 * Синхронизация представления с моделью
 	 */
 	protected abstract void syncView();
@@ -138,16 +126,6 @@ public abstract class ModelView extends View implements ISaveListener {
 	 */
 	public abstract void syncModel(int mode) throws Exception;
 	
-	/**
-	 * Управление доступом к функциям модификации данных
-	 */
-	protected void deactivateUnaccessable() {
-//		boolean changed = (model != null)
-//			&& isEditable();
-//		if (applyAction != null)
-//			applyAction.setEnabled(changed);
-	}
-
 	/**
 	 * Признак того, что элементы представления
 	 * могут редактироваться
@@ -218,10 +196,6 @@ public abstract class ModelView extends View implements ISaveListener {
 		return stateListener;
 	}
 	
-	/**
-	 * Декорирование визуальных компонентов
-	 */
-	protected void decorate() {}
 
 	@Override
 	public void onSave(Model model, boolean update) {
@@ -238,8 +212,9 @@ public abstract class ModelView extends View implements ISaveListener {
 	@Override
 	public void onCancel(Model model) {}
 
-	/**
-	 * Очистка элементов управления
-	 */
-	public void reset() {}
+	@Override
+	protected void init(Composite parent) {
+		container = new Composite(parent, SWT.NONE);
+		container.setLayout(new FillLayout());
+	}
 }

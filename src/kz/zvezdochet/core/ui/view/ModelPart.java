@@ -3,9 +3,12 @@ package kz.zvezdochet.core.ui.view;
 import javax.inject.Inject;
 
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.widgets.Composite;
 
 import kz.zvezdochet.core.bean.Model;
+import kz.zvezdochet.core.service.DataAccessException;
 import kz.zvezdochet.core.ui.listener.IModelListListener;
 
 /**
@@ -13,7 +16,7 @@ import kz.zvezdochet.core.ui.listener.IModelListListener;
  * @author Natalie Didenko
  */
 public abstract class ModelPart extends ModelView {
-	
+
 	@Override
 	public void notifyChange() {
 		part.setDirty(true);
@@ -27,19 +30,10 @@ public abstract class ModelPart extends ModelView {
 		part.setDirty(false);
 	}
 	
-	/**
-	 * Создание представления. 
-	 * Реализовано по шаблону Template method
-	 * @param parent Базовый композит представления
-	 */
 	@Override
-	public View create(Composite parent) {
-		super.create(parent);
-//		this.viewTitle = this.getTitle();
-		decorate();
-		init(parent);
-		deactivateUnaccessable();
-		return null;
+	protected void init(Composite parent) {
+//		super.init(parent);
+		sashForm = new SashForm(parent, SWT.HORIZONTAL);
 	}
 	
 	/**
@@ -76,5 +70,10 @@ public abstract class ModelPart extends ModelView {
 	public void onSave(Model model, boolean update) {
 		part.setDirty(false);
 		super.onSave(model, update);
+	}
+
+	@Override
+	protected void initControls() throws DataAccessException {
+		sashForm.setWeights(new int[] { 5, 1 });
 	}
 }

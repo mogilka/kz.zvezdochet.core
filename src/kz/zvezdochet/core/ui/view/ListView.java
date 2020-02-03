@@ -26,10 +26,6 @@ import kz.zvezdochet.core.ui.listener.ListSelectionListener;
 public abstract class ListView extends View implements IFilterable {
 	
 	/**
-	 * Визуальный контейнер
-	 */
-	public Composite container;
-	/**
 	 * Массив данных таблицы
 	 */
 	protected Object data;
@@ -38,11 +34,10 @@ public abstract class ListView extends View implements IFilterable {
 	 * Таблица елементов
 	 */
 	protected TableViewer tableViewer;
-	protected SashForm sashForm;
 	protected Group group;
 	
 	@Override
-	public View create(Composite parent) {
+	protected void init(Composite parent) {
 		container = new Composite(parent, SWT.NONE);
 		container.setLayout(new FillLayout());
 		initFilter(parent);
@@ -56,22 +51,6 @@ public abstract class ListView extends View implements IFilterable {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		addColumns();
-		init(parent);
-		try {
-			initControls();
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
-
-		tableViewer.setContentProvider(new ArrayContentProvider());
-		tableViewer.setLabelProvider(getLabelProvider());
-		
-		ListSelectionListener listener = getSelectionListener();
-		tableViewer.addSelectionChangedListener(listener);
-		tableViewer.addDoubleClickListener(listener);
-		initTable();
-		initGroup();
-		return null;
 	}
 
 	/**
@@ -156,7 +135,7 @@ public abstract class ListView extends View implements IFilterable {
 	}
 
 	@Override
-	protected void init(Composite parent) {
+	protected void arrange(Composite parent) {
 		GridLayoutFactory.swtDefaults().applyTo(parent);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(container);
 		GridLayoutFactory.swtDefaults().applyTo(container);
@@ -244,4 +223,16 @@ public abstract class ListView extends View implements IFilterable {
 	 * Инициализация контейнера справа от таблицы
 	 */
 	protected void initGroup() {}
+
+	@Override
+	protected void initControls() throws DataAccessException {
+		tableViewer.setContentProvider(new ArrayContentProvider());
+		tableViewer.setLabelProvider(getLabelProvider());
+		
+		ListSelectionListener listener = getSelectionListener();
+		tableViewer.addSelectionChangedListener(listener);
+		tableViewer.addDoubleClickListener(listener);
+		initTable();
+		initGroup();
+	}
 }
