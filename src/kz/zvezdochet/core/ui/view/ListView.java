@@ -38,11 +38,10 @@ public abstract class ListView extends View implements IFilterable {
 	
 	@Override
 	protected void init(Composite parent) {
-		container = new Composite(parent, SWT.NONE);
-		container.setLayout(new FillLayout());
+		parent.setLayout(new FillLayout());
 		initFilter(parent);
 
-		sashForm = new SashForm(container, SWT.HORIZONTAL);
+		sashForm = new SashForm(parent, SWT.HORIZONTAL);
 		tableViewer = new TableViewer(sashForm, SWT.BORDER | SWT.FULL_SELECTION);
 		group = new Group(sashForm, SWT.NONE); 
 		sashForm.setWeights(new int[] { 5, 1 });
@@ -137,8 +136,7 @@ public abstract class ListView extends View implements IFilterable {
 	@Override
 	protected void arrange(Composite parent) {
 		GridLayoutFactory.swtDefaults().applyTo(parent);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(container);
-		GridLayoutFactory.swtDefaults().applyTo(container);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(parent);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(sashForm);
 		GridLayoutFactory.swtDefaults().applyTo(sashForm);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(tableViewer.getTable());
@@ -151,14 +149,6 @@ public abstract class ListView extends View implements IFilterable {
 		tableViewer.refresh();
 	}
 	
-	/**
-	 * Метод, обновляющий контейнер и
-	 * заново задающий расположение элементов управления
-	 */
-	public void refreshView() {
-		container.layout(true, true);
-	}
-
 	/**
 	 * Очистка таблицы
 	 */

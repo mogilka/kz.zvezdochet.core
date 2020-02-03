@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import kz.zvezdochet.core.bean.Model;
@@ -32,7 +33,7 @@ public abstract class ModelPart extends ModelView {
 	
 	@Override
 	protected void init(Composite parent) {
-//		super.init(parent);
+		parent.setLayout(new FillLayout());
 		sashForm = new SashForm(parent, SWT.HORIZONTAL);
 	}
 	
@@ -74,6 +75,6 @@ public abstract class ModelPart extends ModelView {
 
 	@Override
 	protected void initControls() throws DataAccessException {
-		sashForm.setWeights(new int[] { 5, 1 });
+		sashForm.setWeights(new int[] { 1, 5 });
 	}
 }

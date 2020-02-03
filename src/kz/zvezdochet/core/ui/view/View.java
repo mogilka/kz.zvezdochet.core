@@ -21,7 +21,7 @@ public abstract class View {
 	/**
 	 * Визуальный контейнер
 	 */
-	protected Composite container;
+	private Composite container;
 	/**
 	 * Контейнер с разделителем
 	 */
@@ -38,6 +38,7 @@ public abstract class View {
 	 **/
 	public View create(Composite parent) {
 		try {
+			container = parent;
 			init(parent);
 			initControls();
 			arrange(parent);
@@ -151,5 +152,13 @@ public abstract class View {
 //			&& isEditable();
 //		if (applyAction != null)
 //			applyAction.setEnabled(changed);
+	}
+
+	/**
+	 * Метод, обновляющий контейнер и
+	 * заново задающий расположение элементов управления
+	 */
+	public void refreshView() {
+		container.layout(true, true);
 	}
 }

@@ -211,10 +211,4 @@ public abstract class ModelView extends View implements ISaveListener {
 
 	@Override
 	public void onCancel(Model model) {}
-
-	@Override
-	protected void init(Composite parent) {
-		container = new Composite(parent, SWT.NONE);
-		container.setLayout(new FillLayout());
-	}
 }
