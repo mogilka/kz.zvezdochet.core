@@ -239,10 +239,12 @@ public class CalcUtil {
   	}
 
 	/**
-	 * Сравнение значений координат двух точек
+	 * Сравнение значений координат двух точек для корректировки транзита
 	 * @param one координата первой точки
 	 * @param two координата второй точки
-	 * @return true - первая точка больше или равна второй
+	 * @return true - угол между точками нуждается в увеличении на 1 градус,
+	 * 	чтобы синхронизировать его со связанным транзитом
+	 * 	(например, оппозиция и соединение, трин и секстиль, квадратуры тау-квадрата и т.п.)
 	 */
 	public static boolean compareAngles(double one, double two) {
 		int compared = Double.compare(one, two);
@@ -250,7 +252,7 @@ public class CalcUtil {
 			return true;
 
 		if (compared > 0) {
-			double diff = Math.abs(one - two);
+			double diff = one - two;
 			if (diff < 1)
 				return false;
 
@@ -259,8 +261,8 @@ public class CalcUtil {
 			else
 				return true;
 		} else {
-			double res = two - one;
-			if (res >= 189)
+			double diff = two - one;
+			if (diff >= 189)
 				return true;
 		}
 		return false;
