@@ -16,12 +16,13 @@ import org.eclipse.swt.widgets.TableColumn;
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.ui.comparator.TableSortListenerFactory;
 import kz.zvezdochet.core.ui.listener.IModelListListener;
+import kz.zvezdochet.core.ui.listener.ISaveListener;
 
 /**
  * Прототип табличного представления моделей
  * @author Natalie Didenko
  */
-public abstract class ModelListView extends ListView {
+public abstract class ModelListView extends ListView implements ISaveListener {
 
 	/**
 	 * Композит фильтра
@@ -40,7 +41,7 @@ public abstract class ModelListView extends ListView {
 			return null;
 		return selected.getFirstElement();
 	}
-	
+
 	/**
 	 * Создание строкового столбца таблицы
 	 * @param width ширина столбца
@@ -168,4 +169,29 @@ public abstract class ModelListView extends ListView {
 	 * @return модель
 	 */
 	public abstract Model createModel();
+
+	@Override
+	public void onSave(Model model, boolean update) {
+//		setModel(model, false);
+//		if (listView != null)
+//			listView.onUpdate(model, update);
+//		deactivateUnaccessable();
+
+//		if (extensions != null)
+//			for (ModelExtension extension : extensions)
+//				extension.save();
+	}
+
+	@Override
+	public void onCancel(Model model) {}
+
+	@Override
+	public Model getModel(int mode, boolean sync) throws Exception {
+		return (Model)getModel();
+	}
+
+	@Override
+	public boolean check(int mode) throws Exception {
+		return true;
+	}
 }

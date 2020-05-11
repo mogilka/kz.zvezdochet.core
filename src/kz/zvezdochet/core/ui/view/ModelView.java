@@ -101,11 +101,7 @@ public abstract class ModelView extends View implements ISaveListener {
 			((Model)this.model).setId(model.getId());
 	}
 
-	/**
-	 * Возвращает модель представления
-	 * @param mode режим запроса модели
-	 * @param sync признак, требуется ли предварительная синхронизация модели с представлением
-	 */
+	@Override
 	public Model getModel(int mode, boolean sync) throws Exception {
 		if (sync)
 			syncModel(mode);

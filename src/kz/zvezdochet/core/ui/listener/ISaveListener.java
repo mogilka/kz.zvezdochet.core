@@ -18,4 +18,16 @@ public interface ISaveListener {
 	 * @param model модель
 	 */
 	public void onCancel(Model model);
+	/**
+	 * Проверка введённых значений
+	 * @param mode режим проверки содержимого
+	 * @return true - поля заполнены корректно
+	 */
+	public boolean check(int mode) throws Exception;
+	/**
+	 * Возвращает модель представления
+	 * @param mode режим запроса модели
+	 * @param sync признак, требуется ли предварительная синхронизация модели с представлением
+	 */
+	public Model getModel(int mode, boolean sync) throws Exception;
 }

@@ -6,8 +6,8 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.service.IModelService;
+import kz.zvezdochet.core.ui.listener.ISaveListener;
 import kz.zvezdochet.core.ui.util.DialogUtil;
-import kz.zvezdochet.core.ui.view.ModelView;
 
 /**
  * Обработчик сохранения модели
@@ -21,7 +21,7 @@ public class ModelSaveHandler extends Handler {
 		updateStatus(Messages.getString("ApplyElementAction.SavingElement"), false); //$NON-NLS-1$
 		try {
 			int mode = Handler.MODE_SAVE;
-			ModelView part = (ModelView)activePart.getObject();
+			ISaveListener part = (ISaveListener)activePart.getObject();
 			if (!part.check(mode))
 				return;
 			Model model = part.getModel(mode, true);

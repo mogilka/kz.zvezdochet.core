@@ -74,12 +74,6 @@ public abstract class View {
 	 * Инициализация элементов управления
 	 */
 	protected void initControls() throws DataAccessException {}
-	/**
-	 * Проверка введённых значений
-	 * @param mode режим проверки содержимого
-	 * @return true - поля заполнены корректно
-	 */
-	public abstract boolean check(int mode) throws Exception;
 
 	/**
 	 * Идентификатор точки расширения представления
