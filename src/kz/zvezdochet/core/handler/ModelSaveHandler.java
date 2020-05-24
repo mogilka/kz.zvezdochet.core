@@ -31,7 +31,7 @@ public class ModelSaveHandler extends Handler {
 			//TODO после сохранения делать недоступным сохранение пока данные снова не изменятся
 			part.onSave(model, existing);
 		} catch (Exception e) {
-			DialogUtil.alertError(e.getMessage());
+			DialogUtil.alertError(e);
 			updateStatus(Messages.getString("ApplyElementAction.ErrorSavingElement"), true); //$NON-NLS-1$
 			e.printStackTrace();
 		}
@@ -48,7 +48,7 @@ public class ModelSaveHandler extends Handler {
 			model = service.save(model);
 		} catch (Exception e) {
 			updateStatus(Messages.getString("ApplyElementAction.ErrorSavingElement"), true); //$NON-NLS-1$
-			DialogUtil.alertError("error");
+			DialogUtil.alertWarning("error");
 			e.printStackTrace();
 		}
 		return model;

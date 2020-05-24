@@ -1,9 +1,13 @@
 package kz.zvezdochet.core.ui.util;
 
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Device;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.ColorDialog;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -47,5 +51,15 @@ public class GUIutil {
         RGB rgb = dlg.open();
         if (rgb != null)
         	control.setBackground(new Color(shell.getDisplay(), rgb));
+	}
+
+	/**
+	 * Поиск размера экрана
+	 * @return точка с размерами
+	 */
+	public static Point getScreenSize() {
+		Device device = Display.getDefault();
+		Rectangle rect = device.getClientArea();
+		return new Point(rect.width, rect.height);
 	}
 }

@@ -1,73 +1,88 @@
 package kz.zvezdochet.core.ui.util;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Device;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.MessageBox;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 
 import kz.zvezdochet.core.util.PlatformUtil;
 
 /**
- * Обработчик пользовательских сообщений
+ * Обработчик диалоговых окон
  * @author Natalie Didenko
- *
  */
 public class DialogUtil {
 
 	/**
 	 * Вывод ошибки
-	 * @param message сообщение
+	 * @param exception исключение
 	 */
-	public static int alertError(String message) {
-		return alert(SWT.ICON_ERROR, "Ошибка", message);
+	public static void alertError(Exception exception) {
+		MultiStatus status = createMultiStatus(exception);
+        ErrorDialog.openError(PlatformUtil.getDisplayShell(), "Ошибка", exception.getLocalizedMessage(), status);
 	} 
 
 	/**
 	 * Вывод предупреждения
 	 * @param message сообщение
 	 */
-	public static int alertWarning(String message) {
-		return alert(SWT.ICON_WARNING, "Предупреждение", message);
+	public static void alertWarning(String message) {
+		MessageDialog.openWarning(PlatformUtil.getDisplayShell(), "Предупреждение", message);
 	} 
 
 	/**
 	 * Вывод подтверждения
 	 * @param message сообщение
+ 	 * @return true|false - Ok|Cancel
 	 */
-	public static int alertConfirm(String message) {
-		return alert(SWT.ICON_QUESTION, "Подтверждение", message);
+	public static boolean alertConfirm(String message) {
+		return MessageDialog.openConfirm(PlatformUtil.getDisplayShell(), "Подтверждение", message);
 	} 
 
 	/**
 	 * Вывод информации
 	 * @param message сообщение
-	 * */
-	public static int alertInfo(String message) {
-		return alert(SWT.ICON_INFORMATION, "Информация", message);
+	 */
+	public static void alertInfo(String message) {
+		MessageDialog.openInformation(PlatformUtil.getDisplayShell(), "Информация", message);
 	}
 
 	/**
-	 * Генерация диалогового окна
-	 * @param type тип иконки
+	 * Генерация статуса исключения
+	 * @param t ошибка
+	 * @return статус исключения
+	 */
+	private static MultiStatus createMultiStatus(Throwable t) {
+        List<Status> childStatuses = new ArrayList<>();
+        StackTraceElement[] stackTraces = Thread.currentThread().getStackTrace();
+
+        for (StackTraceElement stackTrace: stackTraces) {
+            Status status = new Status(IStatus.ERROR,
+                    "com.vogella.tasks.ui", stackTrace.toString());
+            childStatuses.add(status);
+        }
+
+        MultiStatus ms = new MultiStatus("kz.zvezdochet.core.ui",
+        	IStatus.ERROR, childStatuses.toArray(new Status[] {}),
+        	t.toString(), t);
+        return ms;
+    }
+
+	/**
+	 * Вывод вопроса
 	 * @param title заголовок
 	 * @param message сообщение
-	 * */
-	private static int alert(int type, String title, String message) {
-		MessageBox dialog = new MessageBox(PlatformUtil.getDisplayShell(), type|SWT.OK|SWT.CANCEL);
-		dialog.setText(title);
-		dialog.setMessage(message);
-		return dialog.open();
+	 * @param labels массив ответов
+ 	 * @return 0 by default
+	 */
+	public static int alertQuestion(String title, String message, String[] labels) {
+		MessageDialog dialog = new MessageDialog(PlatformUtil.getDisplayShell(), title, null, message, MessageDialog.QUESTION, labels, 0);
+		int result = dialog.open();
+		System.out.println(result);
+		return result;
 	} 
-
-	/**
-	 * Поиск размера экрана
-	 * @return точка с размерами
-	 * */
-	public static Point getScreenSize() {
-		Device device = Display.getDefault();
-		Rectangle rect = device.getClientArea();
-		return new Point(rect.width, rect.height);
-	}
 }

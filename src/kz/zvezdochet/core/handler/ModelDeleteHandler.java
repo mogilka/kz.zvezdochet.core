@@ -7,7 +7,6 @@ import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
-import org.eclipse.swt.SWT;
 
 import kz.zvezdochet.core.bean.Model;
 import kz.zvezdochet.core.service.IModelService;
@@ -28,14 +27,14 @@ public class ModelDeleteHandler extends Handler {
 		ModelListView listpart = (ModelListView)activePart.getObject();
 		Model model = (Model)listpart.getModel();
 		if (model != null) {
-			if (SWT.OK == DialogUtil.alertConfirm("Удалить объект?")) {
+			if (DialogUtil.alertConfirm("Удалить объект?")) {
 				try {
 					IModelService service = model.getService();
 					service.delete(model.getId());
 					listpart.onDelete(model);
 				} catch (Exception e) {
 					updateStatus("Объект не удалён", true);
-					DialogUtil.alertError("error");
+					DialogUtil.alertWarning("error");
 					e.printStackTrace();
 				}
 			}			

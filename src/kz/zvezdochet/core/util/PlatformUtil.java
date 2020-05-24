@@ -39,6 +39,6 @@ public class PlatformUtil {
 	 * @param messageBody - сообщение
 	 * */
 	public static Shell getDisplayShell() {
-		return new Shell(Display.getDefault());
+		return Display.getCurrent().getActiveShell();
 	} 
 }
