@@ -467,6 +467,8 @@ public class DateUtil {
     }
 
     public static boolean isDaily(Date date) {
+    	if (null == date)
+    		return true;
   	  	String time = formatCustomDateTime(date, new SimpleDateFormat("H").toPattern());
     	return Integer.valueOf(time) < 12;
     }
