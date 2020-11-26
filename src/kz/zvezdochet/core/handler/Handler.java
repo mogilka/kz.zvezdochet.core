@@ -1,5 +1,7 @@
 package kz.zvezdochet.core.handler;
 
+import kz.zvezdochet.core.ui.util.DialogUtil;
+
 /**
  * Прототип визуального действия
  * @author Natalie Didenko
@@ -16,6 +18,9 @@ public abstract class Handler {
 	 * @param isError <true> - выводить красным цветом
 	 */
 	public static void updateStatus(String msg, boolean isError) {
+		System.out.println(msg);
+		if (isError)
+			DialogUtil.alertWarning(msg);
 //		StatusUtil.writeToStatusLine(msg, isError, view.getViewSite().getActionBars());
 	}
 
