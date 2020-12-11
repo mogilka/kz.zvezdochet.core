@@ -8,12 +8,16 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.ui.dialogs.ListSelectionDialog;
 
 import kz.zvezdochet.core.util.PlatformUtil;
 
 /**
  * Обработчик диалоговых окон
  * @author Natalie Didenko
+ * @todo http://www.java2s.com/Code/Java/SWT-JFace-Eclipse/JFacesProgressMonitorDialog.htm
  */
 public class DialogUtil {
 
@@ -82,6 +86,25 @@ public class DialogUtil {
 	public static int alertQuestion(String title, String message, String[] labels) {
 		MessageDialog dialog = new MessageDialog(PlatformUtil.getDisplayShell(), title, null, message, MessageDialog.QUESTION, labels, 0);
 		int result = dialog.open();
+//		System.out.println(result);
+		return result;
+	} 
+
+	/**
+	 * Вывод выбора
+	 * @param title заголовок
+	 * @param message сообщение
+	 * @param labels массив ответов
+	 * @param selections массив ответов по умолчанию
+ 	 * @return массив выбранных ответов
+	 */
+	public static Object[] alertDialog(String title, String message, String[] labels, Object[] selections) {
+		ListSelectionDialog dialog = new ListSelectionDialog(PlatformUtil.getDisplayShell(), labels,
+			ArrayContentProvider.getInstance(), new LabelProvider(), message);
+		dialog.setTitle(title);
+		dialog.setInitialSelections(selections);
+		dialog.open();
+		Object[] result = dialog.getResult();
 		System.out.println(result);
 		return result;
 	} 
