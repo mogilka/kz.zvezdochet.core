@@ -162,4 +162,17 @@ public abstract class View {
 	public void refreshView() {
 		container.layout(true, true);
 	}
+
+	/**
+	 * Режим представления
+	 */
+	private int mode = 0;
+
+	public int getMode() {
+		return mode;
+	}
+
+	public void setMode(int mode) {
+		this.mode = mode;
+	}
 }
