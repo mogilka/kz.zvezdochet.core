@@ -64,4 +64,17 @@ public abstract class TextGenderModel extends Model implements ITextGender {
 
 	@Override
 	public void init(boolean mode) {}
+
+	/**
+	 * Признак позтивного аспекта
+	 */
+	private boolean positive;
+
+	public boolean isPositive() {
+		return positive;
+	}
+
+	public void setPositive(boolean positive) {
+		this.positive = positive;
+	}
 }
