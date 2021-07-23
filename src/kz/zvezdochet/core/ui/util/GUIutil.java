@@ -2,6 +2,7 @@ package kz.zvezdochet.core.ui.util;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
@@ -9,6 +10,7 @@ import org.eclipse.swt.widgets.ColorDialog;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Класс обеспечивающий централизованное хранение
@@ -61,5 +63,21 @@ public class GUIutil {
 		Device device = Display.getDefault();
 		Rectangle rect = device.getClientArea();
 		return new Point(rect.width, rect.height);
+	}
+
+	/**
+	 * Поиск изображения с галочкой
+	 * @return изображение
+	 */
+	public static Image getCheckedImage() {
+		return AbstractUIPlugin.imageDescriptorFromPlugin("kz.zvezdochet.core", "icons/checked.gif").createImage();
+	}
+
+	/**
+	 * Поиск изображения с пустой галочкой
+	 * @return изображение
+	 */
+	public static Image getUncheckedImage() {
+		return AbstractUIPlugin.imageDescriptorFromPlugin("kz.zvezdochet.core", "icons/unchecked.gif").createImage();
 	}
 }
