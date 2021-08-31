@@ -5,7 +5,6 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 
 import kz.zvezdochet.core.bean.Model;
-import kz.zvezdochet.core.service.IModelService;
 import kz.zvezdochet.core.ui.listener.ISaveListener;
 import kz.zvezdochet.core.ui.util.DialogUtil;
 
@@ -44,8 +43,7 @@ public class ModelSaveHandler extends Handler {
 	 */
 	private Model saveModel(Model model) throws Exception {
 		try {
-			IModelService service = model.getService();
-			model = service.save(model);
+			model = model.save();
 		} catch (Exception e) {
 			updateStatus(Messages.getString("ApplyElementAction.ErrorSavingElement"), true); //$NON-NLS-1$
 			DialogUtil.alertWarning("error");

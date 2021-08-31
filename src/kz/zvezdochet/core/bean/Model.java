@@ -2,6 +2,7 @@ package kz.zvezdochet.core.bean;
 
 import java.io.Serializable;
 
+import kz.zvezdochet.core.service.DataAccessException;
 import kz.zvezdochet.core.service.ModelService;
 
 /**
@@ -73,5 +74,17 @@ public abstract class Model implements Serializable {
 
 	public void setImportable(boolean importable) {
 		this.importable = importable;
+	}
+
+	/**
+	 * Сохранение модели в БД
+	 */
+	public Model save() {
+		try {
+			return getService().save(this);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
