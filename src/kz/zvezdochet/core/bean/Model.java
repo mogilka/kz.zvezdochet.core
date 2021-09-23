@@ -81,10 +81,18 @@ public abstract class Model implements Serializable {
 	 */
 	public Model save() {
 		try {
-			return getService().save(this);
+			Model model = getService().save(this);
+			onSave();
+			return model;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
+
+	/**
+	 * Действия после сохранения модели
+	 * @param obj объект
+	 */
+	protected void onSave() {}
 }
