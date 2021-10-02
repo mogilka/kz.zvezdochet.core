@@ -75,6 +75,7 @@ public abstract class ModelPart extends ModelView {
 
 	@Override
 	protected void initControls() throws DataAccessException {
-		sashForm.setWeights(new int[] { 1, 5 });
+		if (sashForm != null)
+			sashForm.setWeights(new int[] { 1, 5 });
 	}
 }
