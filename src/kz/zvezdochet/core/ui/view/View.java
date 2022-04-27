@@ -136,8 +136,10 @@ public abstract class View {
 	protected void arrange(Composite composite) {
 		GridLayoutFactory.swtDefaults().applyTo(composite);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(composite);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(sashForm);
-		GridLayoutFactory.swtDefaults().applyTo(sashForm);
+		if (sashForm != null) {
+			GridDataFactory.fillDefaults().grab(true, true).applyTo(sashForm);
+			GridLayoutFactory.swtDefaults().applyTo(sashForm);
+		}
 	}
 
 	/**
