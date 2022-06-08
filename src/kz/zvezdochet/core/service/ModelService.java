@@ -114,7 +114,6 @@ public abstract class ModelService implements IModelService {
 	@Override
 	public Model find(Long id) throws DataAccessException {
 		if (null == id) return null;
-		Model model = create();
         PreparedStatement ps = null;
         ResultSet rs = null;
 		try {
@@ -123,7 +122,7 @@ public abstract class ModelService implements IModelService {
 			ps.setLong(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) 
-				model = init(rs, model);
+				return init(rs, create());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -134,7 +133,7 @@ public abstract class ModelService implements IModelService {
 				e.printStackTrace(); 
 			}
 		}
-		return model;
+		return null;
 	}
 
 	@Override
