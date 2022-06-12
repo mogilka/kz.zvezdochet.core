@@ -1,10 +1,5 @@
 package kz.zvezdochet.core.test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * Разбиение длинного текста на порции
  * @author Natalie Didenko
