@@ -21,7 +21,7 @@ public class CoreUtil {
 	 * @param array2 массив
 	 * @return объединенный массив
 	 */
-	public Object[] concatTwoArrays(Object[] array1, Object[] array2) {
+	public static Object[] concatTwoArrays(Object[] array1, Object[] array2) {
 		Object[] array = new Object[array1.length + array2.length];
 		System.arraycopy(array1, 0, array, 0, array1.length);
 		System.arraycopy(array2, 0, array, array1.length, array2.length);
