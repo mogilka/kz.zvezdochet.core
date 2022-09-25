@@ -221,4 +221,12 @@ public abstract class ListView extends View implements IFilterable {
 		initTable();
 		initGroup();
 	}
+
+	/**
+	 * Возвращает виджет таблицы
+	 * @return виджет таблицы
+	 */
+	public TableViewer getTableViewer() {
+		return tableViewer;
+	}
 }
