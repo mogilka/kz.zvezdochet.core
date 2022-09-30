@@ -177,4 +177,14 @@ public abstract class View {
 	public void setMode(int mode) {
 		this.mode = mode;
 	}
+
+	/**
+	 * Проверка данных представления
+	 * @param mode
+	 * @return true - данные верно заполнены
+	 * @throws Exception
+	 */
+	public boolean check(int mode) throws Exception {
+		return true;
+	}
 }

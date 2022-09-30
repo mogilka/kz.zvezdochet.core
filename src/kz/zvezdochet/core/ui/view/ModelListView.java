@@ -8,9 +8,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.TableColumn;
 
 import kz.zvezdochet.core.bean.Model;
@@ -24,12 +22,6 @@ import kz.zvezdochet.core.ui.listener.ISaveListener;
  */
 public abstract class ModelListView extends ListView implements ISaveListener {
 
-	/**
-	 * Композит фильтра
-	 */
-	public Group grFilter;
-	protected ViewerFilter viewerFilter;
-	
 	/**
 	 * Метод, возвращающий выделенный элемент таблицы
 	 * @return Object выделенный элемент таблицы
@@ -188,10 +180,5 @@ public abstract class ModelListView extends ListView implements ISaveListener {
 	@Override
 	public Model getModel(int mode, boolean sync) throws Exception {
 		return (Model)getModel();
-	}
-
-	@Override
-	public boolean check(int mode) throws Exception {
-		return true;
 	}
 }

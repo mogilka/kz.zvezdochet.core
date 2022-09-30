@@ -5,6 +5,7 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.layout.FillLayout;
@@ -34,7 +35,13 @@ public abstract class ListView extends View implements IFilterable {
 	 */
 	protected TableViewer tableViewer;
 	protected Group group;
-	
+
+	/**
+	 * Композит фильтра
+	 */
+	public Group grFilter;
+	protected ViewerFilter viewerFilter;
+
 	@Override
 	protected void init(Composite parent) {
 		parent.setLayout(new FillLayout());
