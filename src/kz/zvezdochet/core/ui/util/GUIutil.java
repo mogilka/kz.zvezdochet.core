@@ -12,6 +12,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import kz.zvezdochet.core.Messages;
+
 /**
  * Класс обеспечивающий централизованное хранение
  * параметров, общедоступных для всех компонентов системы

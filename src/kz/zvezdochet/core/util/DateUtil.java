@@ -56,7 +56,7 @@ public class DateUtil {
 	public static SimpleDateFormat dbdf = new SimpleDateFormat("yyyy-MM-dd"); //$NON-NLS-1$
 	/** Формат даты и времени EEE, d MMM yyyy HH:mm:ss Z 
 	 * @sample воскресенье, 21 Июль 1985 21:18:51 +0600 */
-	public static DateFormat fulldtf = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm:ss");
+	public static DateFormat fulldtf = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm:ss", Locale.getDefault());
 
 	/**
 	 * Возвращает дату первого дня месяца

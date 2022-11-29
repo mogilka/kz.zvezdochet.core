@@ -54,4 +54,21 @@ public class NumberUtil {
 	public static double round(double val, int pres) {
 		return new BigDecimal(String.valueOf(val)).setScale(pres, RoundingMode.HALF_UP).doubleValue();
 	}
+
+	/**
+	 * Поиск английского постфикса для количественного значения
+	 * @param num число
+	 * @return постфикс
+	 */
+	public static String getPostfix(int num) {
+		switch (num) {
+			case 1: return "st";
+			case 2: return "nd";
+			case 3: return "rd";
+			case 21: return "st";
+			case 22: return "nd";
+			case 23: return "rd";
+			default: return "th";
+		}
+	}
 }
