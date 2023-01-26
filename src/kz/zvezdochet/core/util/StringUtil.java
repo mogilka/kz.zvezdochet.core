@@ -219,4 +219,26 @@ public class StringUtil {
     	s = s.trim();
     	return s.isEmpty();
     }
+
+	/**
+	 * Удаление смайлов
+	 * @link https://stackoverflow.com/questions/49510006/remove-and-other-such-emojis-images-signs-from-java-strings
+	 * @return строка без смайлов и Emoji
+	 */
+    public static String removeEmoji(String str) {
+		String characterFilter = "[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}\\p{Cf}\\p{Cs}\\s]";
+		/*
+		 * is a range representing all numeric (\\p{N}),
+		 * letter (\\p{L}) specifically includes the characters from other alphabets such as Cyrillic, Latin, Kanji, etc.,
+		 * mark (\\p{M}),
+		 * punctuation (\\p{P}),
+		 * whitespace/separator (\\p{Z}),
+		 * other formatting (\\p{Cf})
+		 * other characters above U+FFFF in Unicode (\\p{Cs}),
+		 * newline (\\s) characters. \\p{L}
+		 * The ^ in the regex character set negates the match.
+		 */
+
+		return str.replaceAll(characterFilter, "");
+	}
 }
