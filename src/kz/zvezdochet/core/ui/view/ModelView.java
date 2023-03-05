@@ -94,11 +94,11 @@ public abstract class ModelView extends View implements ISaveListener {
 			reset();
 			return;
 		}
-		if (sync) {
-			model.init(true); //TODO процесс м.б. долгий сделать прогресс
-			syncView();
-		} else if (this.model != null && model.getId() != null)
+		if (sync)
+			model.init(true);
+		else if (this.model != null && model.getId() != null)
 			((Model)this.model).setId(model.getId());
+		syncView();
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class ModelSaveHandler extends Handler {
 			if (!part.check(mode))
 				return;
 			Model model = part.getModel(mode, true);
-			boolean existing = model.getId() != null;
+			boolean existing = model.isExisting();
 			model = saveModel(model);
 			updateStatus(Messages.getString("ApplyElementAction.ElementSaved"), false); //$NON-NLS-1$
 			//TODO после сохранения делать недоступным сохранение пока данные снова не изменятся

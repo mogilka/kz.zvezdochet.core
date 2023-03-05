@@ -95,4 +95,12 @@ public abstract class Model implements Serializable {
 	 * @param obj объект
 	 */
 	protected void onSave() {}
+
+	/**
+	 * Проверка, является ли модель сохранённой в БД
+	 * @return
+	 */
+	public boolean isExisting() {
+		return id != null && id > 0;
+	}
 }
